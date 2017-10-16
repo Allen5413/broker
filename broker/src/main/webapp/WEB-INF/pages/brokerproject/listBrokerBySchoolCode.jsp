@@ -31,8 +31,8 @@
                 <td>${broker.name}</td>
                 <td></td>
                 <td>
-                  <a class="btn-opr" href="#" onclick="pass(${broker.id});">查看</a>
-                  <a class="btn-opr" href="#" onclick="pass(${broker.id});">黑名单</a>
+                  <a class="btn-opr" href="#" onclick="detail('${broker.zz}');">查看</a>
+                  <a class="btn-opr" href="#" onclick="black('${broker.zz}');">黑名单</a>
                 </td>
               </tr>
             </c:forEach>
@@ -42,3 +42,14 @@
     </div>
   </div>
 </div>
+<script>
+  function detail(zz){
+    app.openDialog("${pageContext.request.contextPath}/findBrokerByZz/find.html?zz="+zz, "经纪人详情", "800", "700", function(index){
+    });
+  }
+
+  function black(zz){
+    app.openOneBtnDialog("${pageContext.request.contextPath}/blackBrokerProject/open.html?zz="+zz+"&projectId=${param.projectId}", "拉黑经纪人", "200", "288", function(index){
+    });
+  }
+</script>

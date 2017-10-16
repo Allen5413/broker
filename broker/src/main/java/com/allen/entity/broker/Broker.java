@@ -13,8 +13,18 @@ import java.util.Date;
 @Table(name = "broker")
 public class Broker {
 
+    public static final int ISBLACK_NOT = 0;     //否
+    public static final int ISBLACK_YES = 1;     //是
+
+    public static final int BLACKTYPE_SIXMONTH = 0;     //6个月
+    public static final int BLACKTYPE_FOREVER = 1;     //永久
+
     private Long id;
     private String zz;
+    private Integer isBlack;            //是否拉黑[0：正常；1：拉黑]
+    private Integer blackType;          //拉黑类型[0：6个月; 1：永久]
+    private Date blackTime;             //拉黑时间
+    private String blackReason;     //拉黑原因
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
 
@@ -50,5 +60,37 @@ public class Broker {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getIsBlack() {
+        return isBlack;
+    }
+
+    public void setIsBlack(Integer isBlack) {
+        this.isBlack = isBlack;
+    }
+
+    public Integer getBlackType() {
+        return blackType;
+    }
+
+    public void setBlackType(Integer blackType) {
+        this.blackType = blackType;
+    }
+
+    public String getBlackReason() {
+        return blackReason;
+    }
+
+    public void setBlackReason(String blackReason) {
+        this.blackReason = blackReason;
+    }
+
+    public Date getBlackTime() {
+        return blackTime;
+    }
+
+    public void setBlackTime(Date blackTime) {
+        this.blackTime = blackTime;
     }
 }

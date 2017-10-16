@@ -1,4 +1,4 @@
-package com.allen.entity.brokerproject;
+package com.allen.entity.broker;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,21 +7,15 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * Created by Allen on 2017/10/10.
+ * Created by Allen on 2017/10/16.
  */
 @Entity
-@Table(name = "broker_project")
-public class BrokerProject {
-
-    public static final int STATE_WAIT = 0;     //待审核
-    public static final int STATE_PASS = 1;     //通过
-    public static final int STATE_NOT = 2;      //不通过
-
+@Table(name = "customer_project")
+public class CustomerProject {
     private Long id;
-    private Long brokerId;
+    private Long customerId;
     private Long projectId;
-    private Integer state;              //状态[0：待审核，1：通过；2：不通过]
-    private String reason;          //不通过原因
+    private Long brokerId;
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -37,12 +31,12 @@ public class BrokerProject {
         this.id = id;
     }
 
-    public Long getBrokerId() {
-        return brokerId;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setBrokerId(Long brokerId) {
-        this.brokerId = brokerId;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public Long getProjectId() {
@@ -53,20 +47,12 @@ public class BrokerProject {
         this.projectId = projectId;
     }
 
-    public Integer getState() {
-        return state;
+    public Long getBrokerId() {
+        return brokerId;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setBrokerId(Long brokerId) {
+        this.brokerId = brokerId;
     }
 
     public String getCreator() {
