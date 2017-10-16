@@ -362,6 +362,25 @@ public class DateUtil {
         String dayBefore = new SimpleDateFormat(longDatePattern).format(c.getTime());
         return dayBefore;
     }
+
+    /**
+     * 计算指定日期几个月后的日期
+     * @param calDate
+     * @param modify
+     * @return
+     */
+    public static String getAfterMonth(Date date, int month)throws Exception{
+        Calendar c = Calendar.getInstance();//获得一个日历的实例
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = sdf.parse(date.toString());//初始日期
+        c.setTime(d);//设置日历时间
+        c.add(Calendar.MONTH, month);//在日历的月份上增加month个月
+        return sdf.format(c.getTime());
+    }
+
+
+
+
     public static void main(String[] args) {
         SimpleDateFormat sd = new SimpleDateFormat("yyyyMMdd");
         String str = DateUtil.calSecondNewDate("2017-06-10 23:00:00",

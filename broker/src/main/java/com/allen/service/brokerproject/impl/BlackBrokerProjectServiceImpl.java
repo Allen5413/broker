@@ -2,7 +2,7 @@ package com.allen.service.brokerproject.impl;
 
 import com.allen.dao.broker.BrokerDao;
 import com.allen.dao.brokerproject.BrokerProjectDao;
-import com.allen.dao.customerproject.CustomerProjectDao;
+import com.allen.dao.customer.CustomerDao;
 import com.allen.dao.log.LogDao;
 import com.allen.dao.project.ProjectDao;
 import com.allen.entity.broker.Broker;
@@ -31,7 +31,7 @@ public class BlackBrokerProjectServiceImpl implements BlackBrokerProjectService 
     @Autowired
     private ProjectDao projectDao;
     @Autowired
-    private CustomerProjectDao customerProjectDao;
+    private CustomerDao customerDao;
     @Autowired
     private AttopService attopService;
 
@@ -45,7 +45,7 @@ public class BlackBrokerProjectServiceImpl implements BlackBrokerProjectService 
         //取消经纪人该项目关联
         brokerProjectDao.delete(bpId);
         //取消经纪人该项目的关联客户
-        customerProjectDao.cancelBroker(brokerId, projectId);
+        customerDao.cancelBroker(brokerId, projectId);
 
         Broker broker = brokerDao.findOne(brokerId);
         Project project = projectDao.findOne(projectId);
@@ -68,7 +68,7 @@ public class BlackBrokerProjectServiceImpl implements BlackBrokerProjectService 
         //取消经纪人该项目关联
         brokerProjectDao.delete(bpId);
         //取消经纪人该项目的关联客户
-        customerProjectDao.cancelBroker(brokerId, projectId);
+        customerDao.cancelBroker(brokerId, projectId);
 
         Broker broker = brokerDao.findOne(brokerId);
         Project project = projectDao.findOne(projectId);
@@ -95,7 +95,7 @@ public class BlackBrokerProjectServiceImpl implements BlackBrokerProjectService 
         //取消经纪人的所有关联项目
         brokerProjectDao.delByBrokerId(brokerId);
         //取消经纪人所有项目的关联客户
-        customerProjectDao.cancelBroker(brokerId);
+        customerDao.cancelBroker(brokerId);
 
         Broker broker = brokerDao.findOne(brokerId);
         //改变经纪人拉黑状态

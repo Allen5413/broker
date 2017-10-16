@@ -61,10 +61,10 @@
   }
 
   function forever(){
-    app.openDialog("${pageContext.request.contextPath}/blackBrokerProject/openReason.html?zz=${param.zz}", "永久拉黑", "400", "200", function(index){
+    app.openDialog("${pageContext.request.contextPath}/blackBrokerProject/openReason.html?zz=${param.zz}", "永久拉黑", "400", "300", function(index){
       var reason = $("#reason").val().trim();
-      if(reason == "") {
-        app.msg("请输入拉黑原因", 1);
+      if(reason == "" || reason.length < 20) {
+        app.msg("请输入不低于20个字的拉黑原因", 1);
         return false;
       }
       $.ajax({
@@ -75,8 +75,8 @@
         async: false,
         success: function(data) {
           if(data.state == 0){
-            app.msg("操作成功！", 0);
             layer.closeAll();
+            app.msg("操作成功！", 0);
           }else{
             app.msg(data.msg, 1);
           }

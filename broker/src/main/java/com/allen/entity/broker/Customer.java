@@ -14,13 +14,15 @@ import java.util.Date;
 public class Customer {
 
     private Long id;
-    private String zz;                          //客户zz
+    private String zz;
+    private Long projectId;                     //项目id
+    private Long brokerId;                      //经纪人id
     private Date endLoginTime;                  //最后登录时间
     private int loginCount;                     //登录次数
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
-    private String operator;
-    private Date operateTime = new Date();
+    private String operator;                    //操作人
+    private Date operateTime = new Date();      //操作时间
 
     @Id
     @GeneratedValue
@@ -38,6 +40,22 @@ public class Customer {
 
     public void setZz(String zz) {
         this.zz = zz;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Long getBrokerId() {
+        return brokerId;
+    }
+
+    public void setBrokerId(Long brokerId) {
+        this.brokerId = brokerId;
     }
 
     public Date getEndLoginTime() {

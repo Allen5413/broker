@@ -15,13 +15,13 @@ import java.util.Map;
 public class FindCustomerDao extends BaseQueryDao {
     public List<Customer> findByBrokerAndProject(Long brokerId, Long projectId)throws Exception{
         Map<String, Object> paramsMap = new HashMap<String, Object>(2);
-        paramsMap.put("cp.brokerId", brokerId);
-        paramsMap.put("cp.projectId", projectId);
+        paramsMap.put("c.brokerId", brokerId);
+        paramsMap.put("c.projectId", projectId);
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>(1);
         sortMap.put("c.id", true);
         String fields = "c";
-        String defaultWhere = "c.id = cp.customerId";
-        String[] tableNames = {"Customer c", "CustomerProject cp"};
+        String defaultWhere = "1=1";
+        String[] tableNames = {"Customer c"};
         return super.findListByHql(tableNames, fields, defaultWhere, paramsMap, sortMap);
     }
 }

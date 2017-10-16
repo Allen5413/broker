@@ -7,6 +7,6 @@
   </tr>
   <tr>
     <td class="tag-b">拉黑原因：</td>
-    <td><input type="text" id="reason" name="reason" class="input-txt-220" /></td>
+    <td><textarea id="reason" name="reason" class="textarea-intro" rows="3" style="width: 240px;"></textarea>不能少于20个字</td>
   </tr>
 </table>
