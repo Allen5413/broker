@@ -69,4 +69,10 @@ public class MD5Util {
         String s = new String(a);
         return s;
     }
+
+    public static void main(String[] args){
+        System.out.println(MD5("442734"));
+    }
 }
+
+

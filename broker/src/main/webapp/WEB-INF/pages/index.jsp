@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="header-view">
-  <div class="title">成人继续教育管理平台</div>
+  <div class="title">至善经纪人项目管理平台</div>
   <div class="user-navs">
     <ul>
       <li> </li>

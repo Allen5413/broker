@@ -1,0 +1,117 @@
+
+/* RESET
+----------------------------------------------------------------------------------------------------*/
+a, abbr, acronym, address, applet, article, aside, audio, 
+b, big, blockquote, body, caption, canvas, center, cite, code,
+dd, del, details, dfn, dialog, div, dl, dt, em, embed, 
+fieldset, figcaption, figure, form, footer, 
+header, hgroup, h1, h2, h3, h4, h5, h6, html, 
+i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav,
+object, ol, output, p, pre, q, ruby, 
+s, samp, section, main, small, span, strike, strong, sub, summary, sup, 
+tt, table, tbody, textarea, tfoot, thead, time, tr, th, td,
+u, ul, var, video { 	
+	font-weight: inherit; 
+	font-style: inherit; 
+	vertical-align: baseline; 
+	white-space: normal;
+	text-align: left; 
+	margin: 0; 
+	padding: 0; 
+	border: 0; 
+	outline: 0;
+	background: transparent; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-size:16px;
+	font-family:-apple-system-font, "Helvetica Neue", sans-serif;
+}
+*{
+	padding: 0; 
+	margin: 0;
+	border: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /*禁止链接高亮*/
+	-webkit-touch-callout: none;  /*禁止链接长按弹出选项菜单*/
+	-webkit-box-sizing:border-box; 
+	-webkit-appearance: none;/* Safari */
+	-moz-box-sizing:border-box; /* Firefox */
+	box-sizing:border-box;/*边框宽度*/
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup,
+menu, nav, section, main { 
+	display: block; 
+}
+								  
+ol, ul { 
+	list-style: none; 
+}
+blockquote, q {
+	quotes: none; 
+}
+
+table { 
+	border-collapse: collapse; 
+	border-spacing: 0; 
+}
+
+input, textarea,button{-moz-border-radius: 0px;-webkit-border-radius: 0px; border-radius: 0px;/*圆角*/ outline: none;/*轮廓线*/}
+
+body {
+	color: #333;
+}
+a{color:#333; text-decoration:none;}
+a:active,a:hover,a:focus{
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-select: none;
+    -moz-user-focus: none;
+    -moz-user-select: none;
+	background: none;
+	outline: 0;
+	text-decoration: none;
+}
+
+.org{color:#ff8208 !important;}
+.red{color:#FF3B30 !important;}
+.green{color:#00b686 !important;}
+.grey{color:#a1a1a1 !important;}
+.blue{color:#008cd3 !important;}
+.right,.f-r{float:right !important;}
+.left,.f-l{float:left !important;}
+.p-t20{padding-top:15px !important;}
+.f-12{font-size:12px !important;}
+.f-14{font-size:14px !important;}
+.f-16{font-size:16px !important;}
+.clear{clear:both; display:table; content:"";}
+
+.alignCenter{text-align:center !important;}
+.alignLeft{text-align:left !important;}
+
+.checkbox-1,.radio-1{
+	width: 20px; 
+	height: 20px; 
+	display: inline-block; 
+	border: solid #ccc 1px; 
+	border-radius: 2px; 
+	background: #fff; 
+	margin-right: 5px; 
+	position: relative; 
+	top: 4px;
+	outline:none;
+}
+.checkbox-1[type=checkbox]:checked{
+	background: #36A0EA url(../images/ico-g.png) center center no-repeat !important; 
+	border: solid #36A0EA 1px;
+}
+.radio-1{
+	border-radius: 100%; 
+	width: 20px; 
+	height: 20px;
+}
+.radio-1[type=radio]:checked{
+	background: #36A0EA url(../images/ico-g.png) center center no-repeat; 
+	border: solid #36A0EA 1px;
+}

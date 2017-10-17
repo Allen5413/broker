@@ -18,9 +18,8 @@ public class LoginServiceImpl implements LoginService {
     private UserDao userDao;
 
     @Override
-    public User login(String loginName, String pwd) throws Exception {
-        pwd = MD5Util.MD5(pwd);
-        User user = userDao.findByLoginNameAndPwd(loginName, pwd);
+    public User login(String loginName) throws Exception {
+        User user = userDao.findByLoginName(loginName);
         if(null != user){
             if(user.getState() == User.STATE_DELETE){
                 throw new BusinessException("您的账号已被删除！");

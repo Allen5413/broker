@@ -1,6 +1,7 @@
 package com.allen.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.allen.base.config.ConfigProp;
 import com.allen.base.exception.BusinessException;
 import com.allen.entity.basic.Menu;
 import com.allen.entity.basic.Resource;
@@ -8,6 +9,7 @@ import com.allen.entity.user.User;
 import com.allen.service.basic.menu.FindMenuByIdService;
 import com.allen.service.basic.resource.FindResourceByUserIdService;
 import com.allen.service.user.user.LoginService;
+import com.allen.util.HttpRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +32,17 @@ public class LoginController {
     private FindResourceByUserIdService findResourceByUserIdService;
     @Autowired
     private FindMenuByIdService findMenuByIdService;
+    @Autowired
+    private ConfigProp configProp;
 
     @RequestMapping("/")
     public String login(){
         return "/login";
+    }
+
+    @RequestMapping("/youxue")
+    public String youxueLogin(){
+        return "/youxue/login";
     }
 
     @RequestMapping("/login")
@@ -42,12 +51,15 @@ public class LoginController {
                             @RequestParam("pwd")String pwd,
                             HttpServletRequest request)throws Exception{
         JSONObject jsonObject = new JSONObject();
-        User user = loginService.login(loginName, pwd);
+        User user = loginService.login(loginName);
         if(null != user){
+            if(!HttpRequestUtil.vaildLogin(loginName, pwd, configProp.getAttop().get("loginUrl"))){
+                throw new BusinessException("用户名密码错误！");
+            }
             this.setSession(request, user);
             jsonObject.put("state", 0);
         }else{
-            throw new BusinessException("用户名密码不存在");
+            throw new BusinessException("zz号不存在");
         }
         return jsonObject;
     }
