@@ -1,4 +1,4 @@
-package com.allen.entity.youxue.product;
+package com.allen.youxue.entity.product;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,15 +10,13 @@ import java.util.Date;
  * Created by Allen on 2017/10/17.
  */
 @Entity
-@Table(name = "yx_product")
-public class Product {
+@Table(name = "yx_product_date")
+public class ProductDate {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
-    private int money;
-    private String unit;
-    private String trip;
+    private Long productId;
+    private String date;
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -32,36 +30,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public int getMoney() {
-        return money;
+    public String getDate() {
+        return date;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getTrip() {
-        return trip;
-    }
-
-    public void setTrip(String trip) {
-        this.trip = trip;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCreator() {

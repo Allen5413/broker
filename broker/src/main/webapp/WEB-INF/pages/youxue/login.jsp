@@ -27,7 +27,8 @@
     }else{
       var params = {
         "loginName":loginName,
-        "pwd":pwd
+        "pwd":pwd,
+        "projectId":1
       };
       $.ajax({
         url:"${pageContext.request.contextPath}/login.json",
@@ -36,7 +37,7 @@
         data:params,
         success:function(data){
           if(data.state == 0){
-            location.href = "${pageContext.request.contextPath}/openIndex.html";
+            location.href = "${pageContext.request.contextPath}/youxue/openIndex.html";
           }else {
             $("#msg").html(data.msg);
           }

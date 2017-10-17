@@ -35,12 +35,20 @@ public class LoginController {
     @Autowired
     private ConfigProp configProp;
 
+    /**
+     * 总后台的登录页面
+     * @return
+     */
     @RequestMapping("/")
     public String login(){
         return "/login";
     }
 
-    @RequestMapping("/youxue")
+    /**
+     * 游学项目的登录页面
+     * @return
+     */
+    @RequestMapping("/youxue/login")
     public String youxueLogin(){
         return "/youxue/login";
     }
@@ -49,6 +57,7 @@ public class LoginController {
     @ResponseBody
     public JSONObject userLogin(@RequestParam("loginName")String loginName,
                             @RequestParam("pwd")String pwd,
+                            @RequestParam(value = "projectId", required = false)Long projectId,
                             HttpServletRequest request)throws Exception{
         JSONObject jsonObject = new JSONObject();
         User user = loginService.login(loginName);
@@ -56,7 +65,7 @@ public class LoginController {
             if(!HttpRequestUtil.vaildLogin(loginName, pwd, configProp.getAttop().get("loginUrl"))){
                 throw new BusinessException("用户名密码错误！");
             }
-            this.setSession(request, user);
+            this.setSession(request, user, projectId);
             jsonObject.put("state", 0);
         }else{
             throw new BusinessException("zz号不存在");
@@ -64,12 +73,27 @@ public class LoginController {
         return jsonObject;
     }
 
+    /**
+     * 总后台的首页
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/openIndex")
     public String index()throws Exception{
         return "/index";
     }
 
-    protected String setSession(HttpServletRequest request, User user)throws Exception{
+    /**
+     * 游学项目的首页
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/youxue/openIndex")
+    public String youxueIndex()throws Exception{
+        return "/youxue/index";
+    }
+
+    protected String setSession(HttpServletRequest request, User user, Long projectId)throws Exception{
         request.getSession().setAttribute("userId", user.getId());
         request.getSession().setAttribute("loginName", user.getLoginName());
         request.getSession().setAttribute("name", user.getName());
@@ -77,15 +101,20 @@ public class LoginController {
         request.getSession().setAttribute("state", user.getState());
         request.getSession().setAttribute("type", user.getType());
         //得到用户拥有的菜单资源权限
-        Map<String, List<Resource>> menuMap = this.getUserMenu(user.getId());
+        Map<String, List<Resource>> menuMap = this.getUserMenu(user.getId(), projectId);
         request.getSession().setAttribute("menuMap", menuMap);
         return "success";
     }
 
-    protected Map<String, List<Resource>> getUserMenu(long userId)throws Exception{
+    protected Map<String, List<Resource>> getUserMenu(long userId, Long projectId)throws Exception{
         Map<String, List<Resource>> menuResourceMap = new LinkedHashMap<String, List<Resource>>();
         //获取用户所关联的资源
-        List<Resource> resourceList = findResourceByUserIdService.find(userId);
+        List<Resource> resourceList = null;
+        if(null != projectId && 0 < projectId){
+            resourceList = findResourceByUserIdService.findProjectAdmin(userId, projectId);
+        }else{
+            resourceList = findResourceByUserIdService.findAdmin(userId);
+        }
         if(null != resourceList && 0 < resourceList.size()) {
             for(Resource resource : resourceList) {
                 //得到菜单

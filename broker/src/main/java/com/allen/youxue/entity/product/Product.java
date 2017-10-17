@@ -1,4 +1,4 @@
-package com.allen.entity.youxue.product;
+package com.allen.youxue.entity.product;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,13 +10,16 @@ import java.util.Date;
  * Created by Allen on 2017/10/17.
  */
 @Entity
-@Table(name = "yx_product_date")
-public class ProductDate {
+@Table(name = "yx_product")
+public class Product {
     @Id
     @GeneratedValue
     private Long id;
-    private Long productId;
-    private String date;
+    private Long projectId;
+    private String name;
+    private int money;
+    private String unit;
+    private String trip;
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -30,20 +33,44 @@ public class ProductDate {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
-    public String getDate() {
-        return date;
+    public String getName() {
+        return name;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getTrip() {
+        return trip;
+    }
+
+    public void setTrip(String trip) {
+        this.trip = trip;
     }
 
     public String getCreator() {

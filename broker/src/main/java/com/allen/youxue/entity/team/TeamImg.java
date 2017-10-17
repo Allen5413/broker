@@ -1,4 +1,4 @@
-package com.allen.entity.youxue.team;
+package com.allen.youxue.entity.team;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

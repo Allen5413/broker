@@ -1,4 +1,4 @@
-package com.allen.entity.youxue.team;
+package com.allen.youxue.entity.team;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +12,10 @@ import java.util.Date;
 @Entity
 @Table(name = "yx_team")
 public class Team {
+
+    public final static int ISHEAD_NOT = 0;
+    public final static int ISHEAD_YES = 1;
+
     @Id
     @GeneratedValue
     private Long id;

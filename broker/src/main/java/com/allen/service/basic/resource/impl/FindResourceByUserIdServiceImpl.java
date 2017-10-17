@@ -18,7 +18,12 @@ public class FindResourceByUserIdServiceImpl implements FindResourceByUserIdServ
     private ResourceDao resourceDao;
 
     @Override
-    public List<Resource> find(long userId) throws Exception {
+    public List<Resource> findAdmin(long userId) throws Exception {
         return resourceDao.findByUserId(userId);
+    }
+
+    @Override
+    public List<Resource> findProjectAdmin(long userId, long projectId) throws Exception {
+        return resourceDao.findByUserId(userId, projectId);
     }
 }

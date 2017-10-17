@@ -31,6 +31,7 @@ public class Resource implements Serializable{
     private int isButton = MENU;//1菜单 2按钮
     private String buttonCode="";//按钮编码
     private int sno=0;//排序号
+    private Long projectId;
 
     public long getId() {
         return id;
@@ -134,5 +135,13 @@ public class Resource implements Serializable{
 
     public void setSno(int sno) {
         this.sno = sno;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }
