@@ -40,7 +40,7 @@ public class FindCustomerByBrokerIdServiceImpl implements FindCustomerByBrokerId
                     String name = userSchool.get("realname").toString();
                     json.put("name", name);
                 }
-                json.put("endLoginTime", customer.getEndLoginTime().toString());
+                json.put("endLoginTime", null == customer.getEndLoginTime() ? "" : customer.getEndLoginTime().toString());
                 json.put("loginCount", customer.getLoginCount());
                 list.add(json);
             }

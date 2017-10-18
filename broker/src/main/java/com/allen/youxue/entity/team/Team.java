@@ -25,6 +25,8 @@ public class Team {
     private int state;              //状态[0：待审核；1：通过；2：不通过]只有普通团员才会审核，团长由经纪人在后台直接创建通过
     private String reason;          //审核不通过原因
     private String label;           //团长的个性说明
+    private Long parentId;          //团长id
+    private String remark;          //备注
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -84,6 +86,22 @@ public class Team {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getCreator() {

@@ -44,7 +44,7 @@
 </div>
 <script>
   function detail(zz){
-    app.openDialog("${pageContext.request.contextPath}/findBrokerByZz/find.html?zz="+zz, "经纪人详情", "800", "700", function(index){
+    app.openOneBtnDialog("${pageContext.request.contextPath}/findBrokerByZz/find.html?zz="+zz, "经纪人详情", "800", "700", function(index){
     });
   }
 

@@ -32,15 +32,26 @@ public class PageYxTeamServiceImpl implements PageYxTeamService {
             for(int i=0; i<pageInfo.getPageResults().size(); i++){
                 Map map = (Map) pageInfo.getPageResults().get(i);
                 JSONObject json = new JSONObject();
-                JSONObject attopJSON = attopService.findZzInfo(map.get("zz").toString(), "");
+                JSONObject attopJSON = attopService.findZzInfo(map.get("zz").toString()+","+map.get("bZz").toString(), "");
                 if ("0".equals(attopJSON.get("status"))) {
                     throw new BusinessException("接口获取学生信息失败！");
                 }
                 List list2 = (List) attopJSON.get("data");
                 if(list2 != null && 0 < list2.size()){
                     JSONObject userSchool = (JSONObject) list2.get(0);
-                    String name = userSchool.get("realname").toString();
-                    json.put("name", name);
+                    JSONObject userSchool2 = (JSONObject) list2.get(1);
+                    if(map.get("zz").toString().equals(userSchool.get("zz").toString())){
+                        json.put("name", userSchool.get("realname").toString());
+                        json.put("sName", userSchool.get("sname").toString());
+                        json.put("mobile", userSchool.get("mobile").toString());
+                        json.put("bName", userSchool2.get("realname").toString());
+                    }
+                    if(map.get("zz").toString().equals(userSchool2.get("zz").toString())){
+                        json.put("name", userSchool2.get("realname").toString());
+                        json.put("sName", userSchool2.get("sname").toString());
+                        json.put("mobile", userSchool2.get("mobile").toString());
+                        json.put("bName", userSchool.get("realname").toString());
+                    }
                 }
                 json.put("id", map.get("id"));
                 json.put("zz", map.get("zz"));

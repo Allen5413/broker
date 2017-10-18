@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface BrokerDao extends CrudRepository<Broker, Long> {
     public Broker findByZz(String zz)throws Exception;
-
+    public List<Broker> findByIsBlack(int isBlack)throws Exception;
     public List<Broker> findByBlackType(int blackType)throws Exception;
 }

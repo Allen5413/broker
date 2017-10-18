@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.allen.util.StringUtil;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
+import com.allen.youxue.entity.product.Product;
 import com.allen.youxue.entity.team.Team;
 import com.allen.youxue.service.product.FindYxProductAllService;
+import com.allen.youxue.service.product.FindYxProductByIdService;
 import com.allen.youxue.service.team.AddYxTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class AddYxTeamController extends BaseController {
     private AddYxTeamService addYxTeamService;
     @Autowired
     private FindYxProductAllService findYxProductAllService;
+    @Autowired
+    private FindYxProductByIdService findYxProductByIdService;
 
     /**
      * @return
@@ -44,12 +48,14 @@ public class AddYxTeamController extends BaseController {
      */
     @RequestMapping(value = "addHead")
     @ResponseBody
-    public JSONObject addHead(HttpServletRequest request, Team team) throws Exception {
+    public JSONObject addHead(HttpServletRequest request, Team team, String brokerZz, long productId) throws Exception {
         JSONObject jsonObject = new JSONObject();
         if(null != team) {
+            Product product = findYxProductByIdService.find(productId);
             team.setCreator(UserUtil.getLoginUserForName(request));
             team.setOperator(UserUtil.getLoginUserForName(request));
-            addYxTeamService.addHead(team, UserUtil.getLoginUserForLoginId(request));
+            addYxTeamService.addHead(team, brokerZz, product.getProjectId()
+                    , UserUtil.getLoginUserForLoginId(request));
         }
         jsonObject.put("state", 0);
         return jsonObject;

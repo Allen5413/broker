@@ -13,20 +13,20 @@
             <td><input type="text" id="zz" name="zz" class="input-txt-220" /></td>
           </tr>
           <tr>
+            <td class="tag-b">经纪人ZZ：</td>
+            <td><input type="text" id="brokerZz" name="brokerZz" class="input-txt-220" /></td>
+          </tr>
+          <tr>
             <td class="tag-b">产品：</td>
             <td>
-              <select id="productId" onchange="selectProduct()">
+              <select id="productId" name="productId" onchange="selectProduct()">
                 <option value="">--请选择--</option>
                 <c:forEach var="product" items="${productList}">
                   <option value="${product.id}">${product.name}</option>
                 </c:forEach>
               </select>&nbsp;&nbsp;&nbsp;&nbsp;
-              <select id="productDateId" style="display: none;"></select>
+              <select id="productDateId" name="productDateId" style="display: none;"></select>
             </td>
-          </tr>
-          <tr>
-            <td class="tag-b">个性说明：</td>
-            <td><textarea id="label" name="label" class="textarea-intro"></textarea></td>
           </tr>
           <tr>
             <td class="tag-b"></td>
@@ -75,6 +75,6 @@
       app.alert("请选择产品行程时间！", 1);
       return false;
     }
-    app.add("${pageContext.request.contextPath}/youxue/addTeam/addHead.json", $("#form").serialize(), "${pageContext.request.contextPath}/pageProject/page.html", "");
+    app.add("${pageContext.request.contextPath}/youxue/addTeam/addHead.json", $("#form").serialize(), "${pageContext.request.contextPath}/youxue/pageTeam/page.html", "");
   }
 </script>

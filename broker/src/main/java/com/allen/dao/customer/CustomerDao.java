@@ -11,6 +11,8 @@ import java.math.BigInteger;
  * Created by Allen on 2017/10/16.
  */
 public interface CustomerDao extends CrudRepository<Customer, Long> {
+    public Customer findByZzAndBrokerIdAndProjectId(String zz, long brokerId, long projectId)throws Exception;
+
     @Query(nativeQuery = true, value = "select count(*) from customer c where c.broker_id = ?1")
     public BigInteger findByBrokerId(long brokerId)throws Exception;
 
