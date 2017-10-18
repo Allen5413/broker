@@ -21,7 +21,7 @@ public class LogoutController {
     @RequestMapping(value = "/youxue/logout")
     public void youxueLogout(HttpServletRequest request, HttpServletResponse response)throws Exception{
         this.removeSession(request);
-        response.sendRedirect("/youxue");
+        response.sendRedirect("/youxue/login");
     }
 
     private void removeSession(HttpServletRequest request){
