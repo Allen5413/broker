@@ -42,8 +42,10 @@ public class FindBrokerByZZServiceImpl implements FindBrokerByZZService{
             for(int i=0; i<list.size(); i++){
                 JSONObject userSchool = (JSONObject) list.get(i);
                 Broker broker = brokerDao.findByZz(zz);
-                BigInteger customerNum = customerDao.findByBrokerId(broker.getId());
-                userSchool.put("customerNum", null == customerNum ? 0 : customerNum);
+                if(null != broker) {
+                    BigInteger customerNum = customerDao.findByBrokerId(broker.getId());
+                    userSchool.put("customerNum", null == customerNum ? 0 : customerNum);
+                }
                 return userSchool;
             }
         }

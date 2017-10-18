@@ -3,3 +3,4 @@
 <!-- 自定义 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/youxue/css/common.css"  />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/youxue/css/at-tour.css"  />
+<script src="${pageContext.request.contextPath}/js/app.js"></script>

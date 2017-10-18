@@ -25,7 +25,12 @@ public class FindBrokerAllServiceImpl implements FindBrokerAllService {
     private AttopService attopService;
 
     @Override
-    public List<JSONObject> find() throws Exception {
+    public List<Broker> find() throws Exception {
+        return (List<Broker>) brokerDao.findAll();
+    }
+
+    @Override
+    public List<JSONObject> findAttop() throws Exception {
         List<Broker> brokerList = brokerDao.findByIsBlack(Broker.ISBLACK_NOT);
         if(null != brokerList && 0 < brokerList.size()){
             List<JSONObject> list = new ArrayList<JSONObject>(brokerList.size());

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,5 +123,46 @@
     </ul>
   </div>
 </section>
+<div id="brokerRecommend" class="layer-trans" style="display: none">
+  <div class="pop-tips-txt">
+    <div class="close-x" onclick="$('#brokerRecommend').hide()">×</div>
+    <div class="title">关联经纪人</div>
+    <div class="pop-input-view">
+      <div class="agent-uhs">
+        <c:forEach var="broker" items="${brokerList}">
+          <a class="u-pic selected" href="#"><img src="${broker.icon}"><span class="g-ed"></span>
+            <div class="info">
+              <p>${broker.name}</p>
+              <p>TEL:${broker.mobile}</p>
+              <p>QQ:${broker.qq}</p>
+            </div>
+          </a>
+        </c:forEach>
+      </div>
+      <label>有认识的经纪人，请输入他的ID</label>
+      <p class="item-input">
+        <span class="i-tg">ZZ：</span>
+        <input type="text">
+      </p>
+      <p><button class="but-submit">确定关联</button></p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+<script>
+  <c:if test="${!isHaveBroker}">
+    setTimeout(function(){
+      //获取当前时间
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth()+1;
+      var day = date.getDate();
+      var nowDate = year+"-"+month+"-"+day;
+      if(app.getCookie("${param.zz}") == ""){
+        app.setCookie("${param.zz}", nowDate, 1);
+        $("#brokerRecommend").show();
+      }
+    }, 3000);
+  </c:if>
+</script>

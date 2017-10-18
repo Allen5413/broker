@@ -604,3 +604,33 @@ App.prototype.operator = function(confirmStr, url, params){
         });
     });
 }
+
+/**
+ * 设置cookie
+ * @param key
+ * @param value
+ * @param exdays   过期时间，天
+ */
+App.prototype.setCookie = function(key, value, exdays){
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = key + "=" + value + "; " + expires;
+}
+
+/**
+ * 得到cookie
+ * @param key
+ * @returns {string}
+ */
+App.prototype.getCookie = function(key){
+    var name = key + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0){
+            return c.substring(name.length,c.length);
+        }
+    }
+    return "";
+}

@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface FindYxTeamHeadService {
     public List<JSONObject> find()throws Exception;
+    public int countNum()throws Exception;
 }

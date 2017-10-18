@@ -6,12 +6,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * Created by Allen on 2017/10/16.
  */
 public interface CustomerDao extends CrudRepository<Customer, Long> {
     public Customer findByZzAndBrokerIdAndProjectId(String zz, long brokerId, long projectId)throws Exception;
+
+    @Query("select c from Customer c where c.zz = ?1 and c.projectId = ?2 and c.brokerId is not null")
+    public List<Customer> findByZzAndProjectIdHaveBroker(String zz, long projectId)throws Exception;
 
     @Query(nativeQuery = true, value = "select count(*) from customer c where c.broker_id = ?1")
     public BigInteger findByBrokerId(long brokerId)throws Exception;

@@ -46,4 +46,10 @@ public class FindYxTeamHeadServiceImpl implements FindYxTeamHeadService {
         }
         return null;
     }
+
+    @Override
+    public int countNum() throws Exception {
+        List<Team> teamList = yxTeamDao.findByIsHead(Team.ISHEAD_YES);
+        return null == teamList ? 0 : teamList.size();
+    }
 }
