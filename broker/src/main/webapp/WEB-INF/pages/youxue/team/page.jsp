@@ -42,6 +42,17 @@
             <option value="1" <c:if test="${param.isHead eq '1'}">selected="selected" </c:if>>是</option>
           </select>
         </span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="itg">状态：</span>
+        <span class="inline-select">
+          <select name="state" class="select-140">
+            <option value="">全部</option>
+            <option value="0" <c:if test="${param.state eq '0'}">selected="selected" </c:if>>已报名</option>
+            <option value="1" <c:if test="${param.state eq '1'}">selected="selected" </c:if>>待审核</option>
+            <option value="2" <c:if test="${param.state eq '2'}">selected="selected" </c:if>>审核通过</option>
+            <option value="3" <c:if test="${param.state eq '3'}">selected="selected" </c:if>>审核未通过</option>
+            <option value="4" <c:if test="${param.state eq '4'}">selected="selected" </c:if>>已缴费</option>
+          </select>
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="inline-input"><a id="searchBtn" class="btn-1" href="#" onclick="app.searchFormPage($('#pageForm'), $('#pageForm').attr('action'))">查 询</a></span>
       </li>
     </form>
@@ -82,10 +93,16 @@
                 <td>${team.pName}</td>
                 <td>${team.isHead == 0 ? "否":"是"}</td>
                 <td>${team.bName}</td>
-                <td>${team.state}</td>
+                <td>
+                  <c:if test="${team.state eq '0'}">已报名</c:if>
+                  <c:if test="${team.state eq '1'}">待审核</c:if>
+                  <c:if test="${team.state eq '2'}">审核通过</c:if>
+                  <c:if test="${team.state eq '3'}">审核未通过</c:if>
+                  <c:if test="${team.state eq '4'}">已缴费</c:if>
+                </td>
                 <td>${team.remark}</td>
                 <td>
-                  <a class="btn-opr" href="#" onclick="app.clickResources('${pageContext.request.contextPath}/editProject/open.html?id=${project.id}&reqParams=${reqParams}');">编辑状态</a>
+                  <a class="btn-opr" href="#" onclick="editState(${team.id})">编辑状态</a>
                 </td>
               </tr>
             </c:forEach>
@@ -96,3 +113,25 @@
     </div>
   </div>
 </div>
+<script>
+  function editState(id){
+    app.openDialog("${pageContext.request.contextPath}/youxue/editTeam/open.html?id="+id, "编辑状态", "400", "300", function(index){
+      $.ajax({
+        cache: true,
+        type: "POST",
+        url:"${pageContext.request.contextPath}/youxue/editTeam/editState.json",
+        data:$("#editForm").serialize(),
+        async: false,
+        success: function(data) {
+          if(data.state == 0){
+            app.msg("操作成功！", 0);
+            layer.close(index);
+            app.clickResources("${pageContext.request.contextPath}/youxue/pageTeam/page.html", "${reqParams}");
+          }else{
+            app.msg(data.msg, 1);
+          }
+        }
+      });
+    });
+  }
+</script>

@@ -16,13 +16,19 @@ public class Team {
     public final static int ISHEAD_NOT = 0;
     public final static int ISHEAD_YES = 1;
 
+    public final static int STATE_SIGN = 0;
+    public final static int STATE_WAIT = 1;
+    public final static int STATE_PASS = 2;
+    public final static int STATE_NOT = 3;
+    public final static int STATE_FEE = 4;
+
     @Id
     @GeneratedValue
     private Long id;
     private Long productDateId;     //产品的行程时间id
     private String zz;              //团员zz
     private int isHead;             //是否团长[0：否；1：是]
-    private int state;              //状态[0：待审核；1：通过；2：不通过]只有普通团员才会审核，团长由经纪人在后台直接创建通过
+    private Integer state;              //状态[0：已报名；1：待审核；2：通过；3：不通过；4：已缴费]只有普通团员才会审核，团长由经纪人在后台直接创建通过
     private String reason;          //审核不通过原因
     private String label;           //团长的个性说明
     private Long parentId;          //团长id
@@ -64,11 +70,11 @@ public class Team {
         this.isHead = isHead;
     }
 
-    public int getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

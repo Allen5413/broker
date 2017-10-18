@@ -8,9 +8,8 @@ import com.allen.service.broker.RemoveBlackBrokerService;
 import com.allen.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class RemoveBlackBrokerServiceImpl implements RemoveBlackBrokerService {
     private LogDao logDao;
 
     @Override
-    @Transient
+    @Transactional
     public void removeBlack(long id, long loginId, String loginName) throws Exception {
         Broker broker = brokerDao.findOne(id);
         broker.setBlackReason(null);

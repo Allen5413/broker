@@ -23,6 +23,7 @@ public class Project {
     private int auditType;      //审批模式[0：自动；1：手动]
     private int ratio;          //在校生总人数比例
     private int frequency;      //客户访问频次
+    private int visitCount;          //访问次数
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -66,6 +67,14 @@ public class Project {
 
     public void setFrequency(int frequency) {
         this.frequency = frequency;
+    }
+
+    public int getVisitCount() {
+        return visitCount;
+    }
+
+    public void setVisitCount(int visitCount) {
+        this.visitCount = visitCount;
     }
 
     public String getCreator() {

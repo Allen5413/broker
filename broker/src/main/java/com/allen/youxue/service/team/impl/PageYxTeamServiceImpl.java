@@ -28,7 +28,7 @@ public class PageYxTeamServiceImpl implements PageYxTeamService {
     public PageInfo findPage(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap) throws Exception {
         pageInfo = findYxTeamDao.findPage(pageInfo, paramsMap, sortMap);
         if(null != pageInfo.getPageResults() && 0 < pageInfo.getPageResults().size()){
-            List<JSONObject> list = new ArrayList<JSONObject>(pageInfo.getPageResults().size());
+            List<Map> list = new ArrayList<Map>(pageInfo.getPageResults().size());
             for(int i=0; i<pageInfo.getPageResults().size(); i++){
                 Map map = (Map) pageInfo.getPageResults().get(i);
                 JSONObject json = new JSONObject();
@@ -41,24 +41,19 @@ public class PageYxTeamServiceImpl implements PageYxTeamService {
                     JSONObject userSchool = (JSONObject) list2.get(0);
                     JSONObject userSchool2 = (JSONObject) list2.get(1);
                     if(map.get("zz").toString().equals(userSchool.get("zz").toString())){
-                        json.put("name", userSchool.get("realname").toString());
-                        json.put("sName", userSchool.get("sname").toString());
-                        json.put("mobile", userSchool.get("mobile").toString());
-                        json.put("bName", userSchool2.get("realname").toString());
+                        map.put("name", userSchool.get("realname").toString());
+                        map.put("sName", userSchool.get("sname").toString());
+                        map.put("mobile", userSchool.get("mobile").toString());
+                        map.put("bName", userSchool2.get("realname").toString());
                     }
                     if(map.get("zz").toString().equals(userSchool2.get("zz").toString())){
-                        json.put("name", userSchool2.get("realname").toString());
-                        json.put("sName", userSchool2.get("sname").toString());
-                        json.put("mobile", userSchool2.get("mobile").toString());
-                        json.put("bName", userSchool.get("realname").toString());
+                        map.put("name", userSchool2.get("realname").toString());
+                        map.put("sName", userSchool2.get("sname").toString());
+                        map.put("mobile", userSchool2.get("mobile").toString());
+                        map.put("bName", userSchool.get("realname").toString());
                     }
                 }
-                json.put("id", map.get("id"));
-                json.put("zz", map.get("zz"));
-                json.put("isHead", map.get("isHead"));
-                json.put("state", map.get("state"));
-                json.put("pName", map.get("pName"));
-                list.add(json);
+                list.add(map);
             }
             pageInfo.setPageResults(list);
         }

@@ -9,14 +9,14 @@
 <section class="section wp-t50">
   <div class="at-wrap">
     <div class="theme-pic">
-      <div class="pic"><img src="${pageContext.request.contextPath}/youxue/images/banner.jpg"></div>
+      <div class="pic"><img src="/youxue/images/banner.jpg"></div>
       <div class="th-tabs">
         <div class="tab">
-          <p class="num">56</p>
+          <p class="num">${teamHeadCount}</p>
           <p>校花</p>
         </div>
         <div class="tab">
-          <p class="num">45678</p>
+          <p class="num">${visitCount}</p>
           <p>关注</p>
         </div>
       </div>
@@ -44,16 +44,16 @@
       </div>
       <ul class="list-item">
         <li>
-          <a href="item/detail-01.html"><img src="${pageContext.request.contextPath}/youxue/images/item-01.jpg"></a>
+          <a href="/youxue/item/detail-01.html"><img src="/youxue/images/item-01.jpg"></a>
         </li>
         <li>
-          <a href="item/detail-02.html"><img src="${pageContext.request.contextPath}/youxue/images/item-02.jpg"></a>
+          <a href="/youxue/item/detail-02.html"><img src="/youxue/images/item-02.jpg"></a>
         </li>
         <li>
-          <a href="item/detail-03.html"><img src="${pageContext.request.contextPath}/youxue/images/item-03.jpg"></a>
+          <a href="/youxue/item/detail-03.html"><img src="/youxue/images/item-03.jpg"></a>
         </li>
         <li>
-          <a href="item/detail-04.html"><img src="${pageContext.request.contextPath}/youxue/images/item-04.jpg"></a>
+          <a href="/youxue/item/detail-04.html"><img src="/youxue/images/item-04.jpg"></a>
         </li>
       </ul>
     </div>
@@ -63,7 +63,7 @@
         <p>
           德行教育咨询集团于北京和香港注册成立，主营海内外教育交流项目。 集团基于十年深耕教育行业的积淀，成立之初已得到众多官方机构独家支持，包括北大清华、英国剑桥、美国耶鲁等国际顶尖学府，摩根、瑞银、高盛等世界著名企业，中科院、国务院教育部、地方教育局、留学基金管理委员会等国家行政单位，中国网、教育电视台等教育媒体平台。
         </p>
-        <img src="${pageContext.request.contextPath}/youxue/images/intro/pic-01.png" />
+        <img src="/youxue/images/intro/pic-01.png" />
         <h5>德行团队</h5>
         <p>
           德行团队精英荟萃，有来自清华、北大、剑桥、耶鲁等世界名校，有来自百度、搜狐、腾讯、九鼎、红杉、和君等世界名企，有近10年教育从业经验，有在中国大陆、中国香港、欧洲、美洲、东北亚、东南亚地区丰富的项目执行资源，始终致力于搭建“交流-成长-蜕变”的国际化舞台，已为10000多名学员提供海内外教育交流项目机会。 德行团队成员，拥有国际交流业内唯一中央级官方背景，拥有央网新闻源全媒体传播矩阵、拥有资本圈教育圈全行业智库，为打造国内独家模块化项目和口碑化运营的教育交流服务平台，奠定坚实基础。
@@ -83,10 +83,10 @@
       <div class="intro-text">
         <ul class="pics-list">
           <li>
-            <img src="${pageContext.request.contextPath}/youxue/images/certificate_01.jpg">
+            <img src="/youxue/images/certificate_01.jpg">
           </li>
           <li>
-            <img src="${pageContext.request.contextPath}/youxue/images/certificate_02.jpg">
+            <img src="/youxue/images/certificate_02.jpg">
           </li>
         </ul>
       </div>
@@ -98,15 +98,15 @@
         <p>出行用户必须与德行签署书面合同，该合同保护双方的合法权益，超出合同范围的口头承诺均无法律效力，请勿轻信。</p>
         <ul class="pics-code-list">
           <li>
-            <img src="${pageContext.request.contextPath}/youxue/images/code-zs-android.png">
+            <img src="/youxue/images/code-zs-android.png">
             <p>至善安卓下载</p>
           </li>
           <li>
-            <img src="${pageContext.request.contextPath}/youxue/images/code-zs-ios.png">
+            <img src="/youxue/images/code-zs-ios.png">
             <p>至善IOS下载</p>
           </li>
           <li>
-            <img src="${pageContext.request.contextPath}/youxue/images/code-dx.png">
+            <img src="/youxue/images/code-dx.png">
             <p>德行公众号</p>
           </li>
         </ul>

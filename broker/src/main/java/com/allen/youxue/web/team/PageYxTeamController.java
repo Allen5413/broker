@@ -36,11 +36,13 @@ public class PageYxTeamController extends BaseController {
                        @RequestParam(value = "teamId", required = false)Long teamId,
                        @RequestParam(value = "brokerId", required = false)Long brokerId,
                        @RequestParam(value = "productId", required = false)Long productId,
-                       @RequestParam(value = "isHead", required = false)Integer isHead) throws Exception {
+                       @RequestParam(value = "isHead", required = false)Integer isHead,
+                       @RequestParam(value = "state", required = false)Integer state) throws Exception {
         PageInfo pageInfo = super.getPageInfo(request);
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("t.parent_id", teamId);
         params.put("t.is_head", isHead);
+        params.put("t.state", state);
         params.put("p.id", productId);
         params.put("b.id", brokerId);
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>();

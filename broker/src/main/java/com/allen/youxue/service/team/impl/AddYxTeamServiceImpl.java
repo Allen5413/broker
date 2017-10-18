@@ -12,6 +12,7 @@ import com.allen.youxue.entity.team.Team;
 import com.allen.youxue.service.team.AddYxTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.Transient;
 
@@ -31,7 +32,7 @@ public class AddYxTeamServiceImpl implements AddYxTeamService {
     private BrokerDao brokerDao;
 
     @Override
-    @Transient
+    @Transactional
     public void addHead(Team team, String brokerZz, long projectId, long loginId) throws Exception {
         Team oldTeam = yxTeamDao.findByZzAndProductDateId(team.getZz(), team.getProductDateId());
         if(null != oldTeam){
