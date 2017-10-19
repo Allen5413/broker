@@ -16,7 +16,7 @@ header{
 }
 .header .tit{
 	line-height:40px;
-	text-align;left;
+	text-align:left;
 	flex:1;
 	padding: 4px 10px 0;
 	font-size: 17px;
@@ -806,7 +806,7 @@ header{
 .ul-input-view .item-cell{
 	padding: 14px 15px 10px 0;
 	display: flex;
-	line-break: 1.6em;
+	line-height: 1.6em;
 	position: relative;
 }
 .ul-input-view .item-cell:after{
@@ -1641,6 +1641,7 @@ color: #9a9a9a;
 }
 .pop-input-view .item-input input{
 flex: 1;
+line-height: 32px;
 }
 .pop-input-view .but-submit{
    background: #49b1fe;
@@ -1650,4 +1651,24 @@ flex: 1;
    font-size: 15px;
    text-align: center;
    min-width: 120px;
+}
+
+.pop-ags-tagcell{
+	padding: 0 0 20px;
+}
+.pop-ags-tagcell p{
+	font-size: 12px;
+}
+.pop-ags-tagcell a.f-r{color: #008CD3;}
+.pop-cells{font-size: 12px; display: flex; flex-flow: wrap;}
+.pop-cells a{
+	width: 45%;
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+	-o-text-overflow:ellipsis; 
+	overflow: hidden;
+	border-radius: 10px;
+	background: #f0f0f0;
+	padding: 4px 6px;
+	margin: 0 10px 10px 0;
 }

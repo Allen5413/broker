@@ -89,13 +89,17 @@ App.prototype.clickResources = function(url, params, obj){
  * @param msg
  * @param flag
  */
-App.prototype.alert = function(msg, flag){
+App.prototype.alert = function(msg, flag, func){
     if(flag == 0){
         //成功的提示
         layer.alert(msg, {icon: 6});
     }else{
         //失败的提示
-        layer.alert(msg, {icon: 5});
+        if(typeof (func) == "undefined") {
+            layer.alert(msg, {icon: 5});
+        }else{
+            layer.alert(msg, {icon: 5}, func);
+        }
     }
 }
 
@@ -104,13 +108,17 @@ App.prototype.alert = function(msg, flag){
  * @param msg
  * @param flag
  */
-App.prototype.msg = function(msg, flag){
+App.prototype.msg = function(msg, flag, func){
     if(flag == 0){
         //成功的提示
         layer.msg(msg, {icon: 6});
     }else{
         //失败的提示
-        layer.alert(msg, {icon: 5});
+        if(typeof (func) == "undefined") {
+            layer.msg(msg, {icon: 5});
+        }else{
+            layer.msg(msg, {icon: 5}, func);
+        }
     }
 }
 

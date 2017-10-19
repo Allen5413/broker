@@ -31,7 +31,7 @@
               <tr>
                 <td>${status.index+1}</td>
                 <td>${broker.creator}</td>
-                <td></td>
+                <td>${broker.name}</td>
                 <td>${broker.pName}</td>
                 <td>${broker.createTime}</td>
                 <td>

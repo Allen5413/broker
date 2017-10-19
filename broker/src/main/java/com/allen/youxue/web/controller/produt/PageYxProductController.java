@@ -1,4 +1,4 @@
-package com.allen.youxue.web.produt;
+package com.allen.youxue.web.controller.produt;
 
 import com.allen.dao.PageInfo;
 import com.allen.web.controller.BaseController;

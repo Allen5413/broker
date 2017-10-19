@@ -1,4 +1,4 @@
-package com.allen.youxue.web.team;
+package com.allen.youxue.web.controller.team;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.util.StringUtil;

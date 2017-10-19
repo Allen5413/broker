@@ -29,11 +29,11 @@
         <p>跟着校花，去触摸世界；或者你就是校花，快来当团长。</p>
       </div>
       <div class="into-itms">
-        <a class="into-2" href="apply-captain.html">
+        <a class="into-2" href="${pageContext.request.contextPath}/youxueApp/applyTeamHead/open.html">
           <div class="icon"></div>
           <p>我要当校花团长</p>
         </a>
-        <a class="into-1" href="apply-agent.html">
+        <a class="into-1" href="${pageContext.request.contextPath}/youxueApp/addBroker/open.html">
           <div class="icon"></div>
           <p>我要做游学经纪人</p>
         </a>
@@ -116,9 +116,9 @@
   </div>
   <div class="footer">
     <ul class="nav-tabs">
-      <li><a class="on" href="index.html">首页</a></li>
-      <li><a href="items.html">项目</a></li>
-      <li><a href="teams.html">团队</a></li>
+      <li><a class="on" href="javascript:;">首页</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/findProduct/open.html">项目</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团队</a></li>
       <li><a href="w-user.html">我的</a></li>
     </ul>
   </div>
@@ -130,7 +130,7 @@
     <div class="pop-input-view">
       <div class="agent-uhs">
         <c:forEach var="broker" items="${brokerList}">
-          <a class="u-pic selected" href="#"><img src="${broker.icon}"><span class="g-ed"></span>
+          <a name="selectBroker" class="u-pic" href="#" onclick="selectBroker('${broker.zz}', this)"><img src="${broker.icon}"><span class="g-ed"></span>
             <div class="info">
               <p>${broker.name}</p>
               <p>TEL:${broker.mobile}</p>
@@ -142,9 +142,10 @@
       <label>有认识的经纪人，请输入他的ID</label>
       <p class="item-input">
         <span class="i-tg">ZZ：</span>
-        <input type="text">
+        <input type="text" id="zz">
       </p>
-      <p><button class="but-submit">确定关联</button></p>
+      <input type="hidden" id="selectBrokerZz" />
+      <p><button class="but-submit" onclick="subBroker()">确定关联</button></p>
     </div>
   </div>
 </div>
@@ -165,4 +166,40 @@
       }
     }, 3000);
   </c:if>
+
+  function selectBroker(zz, obj){
+    $("[name=selectBroker]").each(function(){
+      $(this).removeClass("u-pic selected");
+      $(this).addClass("u-pic");
+    });
+    $(obj).addClass("u-pic selected");
+    $("#selectBrokerZz").val(zz);
+  }
+
+  function subBroker(){
+    var zz = "";
+    if($("#zz").val() == ""){
+      zz = $("#selectBrokerZz").val();
+    }else{
+      zz = $("#zz").val();
+    }
+    if(zz == ""){
+      app.msg("请选择一个经纪人或者输入经纪人ZZ", 1);
+      return false;
+    }
+    $.ajax({
+      url:"${pageContext.request.contextPath}/addCustomer/addForYx.json",
+      method : 'POST',
+      async:false,
+      data:{"brokerZz":zz},
+      success:function(data){
+        if(data.state == 0){
+          app.msg("关联成功！", 0);
+          $("#brokerRecommend").hide();
+        }else {
+          app.msg(data.msg, 1);
+        }
+      }
+    });
+  }
 </script>

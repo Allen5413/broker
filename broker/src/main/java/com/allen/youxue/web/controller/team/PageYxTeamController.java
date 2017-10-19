@@ -1,4 +1,4 @@
-package com.allen.youxue.web.team;
+package com.allen.youxue.web.controller.team;
 
 import com.allen.dao.PageInfo;
 import com.allen.service.broker.FindBrokerAllService;
@@ -45,9 +45,10 @@ public class PageYxTeamController extends BaseController {
         params.put("t.state", state);
         params.put("p.id", productId);
         params.put("b.id", brokerId);
+        params.put("c.project_id", 1l);
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
         sortMap.put("t.id", false);
-        pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap);
+        pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, false);
         request.setAttribute("pageInfo", pageInfo);
         request.setAttribute("teamHeadList", findYxTeamHeadService.find());
         request.setAttribute("produceList", findYxProductAllService.find());

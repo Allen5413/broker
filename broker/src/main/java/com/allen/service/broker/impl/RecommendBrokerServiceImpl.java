@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Allen on 2017/10/18 0018.
@@ -85,12 +87,82 @@ public class RecommendBrokerServiceImpl implements RecommendBrokerService {
                         manJSON.put("mobile", userSchool.get("mobile"));
                         manJSON.put("sName", userSchool.get("sname"));
                         manJSON.put("qq", userSchool.get("qq"));
-                        manJSON.put("sName", userSchool.get("sname"));
+                        manJSON.put("icon", userSchool.get("icon"));
                         resultList.add(manJSON);
                     }
                 }
             }
         }
         return resultList;
+    }
+
+    @Override
+    public List<JSONObject> randomFind(long projectId, int num) throws Exception {
+        List<JSONObject> resultList = new ArrayList<JSONObject>();
+        //查询所有该项目的经纪人
+        List<Object[]> brokerList = brokerProjectDao.findForSchool(projectId);
+        if(null != brokerList && 0 < brokerList.size()) {
+            String zzs = brokerList.get(0)[0].toString();
+            String[] zzArray = zzs.split(",");
+
+            //随机抽取指定数量的经纪人
+            zzArray = this.createRandomArray(zzArray, num);
+            if(null != zzArray && 0 < zzArray.length){
+                zzs = "";
+                for(String zz : zzArray){
+                    zzs += zz+",";
+                }
+                zzs = zzs.substring(0, zzs.length()-1);
+            }
+
+            JSONObject attopJSON = attopService.findZzInfo(zzs, "");
+            if ("0".equals(attopJSON.get("status"))) {
+                throw new BusinessException("接口获取学校信息失败！");
+            }
+            List schoolList = (List) attopJSON.get("data");
+            if(schoolList != null && 0 < schoolList.size()){
+                for(int i=0; i<schoolList.size(); i++){
+                    JSONObject userSchool = (JSONObject) schoolList.get(i);
+                    JSONObject manJSON = new JSONObject();
+                    manJSON.put("zz", userSchool.get("zz"));
+                    manJSON.put("name", userSchool.get("realname"));
+                    manJSON.put("mobile", userSchool.get("mobile"));
+                    manJSON.put("sName", userSchool.get("sname"));
+                    manJSON.put("qq", userSchool.get("qq"));
+                    manJSON.put("icon", userSchool.get("icon"));
+                    resultList.add(manJSON);
+                }
+            }
+        }
+        return resultList;
+    }
+
+
+    /**从数组中随机抽取元素
+     * @return
+     * @Title: createRandomArray
+     * @Description: TODO
+     * @param arr
+     * @param i
+     * @return void
+     * @throws
+     */
+    private static String[] createRandomArray(String[] arr, int n) {
+        // TODO Auto-generated method stub
+        Map map = new HashMap();
+        String[] arrNew = new String[n];
+        if(arr.length <= n){
+            return arr;
+        }else{
+            int count = 0;//新数组下标计数
+            while(map.size() < n){
+                int random = (int) (Math.random() * arr.length);
+                if (!map.containsKey(random)) {
+                    map.put(random, "");
+                    arrNew[count++] = arr[random];
+                }
+            }
+            return arrNew;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.allen.youxue.web.app;
+package com.allen.youxue.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.entity.broker.Customer;
@@ -7,6 +7,7 @@ import com.allen.service.broker.RecommendBrokerService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.service.project.EditProjectVisitCountService;
 import com.allen.service.project.FindProjectByIdService;
+import com.allen.web.controller.BaseController;
 import com.allen.youxue.service.team.FindYxTeamHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/youxueApp/index")
-public class YouXueIndexController {
+public class YouXueIndexController extends BaseController {
 
     @Autowired
     private FindProjectByIdService findProjectByIdService;
@@ -45,9 +46,10 @@ public class YouXueIndexController {
         request.setAttribute("isHaveBroker", isHaveBroker);
         if(!isHaveBroker){
             JSONObject json = findBrokerByZZService.findAttop(zz);
-            request.setAttribute("brokerList", recommendBrokerService.find(json.get("scode").toString(), 1l));
+            String scode = null == json || null == json.get("scode") ? "" : json.get("scode").toString();
+            request.setAttribute("brokerList", recommendBrokerService.find(scode, 1l));
         }
-        request.getSession().setAttribute("zz", zz);
+        request.getSession().setAttribute("loginName", zz);
         return "/youxue/app/index";
     }
 }

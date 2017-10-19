@@ -1,4 +1,4 @@
-package com.allen.youxue.web.productdate;
+package com.allen.youxue.web.controller.productdate;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.web.controller.BaseController;
