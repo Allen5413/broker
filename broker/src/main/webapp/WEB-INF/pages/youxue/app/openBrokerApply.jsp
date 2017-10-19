@@ -70,7 +70,7 @@
         async: false,
         success: function(data) {
           if(data.state == 0){
-            app.msg("申请成功", 1);
+            app.msg("恭喜，您已经是至善网的项目经纪人", 1);
           }else{
             app.alert(data.msg, 1);
           }

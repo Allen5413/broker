@@ -1,9 +1,15 @@
 package com.allen.youxue.web.controller.app;
 
+import com.alibaba.fastjson.JSONObject;
 import com.allen.dao.PageInfo;
 import com.allen.web.controller.BaseController;
+import com.allen.youxue.entity.product.Product;
+import com.allen.youxue.entity.product.ProductDate;
 import com.allen.youxue.entity.team.Team;
 import com.allen.youxue.service.product.FindYxProductAllService;
+import com.allen.youxue.service.product.FindYxProductByIdService;
+import com.allen.youxue.service.productdate.FindYxProductDateByIdService;
+import com.allen.youxue.service.team.FindYxTeamByIdService;
 import com.allen.youxue.service.team.PageYxTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +31,12 @@ public class FindYxTeamController extends BaseController {
     private FindYxProductAllService findYxProductAllService;
     @Autowired
     private PageYxTeamService pageYxTeamService;
+    @Autowired
+    private FindYxTeamByIdService findYxTeamByIdService;
+    @Autowired
+    private FindYxProductDateByIdService findYxProductDateByIdService;
+    @Autowired
+    private FindYxProductByIdService findYxProductByIdService;
 
     @RequestMapping(value = "find")
     public String find(HttpServletRequest request,
@@ -41,5 +53,29 @@ public class FindYxTeamController extends BaseController {
         request.setAttribute("produceList", findYxProductAllService.find());
         request.setAttribute("list", pageInfo.getPageResults());
         return "/youxue/app/listTeam";
+    }
+
+    @RequestMapping(value = "findInfo")
+    public String findInfo(HttpServletRequest request, long teamId) throws Exception {
+        JSONObject team = findYxTeamByIdService.findAttop(teamId);
+        ProductDate productDate = findYxProductDateByIdService.find(Long.parseLong(team.get("productDateId").toString()));
+        Product product = findYxProductByIdService.find(productDate.getProductId());
+
+        //查询团员信息
+        PageInfo pageInfo = super.getPageInfo(request);
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("t.parent_id", teamId);
+        params.put("t.state", Team.STATE_FEE);
+        params.put("c.project_id", 1l);
+        Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
+        sortMap.put("t.id", false);
+        pageInfo.setCountOfCurrentPage(999999);
+        pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, false);
+
+        request.setAttribute("team", team);
+        request.setAttribute("productDate", productDate);
+        request.setAttribute("product", product);
+        request.setAttribute("teamList", pageInfo.getPageResults());
+        return "/youxue/app/teamInfo";
     }
 }

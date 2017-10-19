@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping(value = "/youxueApp/applyTeamHead")
-public class ApplyTeamHeadController extends BaseController {
+public class ApplyYxTeamHeadController extends BaseController {
 
     @Autowired
     private FindBrokerByZZService findBrokerByZZService;

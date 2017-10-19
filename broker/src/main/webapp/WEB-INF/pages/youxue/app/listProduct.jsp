@@ -11,7 +11,7 @@
     <div class="item-view">
       <ul class="list-item">
         <li>
-          <a class="item" href="item/detail-01.html"><img src="/youxue/images/item/item-01.png">
+          <a class="item" href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${bj.id}&teamNum=${bj.num}"><img src="/youxue/images/item/item-01.png">
             <div class="info">
               <p class="tit">${bj.name}</p>
               <p class="sum-bar">
@@ -21,7 +21,7 @@
           </a>
         </li>
         <li>
-          <a class="item" href="item/detail-02.html"><img src="/youxue/images/item/item-02.png">
+          <a class="item" href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${xg.id}&teamNum=${xg.num}"><img src="/youxue/images/item/item-02.png">
             <div class="info">
               <p class="tit">${xg.name}</p>
               <p class="sum-bar">
@@ -31,7 +31,7 @@
           </a>
         </li>
         <li>
-          <a class="item" href="item/detail-03.html"><img src="/youxue/images/item/item-03.png">
+          <a class="item" href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${jq.id}&teamNum=${jq.num}"><img src="/youxue/images/item/item-03.png">
             <div class="info">
               <p class="tit">${jq.name}</p>
               <p class="sum-bar">
@@ -41,7 +41,7 @@
           </a>
         </li>
         <li>
-          <a class="item" href="item/detail-04.html"><img src="/youxue/images/item/item-04.png">
+          <a class="item" href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${yl.id}&teamNum=${yl.num}"><img src="/youxue/images/item/item-04.png">
             <div class="info">
               <p class="tit">${yl.name}</p>
               <p class="sum-bar">

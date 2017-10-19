@@ -52,7 +52,7 @@ public class PageYxTeamController extends BaseController {
         request.setAttribute("pageInfo", pageInfo);
         request.setAttribute("teamHeadList", findYxTeamHeadService.find());
         request.setAttribute("produceList", findYxProductAllService.find());
-        request.setAttribute("brokerList", findBrokerAllService.find());
+        request.setAttribute("brokerList", findBrokerAllService.findAttop());
         request.setAttribute("reqParams", super.getParameters(request));
         return "/youxue/team/page";
     }

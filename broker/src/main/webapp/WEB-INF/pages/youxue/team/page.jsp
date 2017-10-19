@@ -102,7 +102,9 @@
                 </td>
                 <td>${team.remark}</td>
                 <td>
-                  <a class="btn-opr" href="#" onclick="editState(${team.id})">编辑状态</a>
+                  <c:if test="${team.isHead == 0}">
+                    <a class="btn-opr" href="#" onclick="editState(${team.id})">编辑状态</a>
+                  </c:if>
                 </td>
               </tr>
             </c:forEach>

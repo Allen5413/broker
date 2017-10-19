@@ -16,7 +16,7 @@
       <ul class="list-item">
         <c:forEach var="team" items="${list}">
           <li>
-            <a class="team-cel" href="team/team-detail-01.html">
+            <a class="team-cel" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}">
               <div class="uh-pic"><img src="${team.icon}"></div>
               <div class="tm-info">
                 <p class="tit">${team.name} <span class="fxx">(${team.sName})</span></p>
