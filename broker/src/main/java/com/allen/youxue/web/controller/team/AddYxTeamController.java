@@ -48,10 +48,12 @@ public class AddYxTeamController extends BaseController {
      */
     @RequestMapping(value = "addHead")
     @ResponseBody
-    public JSONObject addHead(HttpServletRequest request, Team team, String brokerZz, long productId) throws Exception {
+    public JSONObject addHead(HttpServletRequest request, Team team, String brokerZz, long productId,
+                              @RequestParam(value = "qq", required = false)String qq) throws Exception {
         JSONObject jsonObject = new JSONObject();
         if(null != team) {
             Product product = findYxProductByIdService.find(productId);
+            team.setQq(qq);
             team.setCreator(UserUtil.getLoginUserForName(request));
             team.setOperator(UserUtil.getLoginUserForName(request));
             addYxTeamService.addHead(team, brokerZz, product.getProjectId()

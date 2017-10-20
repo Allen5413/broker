@@ -6,6 +6,7 @@ import com.allen.entity.broker.Broker;
 import com.allen.entity.broker.Customer;
 import com.allen.service.broker.FindBrokerByIdService;
 import com.allen.service.broker.FindBrokerByZZService;
+import com.allen.service.broker.RecommendBrokerService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
@@ -43,6 +44,8 @@ public class SignUpYxTeamController extends BaseController {
     private FindCustomerByZzAndProjectIdHaveBrokerService findCustomerByZzAndProjectIdHaveBrokerService;
     @Autowired
     private SignUpYxTeamService signUpYxTeamService;
+    @Autowired
+    private RecommendBrokerService recommendBrokerService;
 
     @RequestMapping(value = "open")
     public String open(HttpServletRequest request, long productId) throws Exception {
@@ -59,6 +62,10 @@ public class SignUpYxTeamController extends BaseController {
         if(null != customerList && 0 < customerList.size()){
             JSONObject broker = findBrokerByIdService.findAttop(customerList.get(0).getBrokerId());
             request.setAttribute("broker", broker);
+        }else{
+            //推荐经纪人
+            List<JSONObject> brokerList = recommendBrokerService.find(team.get("scode").toString(), 1l);
+            request.setAttribute("brokerList", brokerList);
         }
         request.setAttribute("teamHead", teamHead);
         request.setAttribute("team", team);

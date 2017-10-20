@@ -15,7 +15,7 @@ public class TeamImg {
     @Id
     @GeneratedValue
     private Long id;
-    private Long teamId;                //团员id
+    private String zz;                  //团员id
     private String imgUrl;              //照片url
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
@@ -28,12 +28,12 @@ public class TeamImg {
         this.id = id;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public String getZz() {
+        return zz;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setZz(String zz) {
+        this.zz = zz;
     }
 
     public String getImgUrl() {

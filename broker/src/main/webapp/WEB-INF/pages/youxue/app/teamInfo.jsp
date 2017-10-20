@@ -22,11 +22,11 @@
       <div class="team-cel">
         <div class="uh-pic"><img src="${team.icon}"></div>
         <div class="tm-info">
-          <p class="tit">${team.realname} <span class="fxx">(${team.sname})</span></p>
+          <p class="tit">${team.nickname} <span class="fxx">(${team.sname})</span></p>
           <p class="from">
             ${product.name}
           </p>
-          <p class="from">咨询QQ群：234562345<a class="btn-go f-r" href="${pageContext.request.contextPath}/youxueApp/signUpTeam/open.html?productId=${product.id}&teamHeadId=${team.id}">去报名</a></p>
+          <p class="from">咨询QQ群：${team.teamQq}<a class="btn-go f-r" href="${pageContext.request.contextPath}/youxueApp/signUpTeam/open.html?productId=${product.id}&teamHeadId=${team.id}">去报名</a></p>
         </div>
       </div>
     </div>
@@ -54,12 +54,11 @@
             <p>${team.label}</p>
           </div>
           <div class="photos-list">
-            <a class="pic" href="#"><img src="/youxue/images/xiupic1.jpg"></a>
-            <a class="pic" href="#"><img src="/youxue/images/xiupic2.jpg"></a>
-            <a class="pic" href="#"><img src="/youxue/images/xiupic3.jpg"></a>
-            <a class="pic" href="#"><img src="/youxue/images/xiupic2.jpg"></a>
-            <a class="pic" href="#"><img src="/youxue/images/xiupic1.jpg"></a>
-            <a class="pic" href="#"><img src="/youxue/images/xiupic3.jpg"></a>
+            <c:forEach var="img" items="${imgMap}">
+              <c:forEach var="url" items="${img.value}">
+                <a class="pic" href="#"><img src="${url}"></a>
+              </c:forEach>
+            </c:forEach>
           </div>
         </div>
       </div>
@@ -69,7 +68,7 @@
             <div class="member-cell">
               <div class="upic"><img src="${team.icon}"></div>
               <div class="uinfo">
-                <p class="tit">${team.name}</p>
+                <p class="tit">${team.nickName}</p>
                 <p>${team.sName}</p>
               </div>
             </div>

@@ -11,6 +11,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "broker", locations = "classpath:config.properties")
 public class ConfigProp {
     public Map<String, String> attop = new HashMap<String, String>();
+    public Map<String, String> upload = new HashMap<String, String>();
 
     public Map<String, String> getAttop() {
         return attop;
@@ -18,5 +19,13 @@ public class ConfigProp {
 
     public void setAttop(Map<String, String> attop) {
         this.attop = attop;
+    }
+
+    public Map<String, String> getUpload() {
+        return upload;
+    }
+
+    public void setUpload(Map<String, String> upload) {
+        this.upload = upload;
     }
 }

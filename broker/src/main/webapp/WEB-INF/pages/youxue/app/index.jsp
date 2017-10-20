@@ -45,16 +45,16 @@
       </div>
       <ul class="list-item">
         <li>
-          <a href="/youxue/item/detail-01.html"><img src="/youxue/images/item-01.jpg"></a>
+          <a href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${bj.id}&teamNum=${bj.num}"><img src="/youxue/images/item-01.jpg"></a>
         </li>
         <li>
-          <a href="/youxue/item/detail-02.html"><img src="/youxue/images/item-02.jpg"></a>
+          <a href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${xg.id}&teamNum=${xg.num}"><img src="/youxue/images/item-02.jpg"></a>
         </li>
         <li>
-          <a href="/youxue/item/detail-03.html"><img src="/youxue/images/item-03.jpg"></a>
+          <a href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${jq.id}&teamNum=${jq.num}"><img src="/youxue/images/item-03.jpg"></a>
         </li>
         <li>
-          <a href="/youxue/item/detail-04.html"><img src="/youxue/images/item-04.jpg"></a>
+          <a href="${pageContext.request.contextPath}/youxueApp/findProduct/findInfo.html?productId=${yl.id}&teamNum=${yl.num}"><img src="/youxue/images/item-04.jpg"></a>
         </li>
       </ul>
     </div>
@@ -119,7 +119,7 @@
       <li><a class="on" href="javascript:;">首页</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findProduct/open.html">项目</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团队</a></li>
-      <li><a href="w-user.html">我的</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/user.html">我的</a></li>
     </ul>
   </div>
 </section>

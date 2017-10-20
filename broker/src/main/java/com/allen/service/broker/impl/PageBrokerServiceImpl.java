@@ -50,6 +50,7 @@ public class PageBrokerServiceImpl implements PageBrokerService {
                 if(schoolList != null && 0 < schoolList.size()){
                     JSONObject userSchool = (JSONObject) schoolList.get(0);
                     json.put("name", userSchool.get("realname"));
+                    json.put("nickName", userSchool.get("nickname"));
                 }
 
                 list.add(json);

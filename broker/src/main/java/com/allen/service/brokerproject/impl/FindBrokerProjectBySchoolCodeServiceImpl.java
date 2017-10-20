@@ -41,6 +41,7 @@ public class FindBrokerProjectBySchoolCodeServiceImpl implements FindBrokerProje
                     if(!StringUtil.isEmpty(sCode) && sCode.equals(schoolCode)){
                         manJSON.put("zz", userSchool.get("zz"));
                         manJSON.put("name", userSchool.get("realname"));
+                        manJSON.put("nickName", userSchool.get("nickname"));
                         resultList.add(manJSON);
                     }
                 }

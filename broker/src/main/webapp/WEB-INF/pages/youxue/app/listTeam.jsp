@@ -19,7 +19,7 @@
             <a class="team-cel" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}">
               <div class="uh-pic"><img src="${team.icon}"></div>
               <div class="tm-info">
-                <p class="tit">${team.name} <span class="fxx">(${team.sName})</span></p>
+                <p class="tit">${team.nickName} <span class="fxx">(${team.sName})</span></p>
                 <p class="from">
                   ${team.pName}
                   <span class="num">${team.teamNum+1} 人</span>
@@ -36,7 +36,7 @@
       <li><a href="${pageContext.request.contextPath}/youxueApp/index/open.html?zz=${sessionScope.loginName}">首页</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findProduct/open.html">项目</a></li>
       <li><a class="on" href="javascript:;">团队</a></li>
-      <li><a href="w-user.html">我的</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/user.html">我的</a></li>
     </ul>
   </div>
 </section>

@@ -28,10 +28,11 @@ public class Team {
     private Long productDateId;     //产品的行程时间id
     private String zz;              //团员zz
     private int isHead;             //是否团长[0：否；1：是]
-    private Integer state;              //状态[0：已报名；1：待审核；2：通过；3：不通过；4：已缴费]只有普通团员才会审核，团长由经纪人在后台直接创建通过
+    private Integer state;          //状态[0：已报名；1：待审核；2：通过；3：不通过；4：已缴费]只有普通团员才会审核，团长由经纪人在后台直接创建通过
     private String reason;          //审核不通过原因
     private String label;           //团长的个性说明
     private String yyDate;          //预约咨询时间
+    private String qq;              //团咨询qq群
     private Long parentId;          //团长id
     private String remark;          //备注
     private String creator;                     //创建人
@@ -101,6 +102,14 @@ public class Team {
 
     public void setYyDate(String yyDate) {
         this.yyDate = yyDate;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 
     public Long getParentId() {

@@ -30,9 +30,9 @@ public class UpLoadFileUtil {
     public static String uploadImg(HttpServletRequest request,List<MultipartFile> fileList,String imgType, int imgSize, int imgMaxCount, String imgPath, String saveFileName)throws Exception{
         String imgUrl = "";
         //创建一个通用的多部分解析器
-        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        //CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         //判断 request 是否有文件上传,即多部分请求
-        if(commonsMultipartResolver.isMultipart(request)) {
+        //if(commonsMultipartResolver.isMultipart(request)) {
             //取得request中的所有文件名
             if(null != fileList && 0 < fileList.size()) {
                 //判断上传文件数量
@@ -56,7 +56,7 @@ public class UpLoadFileUtil {
                             }
                             //判断上传文件大小
                             if (fileSize / 1024 > imgSize) {
-                                throw new BusinessException("图片最大不能超过" + imgSize + "kb");
+                                throw new BusinessException("图片最大不能超过" + imgSize/1024 + "MB");
                             }
                             //重命名上传后的文件名
                             fileName = StringUtil.isEmpty(saveFileName) ? UUID.randomUUID().toString() : saveFileName + ".png";
@@ -73,7 +73,7 @@ public class UpLoadFileUtil {
                     }
                 }
             }
-        }
+        //}
         return  imgUrl.substring(0, imgUrl.length() > 0 ? imgUrl.length()-1 : 0);
     }
 

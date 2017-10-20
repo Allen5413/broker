@@ -23,11 +23,11 @@
         <ul class="ul-info">
           <li>
             <div class="tag-cel">校花团长</div>
-            <div class="txt-cel bline"><span class="uname">${teamHead.realname}</span><img class="uhpic" src="${teamHead.icon}"><i class="i-arr"></i></div>
+            <div class="txt-cel bline"><span class="uname">${teamHead.nickname}</span><img class="uhpic" src="${teamHead.icon}"></div>
           </li>
           <li>
             <div class="tag-cel">项目名称</div>
-            <div class="txt-cel bline">${product.name}<i class="i-arr"></i></div>
+            <div class="txt-cel bline">${product.name}</div>
           </li>
           <li>
             <div class="tag-cel">报名人数</div>
@@ -49,6 +49,10 @@
           <li>
             <div class="tag-cel">手 机</div>
             <div class="txt-cel bline">${tean.mobile}</div>
+          </li>
+          <li>
+            <div class="tag-cel">经纪人</div>
+            <div id="brokerNameDiv" class="txt-cel bline">${empty broker.realname ? "未关联" : broker.realname}</div>
           </li>
         </ul>
       </div>
@@ -74,6 +78,27 @@
   <input type="hidden" id="teamHeadId" name="teamHeadId" value="${teamHead.id}" />
   <input type="hidden" id="brokerZz" name="brokerZz" value="${broker.zz}" />
 </form>
+<c:if test="${empty broker.zz}">
+  <div id="selectBrokerDiv" class="layer-trans">
+    <div class="pop-tips-txt">
+      <div class="title">关联经纪人</div>
+      <div class="pop-input-view">
+        <p class="item-input">
+          <input type="text" id="brokerZzText" placeholder="输入经纪人ZZ号">
+        </p>
+        <div class="pop-ags-tagcell">
+          <p>推荐经纪人<a class="f-r" href="javascript:;" onclick="huan()">换一换</a></p>
+          <div id="brokerDiv" class="pop-cells">
+            <c:forEach var="broker" items="${brokerList}">
+              <a href="javascript:;" onclick="selectBroker('${broker.zz}', '${broker.name}')">${broker.name}（${broker.mobile}）</a>
+            </c:forEach>
+          </div>
+        </div>
+        <p class="alignCenter"><button class="but-submit" onclick="enterBroker()">确定关联</button></p>
+      </div>
+    </div>
+  </div>
+</c:if>
 </body>
 </html>
 <script>
@@ -105,6 +130,64 @@
         if(data.state == 0){
           app.msg("您已报名成功", 0);
         }else{
+          app.alert(data.msg, 1);
+        }
+      }
+    });
+  }
+
+  function huan(){
+    $.ajax({
+      url:"${pageContext.request.contextPath}/recommendBroker/randomBroker.json",
+      method : 'POST',
+      async:false,
+      data:{},
+      success:function(data){
+        if(data.state == 0){
+          $("#brokerDiv").html("");
+          var list = data.list;
+          if(list.length > 0){
+            var html = "";
+            for(var i=0; i<list.length; i++){
+              var broker = list[i];
+              html += "<a href='javascript:;' onclick='selectBroker('"+broker.zz+"', '"+broker.name+"')'>"+broker.name+"（"+broker.mobile+"）</a>";
+            }
+            $("#brokerDiv").html(html);
+          }
+        }else {
+          app.alert(data.msg, 1);
+        }
+      }
+    });
+  }
+
+  function selectBroker(zz, name){
+    $("#brokerZz").val(zz);
+    $("#brokerNameDiv").html(name);
+    $("#selectBrokerDiv").hide();
+  }
+
+  function enterBroker(){
+    var zz = $("#brokerZzText").val();
+    if(zz == ""){
+      app.alert("请输入经纪人ZZ号", 1);
+      return false;
+    }
+    $.ajax({
+      url:"${pageContext.request.contextPath}/findBrokerByZz/findForJSON.json",
+      method : 'POST',
+      async:false,
+      data:{"zz":zz},
+      success:function(data){
+        if(data.state == 0){
+          if(null == data.broker){
+            app.alert("您输入的ZZ号目前还不是经纪人", 1);
+            return false;
+          }
+          $("#brokerZz").val(data.broker.zz);
+          $("#brokerNameDiv").html(data.broker.realname);
+          $("#selectBrokerDiv").hide();
+        }else {
           app.alert(data.msg, 1);
         }
       }

@@ -42,6 +42,7 @@ public class FindBrokerProjectForSchoolServiceImpl implements FindBrokerProjectF
                     String sCode = userSchool.get("scode").toString();
                     if(!StringUtil.isEmpty(sCode)) {
                         String sName = userSchool.get("sname").toString();
+                        String nickName = userSchool.get("nickname").toString();
                         int snum = Integer.parseInt(userSchool.get("snum").toString());
 
                         JSONObject school = (JSONObject) map.get(sCode);
@@ -49,6 +50,7 @@ public class FindBrokerProjectForSchoolServiceImpl implements FindBrokerProjectF
                             school = new JSONObject();
                             school.put("code", sCode);
                             school.put("name", sName);
+                            school.put("nickName", nickName);
                             school.put("num", snum);
                             school.put("maxNum", snum * ratio / 100);
                             school.put("manNum", 1);

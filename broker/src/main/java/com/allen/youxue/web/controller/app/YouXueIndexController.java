@@ -8,6 +8,7 @@ import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.service.project.EditProjectVisitCountService;
 import com.allen.service.project.FindProjectByIdService;
 import com.allen.web.controller.BaseController;
+import com.allen.youxue.service.product.FindYxProductForAppService;
 import com.allen.youxue.service.team.FindYxTeamHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Allen on 2017/10/17.
@@ -35,6 +37,8 @@ public class YouXueIndexController extends BaseController {
     private RecommendBrokerService recommendBrokerService;
     @Autowired
     private FindBrokerByZZService findBrokerByZZService;
+    @Autowired
+    private FindYxProductForAppService findYxProductForAppService;
 
     @RequestMapping(value = "open")
     public String find(HttpServletRequest request, String zz) throws Exception {
@@ -49,6 +53,11 @@ public class YouXueIndexController extends BaseController {
             String scode = null == json || null == json.get("scode") ? "" : json.get("scode").toString();
             request.setAttribute("brokerList", recommendBrokerService.find(scode, 1l));
         }
+        List<Map> list = findYxProductForAppService.find(1l);
+        request.setAttribute("bj", list.get(0));
+        request.setAttribute("xg", list.get(1));
+        request.setAttribute("jq", list.get(2));
+        request.setAttribute("yl", list.get(3));
         request.getSession().setAttribute("loginName", zz);
         return "/youxue/app/index";
     }

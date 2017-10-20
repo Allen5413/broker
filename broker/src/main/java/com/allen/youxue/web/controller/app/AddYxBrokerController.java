@@ -1,7 +1,6 @@
 package com.allen.youxue.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
-import com.allen.base.exception.BusinessException;
 import com.allen.entity.broker.Broker;
 import com.allen.entity.brokerproject.BrokerProject;
 import com.allen.service.broker.AddBrokerService;
@@ -11,7 +10,6 @@ import com.allen.service.brokerproject.FindBrokerProjectByBIdAndPIdService;
 import com.allen.util.StringUtil;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
-import com.allen.youxue.entity.team.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

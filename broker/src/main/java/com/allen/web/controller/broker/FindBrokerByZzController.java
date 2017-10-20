@@ -9,6 +9,7 @@ import com.allen.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -43,5 +44,15 @@ public class FindBrokerByZzController extends BaseController {
         request.setAttribute("broker", json);
         request.setAttribute("projectList", projectList);
         return "/broker/info";
+    }
+
+    @RequestMapping(value = "findForJSON")
+    @ResponseBody
+    public JSONObject findForJSON(String zz) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        JSONObject json = findBrokerByZZService.findAttop(zz);
+        jsonObject.put("state", 0);
+        jsonObject.put("broker", json);
+        return jsonObject;
     }
 }

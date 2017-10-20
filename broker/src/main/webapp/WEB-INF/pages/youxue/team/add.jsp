@@ -29,6 +29,10 @@
             </td>
           </tr>
           <tr>
+            <td class="tag-b">咨询QQ群：</td>
+            <td><input type="text" id="qq" name="qq" class="input-txt-220" /></td>
+          </tr>
+          <tr>
             <td class="tag-b"></td>
             <td>
               <a class="btn-com" href="#" onclick="addTeamHead();">保存提交</a>

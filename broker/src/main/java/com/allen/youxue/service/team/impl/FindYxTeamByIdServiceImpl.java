@@ -41,6 +41,7 @@ public class FindYxTeamByIdServiceImpl implements FindYxTeamByIdService {
                 userSchool.put("productDateId", team.getProductDateId());
                 userSchool.put("label", team.getLabel());
                 userSchool.put("id", team.getId());
+                userSchool.put("teamQq", team.getQq());
                 return userSchool;
             }
         }

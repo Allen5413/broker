@@ -37,7 +37,7 @@
         <c:forEach var="team" items="${pageInfo.pageResults}" begin="0" end="4">
           <a class="mem-cell" href="#">
             <div class="uhpic"><img src="${team.icon}"></div>
-            <p>${team.name}</p>
+            <p>${team.nickName}</p>
           </a>
         </c:forEach>
         <a class="mem-cell" href="${pageContext.request.contextPath}/youxueApp/applyTeamHead/open.html">

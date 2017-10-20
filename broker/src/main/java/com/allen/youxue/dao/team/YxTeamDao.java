@@ -1,6 +1,7 @@
 package com.allen.youxue.dao.team;
 
 import com.allen.youxue.entity.team.Team;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public interface YxTeamDao extends CrudRepository<Team, Long> {
     public Team findByZzAndProductDateId(String zz, long productDateId)throws Exception;
     public List<Team> findByIsHead(int isHead)throws Exception;
+    public List<Team> findByZzAndIsHead(String zz, int isHead)throws Exception;
     public Team findByZzAndParentId(String zz, long parentId)throws Exception;
 
     /**
@@ -21,6 +23,10 @@ public interface YxTeamDao extends CrudRepository<Team, Long> {
      * @return
      * @throws Exception
      */
-    @Query(nativeQuery = true, value = "select count(*) from yx_team where parent_id = ?1")
+    @Query(nativeQuery = true, value = "select count(*) from yx_team where parent_id = ?1 and state = 4")
     public BigInteger countTeamNum(long parentId)throws Exception;
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update yx_team set label = ?1 where zz = ?2")
+    public void editLabelByZz(String label, String zz)throws Exception;
 }

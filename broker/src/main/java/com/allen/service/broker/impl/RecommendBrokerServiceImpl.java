@@ -46,6 +46,7 @@ public class RecommendBrokerServiceImpl implements RecommendBrokerService {
                     if(!StringUtil.isEmpty(sCode) && sCode.equals(schoolCode)){
                         manJSON.put("zz", userSchool.get("zz"));
                         manJSON.put("name", userSchool.get("realname"));
+                        manJSON.put("nickName", userSchool.get("nickname"));
                         manJSON.put("mobile", userSchool.get("mobile"));
                         manJSON.put("sName", userSchool.get("sname"));
                         manJSON.put("qq", userSchool.get("qq"));
@@ -84,6 +85,7 @@ public class RecommendBrokerServiceImpl implements RecommendBrokerService {
                         JSONObject userSchool = (JSONObject) schoolList.get(i);
                         manJSON.put("zz", userSchool.get("zz"));
                         manJSON.put("name", userSchool.get("realname"));
+                        manJSON.put("nickName", userSchool.get("nickname"));
                         manJSON.put("mobile", userSchool.get("mobile"));
                         manJSON.put("sName", userSchool.get("sname"));
                         manJSON.put("qq", userSchool.get("qq"));
@@ -126,6 +128,7 @@ public class RecommendBrokerServiceImpl implements RecommendBrokerService {
                     JSONObject manJSON = new JSONObject();
                     manJSON.put("zz", userSchool.get("zz"));
                     manJSON.put("name", userSchool.get("realname"));
+                    manJSON.put("nickName", userSchool.get("nickname"));
                     manJSON.put("mobile", userSchool.get("mobile"));
                     manJSON.put("sName", userSchool.get("sname"));
                     manJSON.put("qq", userSchool.get("qq"));

@@ -44,17 +44,21 @@ public class PageYxTeamServiceImpl implements PageYxTeamService {
                     JSONObject userSchool2 = (JSONObject) list2.get(1);
                     if(map.get("zz").toString().equals(userSchool.get("zz").toString())){
                         map.put("name", userSchool.get("realname").toString());
+                        map.put("nickName", userSchool.get("nickname").toString());
                         map.put("sName", userSchool.get("sname").toString());
                         map.put("mobile", userSchool.get("mobile").toString());
                         map.put("icon", userSchool.get("icon").toString());
                         map.put("bName", userSchool2.get("realname").toString());
+                        map.put("bNickName", userSchool2.get("realname").toString());
                     }
                     if(map.get("zz").toString().equals(userSchool2.get("zz").toString())){
                         map.put("name", userSchool2.get("realname").toString());
+                        map.put("nickName", userSchool2.get("nickname").toString());
                         map.put("sName", userSchool2.get("sname").toString());
                         map.put("mobile", userSchool2.get("mobile").toString());
                         map.put("icon", userSchool2.get("icon").toString());
                         map.put("bName", userSchool.get("realname").toString());
+                        map.put("bNickName", userSchool.get("realname").toString());
                     }
                 }
                 if(isCountTeamNum){
