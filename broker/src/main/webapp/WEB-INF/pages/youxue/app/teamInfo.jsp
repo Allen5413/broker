@@ -42,10 +42,7 @@
           <div class="txt-cell">
             <p>${productDate.date}</p>
           </div>
-          <div class="title">行程安排</div>
-          <div class="trip-list">
-            ${product.trip}
-          </div>
+          ${product.trip}
         </div>
       </div>
       <div class="bd-mod-view">

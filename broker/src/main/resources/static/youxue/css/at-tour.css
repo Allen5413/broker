@@ -363,6 +363,15 @@ header{
 	position: relative;
 	top: -6px;
 }
+ @media screen and (min-width: 640px) {
+   .team-theme-view .opr-cel{width: 120px;}
+   .team-theme-view .btn-go{
+   	font-size: 18px;
+   	padding: 10px 25px;
+   	border-radius: 25px;
+   	top: -12px;
+   }
+}
 .btn-go .i-go{
 	background:url(../images/ico-2.png) no-repeat;
 	width:22px;
@@ -557,6 +566,14 @@ header{
 }
 .introTable td{
 	line-height: 1.6em;
+	vertical-align: middle;
+}
+.introTable td.thg{
+	background: #E69BC3;
+	font-weight: bold;
+	width: 70px;
+	text-align: center;
+	vertical-align: middle;
 }
 .view-members{
 	background: #fff;
@@ -1390,6 +1407,19 @@ border-radius: 100%;
 	height: 24px;
 	background-size: 100% 100%;
 }
+.btn-upload .uploadFile{
+	position:absolute;
+	z-index:100;
+	margin-left:-60px;
+	margin-top: -30px;
+	font-size:30px;
+	opacity:0;
+	filter:alpha(opacity=0);
+	cursor:pointer;
+	color:#333333 !important;
+	width: 90px;
+	height: 70px;
+}
 .photo-btn-cell .opr-bar{
 	padding: 10px 0 15px;
 	text-align: right;
@@ -1675,19 +1705,3 @@ line-height: 32px;
 	padding: 4px 6px;
 	margin: 0 10px 10px 0;
 }
-
-.btn-upload .uploadFile{
-	position:absolute;
-	z-index:100;
-	margin-left:-60px;
-	margin-top: -30px;
-	font-size:30px;
-	opacity:0;
-	filter:alpha(opacity=0);
-	cursor:pointer;
-	color:#333333 !important;
-	width: 90px;
-	height: 70px;
-}
-
-
