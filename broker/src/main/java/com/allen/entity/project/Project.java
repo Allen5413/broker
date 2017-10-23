@@ -19,9 +19,11 @@ public class Project {
     @Id
     @GeneratedValue
     private Long id;
+    private String pic;
     private String name;
+    private String content;
     private int auditType;      //审批模式[0：自动；1：手动]
-    private int ratio;          //在校生总人数比例
+    private float ratio;          //在校生总人数比例
     private int frequency;      //客户访问频次
     private int visitCount;          //访问次数
     private String creator;                     //创建人
@@ -45,6 +47,22 @@ public class Project {
         this.name = name;
     }
 
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public int getAuditType() {
         return auditType;
     }
@@ -53,11 +71,11 @@ public class Project {
         this.auditType = auditType;
     }
 
-    public int getRatio() {
+    public float getRatio() {
         return ratio;
     }
 
-    public void setRatio(int ratio) {
+    public void setRatio(float ratio) {
         this.ratio = ratio;
     }
 

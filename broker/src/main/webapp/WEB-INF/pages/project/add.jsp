@@ -6,7 +6,21 @@
 <div class="container-view">
   <div class="mod-com-view">
     <div class="mod-content">
+      <form id="picForm" name="picForm" enctype="multipart/form-data" method="post">
+        <table class="set-table-info">
+          <tr>
+            <td class="tag-b">展示图片：</td>
+            <td>
+              <input type="file" name="file" class="input-txt-220" onchange="addPic()" />
+              <br />
+              <img id="pic" name="pic" />
+            </td>
+          </tr>
+        </table>
+      </form>
       <form id="form" name="form" action="${pageContext.request.contextPath}/addProject/add.json">
+        <input type="hidden" id="fileName" name="fileName" />
+        <input type="hidden" id="domain" name="domain" value="http://localhost:8080" />
         <table class="set-table-info">
           <tr>
             <td class="tag-b">项目名称：</td>
@@ -28,6 +42,10 @@
             </td>
           </tr>
           <tr>
+            <td class="tag-b">项目介绍：</td>
+            <td><textarea id="content" name="content" class="textarea-intro" rows="8"></textarea></td>
+          </tr>
+          <tr>
             <td class="tag-b"></td>
             <td>
               <a class="btn-com" href="#" onclick="addProject();">保存提交</a>
@@ -45,5 +63,26 @@
       return false;
     }
     app.add("${pageContext.request.contextPath}/addProject/add.json", $("#form").serialize(), "${pageContext.request.contextPath}/pageProject/page.html", "");
+  }
+
+  function addPic(){
+    $.ajax({
+      type: "POST",
+      enctype: 'multipart/form-data',
+      url: "${pageContext.request.contextPath}/addProject/upload.json",
+      data: new FormData($("#picForm")[0]),
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 600000,
+      success: function (data) {
+        if(data.state == 0) {
+          $("#pic").attr("src", data.path);
+          $("#fileName").val(data.fileName);
+        }else{
+          app.alert(data.msg, 1);
+        }
+      }
+    });
   }
 </script>

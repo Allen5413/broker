@@ -5,6 +5,7 @@ import com.allen.entity.broker.Customer;
 import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.service.broker.RecommendBrokerService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
+import com.allen.service.customerdaylogincount.AddCusotmerDayLoginCountService;
 import com.allen.service.project.EditProjectVisitCountService;
 import com.allen.service.project.FindProjectByIdService;
 import com.allen.web.controller.BaseController;
@@ -39,21 +40,24 @@ public class YouXueIndexController extends BaseController {
     private FindBrokerByZZService findBrokerByZZService;
     @Autowired
     private FindYxProductForAppService findYxProductForAppService;
+    @Autowired
+    private AddCusotmerDayLoginCountService addCusotmerDayLoginCountService;
 
     @RequestMapping(value = "open")
-    public String find(HttpServletRequest request, String zz) throws Exception {
-        List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(zz, 1l);
+    public String find(HttpServletRequest request, String zz, long projectId) throws Exception {
+        List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(zz, projectId);
         boolean isHaveBroker = null != customerList && 0 < customerList.size() ? true : false;
-        editProjectVisitCountService.edit(1l, 1);
+        editProjectVisitCountService.edit(projectId, 1);
+        addCusotmerDayLoginCountService.add(zz, projectId);
         request.setAttribute("teamHeadCount", findYxTeamHeadService.countNum());
-        request.setAttribute("visitCount", findProjectByIdService.find(1l).getVisitCount());
+        request.setAttribute("visitCount", findProjectByIdService.find(projectId).getVisitCount());
         request.setAttribute("isHaveBroker", isHaveBroker);
         if(!isHaveBroker){
             JSONObject json = findBrokerByZZService.findAttop(zz);
             String scode = null == json || null == json.get("scode") ? "" : json.get("scode").toString();
-            request.setAttribute("brokerList", recommendBrokerService.find(scode, 1l));
+            request.setAttribute("brokerList", recommendBrokerService.find(scode, projectId));
         }
-        List<Map> list = findYxProductForAppService.find(1l);
+        List<Map> list = findYxProductForAppService.find(projectId);
         request.setAttribute("bj", list.get(0));
         request.setAttribute("xg", list.get(1));
         request.setAttribute("jq", list.get(2));

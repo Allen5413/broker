@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface CustomerDao extends CrudRepository<Customer, Long> {
     public Customer findByZzAndBrokerIdAndProjectId(String zz, long brokerId, long projectId)throws Exception;
+    public List<Customer> findByZzAndProjectId(String zz, long projectId)throws Exception;
 
     @Query("select c from Customer c where c.zz = ?1 and c.projectId = ?2 and c.brokerId is not null")
     public List<Customer> findByZzAndProjectIdHaveBroker(String zz, long projectId)throws Exception;

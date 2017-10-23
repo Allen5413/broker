@@ -1,4 +1,4 @@
-package com.allen.web.controller.project;
+package com.allen.web.controller.customer;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.service.customer.AddCustomerService;

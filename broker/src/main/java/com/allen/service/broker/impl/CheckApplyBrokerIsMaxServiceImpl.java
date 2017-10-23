@@ -25,7 +25,7 @@ public class CheckApplyBrokerIsMaxServiceImpl implements CheckApplyBrokerIsMaxSe
     public boolean check(long projectId, String sCode, int snum) throws Exception {
         Project project = findProjectByIdService.find(projectId);
         //计算学校最大申请人数
-        int maxNum = snum * project.getRatio() / 100;
+        float maxNum = snum * project.getRatio() / 100;
         //查询学校当前已经申请人数
         List<JSONObject> list = findBrokerProjectBySchoolCodeService.find(projectId, sCode);
         int nowNum = null == list ? 0 : list.size();
