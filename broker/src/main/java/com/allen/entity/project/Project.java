@@ -22,6 +22,7 @@ public class Project {
     private String pic;
     private String name;
     private String content;
+    private String protocol;    //合作协议
     private int auditType;      //审批模式[0：自动；1：手动]
     private float ratio;          //在校生总人数比例
     private int frequency;      //客户访问频次
@@ -61,6 +62,14 @@ public class Project {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public int getAuditType() {
