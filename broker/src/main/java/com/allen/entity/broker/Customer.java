@@ -13,12 +13,17 @@ import java.util.Date;
 @Table(name = "customer")
 public class Customer {
 
+    public final static int ISSTAR_NOT = 0;
+    public final static int ISSTAR_YES = 1;
+
     private Long id;
     private String zz;
     private Long projectId;                     //项目id
     private Long brokerId;                      //经纪人id
     private Date endLoginTime;                  //最后登录时间
     private int loginCount;                     //登录次数
+    private int isStar;                         //点亮星星[0：否；1：是]
+    private String remark;
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -72,6 +77,22 @@ public class Customer {
 
     public void setLoginCount(int loginCount) {
         this.loginCount = loginCount;
+    }
+
+    public int getIsStar() {
+        return isStar;
+    }
+
+    public void setIsStar(int isStar) {
+        this.isStar = isStar;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getCreator() {
