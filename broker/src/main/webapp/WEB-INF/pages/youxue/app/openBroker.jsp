@@ -26,7 +26,12 @@
         <p>移动平台支持，数字化管理，客户自动推送，让一切变得更简单</p>
         <p>每校限额，项目直管，去除中间层压榨，避免恶性竞争，确保经纪人利益</p>
         <p>本项目业绩被 <span class="blue">职多星</span> 收录，人社系统推荐，数百万企业认可</p>
-        <div class="opr-bar">机会始于行动 <a class="btn-inline" href="${pageContext.request.contextPath}/youxueApp/addBroker/openApply.html">我要申请</a></div>
+        <div class="title">申请流程步骤</div>
+        <p>1.下载至善APP<br>
+          2.登录至善网，进入发现频道<br>
+          3.点击“经纪人”去申请成为经纪人
+        </p>
+        <%--<div class="opr-bar">机会始于行动 <a class="btn-inline" href="${pageContext.request.contextPath}/youxueApp/addBroker/openApply.html">我要申请</a></div>--%>
       </div>
     </div>
   </div>

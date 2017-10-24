@@ -1705,3 +1705,10 @@ line-height: 32px;
 	padding: 4px 6px;
 	margin: 0 10px 10px 0;
 }
+
+.text-view .title{
+	font-size: 16px;
+	text-align: center;
+	padding: 20px 0 10px;
+	font-weight: bold;
+}

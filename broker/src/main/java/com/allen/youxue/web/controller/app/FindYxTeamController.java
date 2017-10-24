@@ -2,18 +2,23 @@ package com.allen.youxue.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.dao.PageInfo;
+import com.allen.entity.broker.Customer;
+import com.allen.service.broker.FindBrokerByIdService;
 import com.allen.service.broker.FindBrokerByZZService;
+import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
 import com.allen.youxue.entity.product.Product;
 import com.allen.youxue.entity.product.ProductDate;
 import com.allen.youxue.entity.team.Team;
+import com.allen.youxue.entity.team.TeamImg;
 import com.allen.youxue.service.product.FindYxProductAllService;
 import com.allen.youxue.service.product.FindYxProductByIdService;
 import com.allen.youxue.service.productdate.FindYxProductDateByIdService;
 import com.allen.youxue.service.team.FindYxTeamByIdService;
 import com.allen.youxue.service.team.FindYxTeamByZzAndIsHeadService;
 import com.allen.youxue.service.team.PageYxTeamService;
+import com.allen.youxue.service.teamimg.FindYxTeamImgByZzForNewImgService;
 import com.allen.youxue.service.teamimg.FindYxTeamImgByZzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,6 +53,12 @@ public class FindYxTeamController extends BaseController {
     private FindYxTeamByZzAndIsHeadService findYxTeamByZzAndIsHeadService;
     @Autowired
     private FindYxTeamImgByZzService findYxTeamImgByZzService;
+    @Autowired
+    private FindYxTeamImgByZzForNewImgService findYxTeamImgByZzForNewImgService;
+    @Autowired
+    private FindCustomerByZzAndProjectIdHaveBrokerService findCustomerByZzAndProjectIdHaveBrokerService;
+    @Autowired
+    private FindBrokerByIdService findBrokerByIdService;
 
     @RequestMapping(value = "find")
     public String find(HttpServletRequest request,
@@ -110,7 +121,19 @@ public class FindYxTeamController extends BaseController {
         request.setAttribute("teamList", pageInfo.getPageResults());
         //查询登录用户是不是校花团长
         List<Team> teamList = findYxTeamByZzAndIsHeadService.find(UserUtil.getLoginUserForLoginName(request), Team.ISHEAD_YES);
-        request.setAttribute("isHead", null != teamList && 0 < teamList.size() ? true : false);
+        boolean isHead = null != teamList && 0 < teamList.size() ? true : false;
+        if(isHead){
+            //查询最新上传的一张相册
+            request.setAttribute("imgUrl", findYxTeamImgByZzForNewImgService.find(UserUtil.getLoginUserForLoginName(request)));
+        }
+        request.setAttribute("isHead", isHead);
+        //查询我的经纪人
+        List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(UserUtil.getLoginUserForLoginName(request), 1l);
+        if(null != customerList && 0 < customerList.size()){
+            Customer customer = customerList.get(0);
+            JSONObject broker = findBrokerByIdService.findAttop(customer.getBrokerId());
+            request.setAttribute("broker", broker);
+        }
         return "/youxue/app/user";
     }
 }

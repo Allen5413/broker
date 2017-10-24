@@ -78,27 +78,6 @@
   <input type="hidden" id="teamHeadId" name="teamHeadId" value="${teamHead.id}" />
   <input type="hidden" id="brokerZz" name="brokerZz" value="${broker.zz}" />
 </form>
-<c:if test="${empty broker.zz}">
-  <div id="selectBrokerDiv" class="layer-trans">
-    <div class="pop-tips-txt">
-      <div class="title">关联经纪人</div>
-      <div class="pop-input-view">
-        <p class="item-input">
-          <input type="text" id="brokerZzText" placeholder="输入经纪人ZZ号">
-        </p>
-        <div class="pop-ags-tagcell">
-          <p>推荐经纪人<a class="f-r" href="javascript:;" onclick="huan()">换一换</a></p>
-          <div id="brokerDiv" class="pop-cells">
-            <c:forEach var="broker" items="${brokerList}">
-              <a href="javascript:;" onclick="selectBroker('${broker.zz}', '${broker.name}')">${broker.name}（${broker.mobile}）</a>
-            </c:forEach>
-          </div>
-        </div>
-        <p class="alignCenter"><button class="but-submit" onclick="enterBroker()">确定关联</button></p>
-      </div>
-    </div>
-  </div>
-</c:if>
 </body>
 </html>
 <script>
@@ -117,7 +96,7 @@
       return false;
     }
     if($("#brokerZz").val() == ""){
-      app.alert("请选择经纪人", 1);
+      app.alert("请到 我的-我的经纪人 去选择经纪人", 1);
       return false;
     }
     $.ajax({
@@ -130,64 +109,6 @@
         if(data.state == 0){
           app.msg("您已报名成功", 0);
         }else{
-          app.alert(data.msg, 1);
-        }
-      }
-    });
-  }
-
-  function huan(){
-    $.ajax({
-      url:"${pageContext.request.contextPath}/recommendBroker/randomBroker.json",
-      method : 'POST',
-      async:false,
-      data:{},
-      success:function(data){
-        if(data.state == 0){
-          $("#brokerDiv").html("");
-          var list = data.list;
-          if(list.length > 0){
-            var html = "";
-            for(var i=0; i<list.length; i++){
-              var broker = list[i];
-              html += "<a href='javascript:;' onclick='selectBroker('"+broker.zz+"', '"+broker.name+"')'>"+broker.name+"（"+broker.mobile+"）</a>";
-            }
-            $("#brokerDiv").html(html);
-          }
-        }else {
-          app.alert(data.msg, 1);
-        }
-      }
-    });
-  }
-
-  function selectBroker(zz, name){
-    $("#brokerZz").val(zz);
-    $("#brokerNameDiv").html(name);
-    $("#selectBrokerDiv").hide();
-  }
-
-  function enterBroker(){
-    var zz = $("#brokerZzText").val();
-    if(zz == ""){
-      app.alert("请输入经纪人ZZ号", 1);
-      return false;
-    }
-    $.ajax({
-      url:"${pageContext.request.contextPath}/findBrokerByZz/findForJSON.json",
-      method : 'POST',
-      async:false,
-      data:{"zz":zz},
-      success:function(data){
-        if(data.state == 0){
-          if(null == data.broker){
-            app.alert("您输入的ZZ号目前还不是经纪人", 1);
-            return false;
-          }
-          $("#brokerZz").val(data.broker.zz);
-          $("#brokerNameDiv").html(data.broker.realname);
-          $("#selectBrokerDiv").hide();
-        }else {
           app.alert(data.msg, 1);
         }
       }

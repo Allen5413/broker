@@ -55,7 +55,7 @@
   </div>
   <div class="footer">
     <ul class="nav-tabs">
-      <li><a href="${pageContext.request.contextPath}/youxueApp/index/open.html?zz=${sessionScope.loginName}">首页</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/index/open.html?zz=${sessionScope.loginName}&projectId=${sessionScope.projectId}&notCount=0">首页</a></li>
       <li><a class="on" href="javascript:;">项目</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团队</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/user.html">我的</a></li>

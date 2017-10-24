@@ -38,29 +38,29 @@ public class AddYxBrokerController extends BaseController {
      */
     @RequestMapping(value = "open")
     public String open(HttpServletRequest request)throws Exception{
-        String msg = "";
-        //检查经纪人学校是否到达申请上限
-        JSONObject broker2 = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
-        String sCode = broker2.get("scode").toString();
-        String mobile = broker2.get("mobile").toString();
-        if(StringUtil.isEmpty(sCode) || StringUtil.isEmpty(mobile)){
-            msg = "请到个人中心完善手机、学校等联系方式的绑定。";
-        }else {
-            if (checkApplyBrokerIsMaxService.check(1l, broker2.get("scode").toString(), Integer.parseInt(broker2.get("snum").toString()))){
-                msg = "很抱歉，每个学校经纪人名额有限，贵校本项目已不再接收新的申请。";
-            }
-        }
-        Broker broker = findBrokerByZZService.find(UserUtil.getLoginUserForLoginName(request));
-        if(null != broker) {
-            BrokerProject brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), 1l);
-            if(null != brokerProject){
-                msg = "您目前已是游学项目的经纪人";
-            }
-            if(Broker.ISBLACK_YES == broker.getIsBlack()){
-                msg = "对不起，您已被取消申请新项目经纪人资格";
-            }
-        }
-        request.setAttribute("msg", msg);
+//        String msg = "";
+//        //检查经纪人学校是否到达申请上限
+//        JSONObject broker2 = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
+//        String sCode = broker2.get("scode").toString();
+//        String mobile = broker2.get("mobile").toString();
+//        if(StringUtil.isEmpty(sCode) || StringUtil.isEmpty(mobile)){
+//            msg = "请到个人中心完善手机、学校等联系方式的绑定。";
+//        }else {
+//            if (checkApplyBrokerIsMaxService.check(1l, broker2.get("scode").toString(), Integer.parseInt(broker2.get("snum").toString()))){
+//                msg = "很抱歉，每个学校经纪人名额有限，贵校本项目已不再接收新的申请。";
+//            }
+//        }
+//        Broker broker = findBrokerByZZService.find(UserUtil.getLoginUserForLoginName(request));
+//        if(null != broker) {
+//            BrokerProject brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), 1l);
+//            if(null != brokerProject){
+//                msg = "您目前已是游学项目的经纪人";
+//            }
+//            if(Broker.ISBLACK_YES == broker.getIsBlack()){
+//                msg = "对不起，您已被取消申请新项目经纪人资格";
+//            }
+//        }
+//        request.setAttribute("msg", msg);
         return "youxue/app/openBroker";
     }
 

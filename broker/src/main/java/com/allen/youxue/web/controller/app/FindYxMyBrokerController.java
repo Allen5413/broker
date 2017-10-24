@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.allen.entity.broker.Broker;
 import com.allen.entity.broker.Customer;
 import com.allen.service.broker.FindBrokerByIdService;
+import com.allen.service.broker.FindBrokerByZZService;
+import com.allen.service.broker.RecommendBrokerService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
@@ -29,6 +31,10 @@ public class FindYxMyBrokerController extends BaseController {
     private FindCustomerByZzAndProjectIdHaveBrokerService findCustomerByZzAndProjectIdHaveBrokerService;
     @Autowired
     private FindBrokerByIdService findBrokerByIdService;
+    @Autowired
+    private RecommendBrokerService recommendBrokerService;
+    @Autowired
+    private FindBrokerByZZService findBrokerByZZService;
 
     /**
      * @return
@@ -38,8 +44,22 @@ public class FindYxMyBrokerController extends BaseController {
         List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(UserUtil.getLoginUserForLoginName(request), 1l);
         if(null != customerList && 0 < customerList.size()){
             Customer customer = customerList.get(0);
-            JSONObject broker = findBrokerByIdService.findAttop(customer.getBrokerId());
-            request.setAttribute("broker", broker);
+            if(null != customer.getBrokerId() && 0 < customer.getBrokerId()) {
+                JSONObject broker = findBrokerByIdService.findAttop(customer.getBrokerId());
+                request.setAttribute("broker", broker);
+            }else{
+                //得到当前用户的所在学校code
+                JSONObject json = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
+                //推荐经纪人
+                List<JSONObject> brokerList = recommendBrokerService.find(json.get("scode").toString(), UserUtil.getLoginUserForProjectId(request));
+                request.setAttribute("brokerList", brokerList);
+            }
+        }else{
+            //得到当前用户的所在学校code
+            JSONObject json = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
+            //推荐经纪人
+            List<JSONObject> brokerList = recommendBrokerService.find(json.get("scode").toString(), UserUtil.getLoginUserForProjectId(request));
+            request.setAttribute("brokerList", brokerList);
         }
         return "youxue/app/myBroker";
     }

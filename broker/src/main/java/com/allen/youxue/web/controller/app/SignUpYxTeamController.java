@@ -1,8 +1,6 @@
 package com.allen.youxue.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
-import com.allen.base.exception.BusinessException;
-import com.allen.entity.broker.Broker;
 import com.allen.entity.broker.Customer;
 import com.allen.service.broker.FindBrokerByIdService;
 import com.allen.service.broker.FindBrokerByZZService;
@@ -80,13 +78,9 @@ public class SignUpYxTeamController extends BaseController {
      */
     @RequestMapping(value = "signUp")
     @ResponseBody
-    public JSONObject signUp(HttpServletRequest request, String yyDate, String brokerZz, long teamHeadId) throws Exception {
+    public JSONObject signUp(HttpServletRequest request, String yyDate, long teamHeadId) throws Exception {
         JSONObject jsonObject = new JSONObject();
-        Broker broker = findBrokerByZZService.find(brokerZz);
-        if(broker == null){
-            throw new BusinessException("您的经纪人不存在");
-        }
-        signUpYxTeamService.signUp(1l, UserUtil.getLoginUserForLoginName(request), yyDate, broker.getId(), teamHeadId);
+        signUpYxTeamService.signUp(1l, UserUtil.getLoginUserForLoginName(request), yyDate, teamHeadId);
         jsonObject.put("state", 0);
         return jsonObject;
     }

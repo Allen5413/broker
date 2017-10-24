@@ -57,12 +57,12 @@ public class UserUtil {
     }
 
     /**
-     * 获取登录用户的中心id
+     * 获取登录用户所在项目
      * @param request
      * @return
      */
-    public static Long getLoginUserForCenterId(HttpServletRequest request){
-        return (Long) request.getSession().getAttribute("centerId");
+    public static Long getLoginUserForProjectId(HttpServletRequest request){
+        return (Long) request.getSession().getAttribute("projectId");
     }
 
     /**

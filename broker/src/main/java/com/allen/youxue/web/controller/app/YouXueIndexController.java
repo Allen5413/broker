@@ -8,12 +8,14 @@ import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.service.customerdaylogincount.AddCusotmerDayLoginCountService;
 import com.allen.service.project.EditProjectVisitCountService;
 import com.allen.service.project.FindProjectByIdService;
+import com.allen.util.StringUtil;
 import com.allen.web.controller.BaseController;
 import com.allen.youxue.service.product.FindYxProductForAppService;
 import com.allen.youxue.service.team.FindYxTeamHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -44,11 +46,15 @@ public class YouXueIndexController extends BaseController {
     private AddCusotmerDayLoginCountService addCusotmerDayLoginCountService;
 
     @RequestMapping(value = "open")
-    public String find(HttpServletRequest request, String zz, long projectId) throws Exception {
+    public String find(HttpServletRequest request, String zz, long projectId,
+                       @RequestParam(value = "notCount", required = false)String notCount) throws Exception {
         List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(zz, projectId);
         boolean isHaveBroker = null != customerList && 0 < customerList.size() ? true : false;
-        editProjectVisitCountService.edit(projectId, 1);
-        addCusotmerDayLoginCountService.add(zz, projectId);
+        if(!StringUtil.isEmpty(notCount)) {
+            //如果是app内部跳转到首页的话，就不计数
+            editProjectVisitCountService.edit(projectId, 1);
+            addCusotmerDayLoginCountService.add(zz, projectId);
+        }
         request.setAttribute("teamHeadCount", findYxTeamHeadService.countNum());
         request.setAttribute("visitCount", findProjectByIdService.find(projectId).getVisitCount());
         request.setAttribute("isHaveBroker", isHaveBroker);
@@ -63,6 +69,7 @@ public class YouXueIndexController extends BaseController {
         request.setAttribute("jq", list.get(2));
         request.setAttribute("yl", list.get(3));
         request.getSession().setAttribute("loginName", zz);
+        request.getSession().setAttribute("projectId", projectId);
         return "/youxue/app/index";
     }
 }
