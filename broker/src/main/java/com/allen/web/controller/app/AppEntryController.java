@@ -2,9 +2,13 @@ package com.allen.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.base.exception.BusinessException;
+import com.allen.service.app.broker.AddBrokerForAppService;
 import com.allen.service.app.broker.FindBrokerByZzForAppService;
+import com.allen.service.app.broker.FindBrokerNumBySchoolCodeForAppService;
+import com.allen.service.app.customer.EditCustomerIsStarForAppService;
 import com.allen.service.app.customer.EditCustomerRemarkForAppService;
 import com.allen.service.app.customer.FindCustomerByBrokerIdForAppService;
+import com.allen.service.app.customer.FindCustomerByIdForAppService;
 import com.allen.service.app.project.FindProjectByIdForAppService;
 import com.allen.util.StringUtil;
 import com.allen.web.controller.BaseController;
@@ -28,6 +32,14 @@ public class AppEntryController extends BaseController {
     private EditCustomerRemarkForAppService editCustomerRemarkForAppService;
     @Autowired
     private FindProjectByIdForAppService findProjectByIdForAppService;
+    @Autowired
+    private AddBrokerForAppService addBrokerForAppService;
+    @Autowired
+    private FindBrokerNumBySchoolCodeForAppService findBrokerNumBySchoolCodeForAppService;
+    @Autowired
+    private EditCustomerIsStarForAppService editCustomerIsStarForAppService;
+    @Autowired
+    private FindCustomerByIdForAppService findCustomerByIdForAppService;
 
     @RequestMapping(value = "/appEntry")
     public JSONObject entry(HttpServletRequest request) throws Exception {
@@ -53,7 +65,7 @@ public class AppEntryController extends BaseController {
         }
         if(3 == methodId){
             //获取经纪人的一个项目下的成员详情
-
+            jsonObject = findCustomerByIdForAppService.find(request);
         }
         if(4 == methodId){
             //编辑一个成员的备注
@@ -61,15 +73,15 @@ public class AppEntryController extends BaseController {
         }
         if(5 == methodId){
             //点亮一个成员的星星
-
+            jsonObject = editCustomerIsStarForAppService.edit(request);
         }
         if(6 == methodId){
             //获取一所学校最大申请人数和已经申请人数
-
+            jsonObject = findBrokerNumBySchoolCodeForAppService.find(request);
         }
         if(7 == methodId){
             //申请当经纪人
-
+            jsonObject = addBrokerForAppService.add(request);
         }
         if(8 == methodId){
             //获取项目详情
