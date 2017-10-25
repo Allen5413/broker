@@ -1,6 +1,7 @@
 package com.allen.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
+import com.allen.base.config.ConfigProp;
 import com.allen.base.exception.BusinessException;
 import com.allen.service.app.broker.AddBrokerForAppService;
 import com.allen.service.app.broker.FindBrokerByZzForAppService;
@@ -10,6 +11,7 @@ import com.allen.service.app.customer.EditCustomerRemarkForAppService;
 import com.allen.service.app.customer.FindCustomerByBrokerIdForAppService;
 import com.allen.service.app.customer.FindCustomerByIdForAppService;
 import com.allen.service.app.project.FindProjectByIdForAppService;
+import com.allen.util.MD5Util;
 import com.allen.util.StringUtil;
 import com.allen.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class AppEntryController extends BaseController {
     private EditCustomerIsStarForAppService editCustomerIsStarForAppService;
     @Autowired
     private FindCustomerByIdForAppService findCustomerByIdForAppService;
+    @Autowired
+    private ConfigProp configProp;
 
     @RequestMapping(value = "/appEntry")
     public JSONObject entry(HttpServletRequest request) throws Exception {
@@ -50,10 +54,11 @@ public class AppEntryController extends BaseController {
         }
         Integer methodId = Integer.parseInt(request.getParameter("methodId"));
         String query = request.getQueryString();
-//        query = query.substring(0, query.indexOf("&mac="));
-//        if(!mac.equals(MD5Util.getAttopMd5(query + key))){
-//            //throw new BusinessException("mac校验失败");
-//        }
+        String key = configProp.getAttop().get("key");
+        query = query.substring(0, query.indexOf("&mac="));
+        if(!mac.equals(MD5Util.getAttopMd5(query + key))){
+            throw new BusinessException("mac校验失败");
+        }
         JSONObject jsonObject = new JSONObject();
         if(1 == methodId){
             //经纪人页面获取数据

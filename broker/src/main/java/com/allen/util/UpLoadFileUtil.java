@@ -1,6 +1,7 @@
 package com.allen.util;
 
 import com.allen.base.exception.BusinessException;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -151,4 +152,24 @@ public class UpLoadFileUtil {
             e.printStackTrace();
         }
     }
+
+
+
+
+    //按指定大小把图片进行缩和放（会遵循原图高宽比例）
+    //此处把图片压成400×500的缩略图
+//    Thumbnails.of(fromPic).size(400,500).toFile(toPic);//变为400*300,遵循原图比例缩或放到400*某个高度
+//
+//    按照指定比例进行缩小和放大
+//
+//    //按照比例进行缩小和放大
+//    Thumbnails.of(fromPic).scale(0.2f).toFile(toPic);//按比例缩小
+//    Thumbnails.of(fromPic).scale(2f);//按比例放大
+//
+//    图片尺寸不变，压缩图片文件大小
+//
+//    //图片尺寸不变，压缩图片文件大小outputQuality实现,参数1为最高质量
+//    Thumbnails.of(fromPic).scale(1f).outputQuality(0.25f).toFile(toPic);
+
+
 }
