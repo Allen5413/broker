@@ -40,10 +40,10 @@ public class FindCustomerByBrokerIdForAppServiceImpl implements FindCustomerByBr
         pageInfo.setCurrentPage(pageNum);
         pageInfo.setCountOfCurrentPage(pageSize);
         Map<String, Object> paramsMap = new HashMap<String, Object>(2);
-        paramsMap.put("c.brokerId", Long.parseLong(id));
-        paramsMap.put("c.projectId", Long.parseLong(projectId));
+        paramsMap.put("c.broker_id", Long.parseLong(id));
+        paramsMap.put("c.project_id", Long.parseLong(projectId));
         Map<String, Boolean> sortMap = new LinkedHashMap<String, Boolean>(2);
-        sortMap.put("c.isStar", false);
+        sortMap.put("c.is_star", false);
         sortMap.put("c.id", false);
         pageInfo = findCustomerDao.findPage(pageInfo, paramsMap, sortMap);
         jsonObject.put("customerList", pageInfo.getPageResults());

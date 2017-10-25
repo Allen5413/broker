@@ -57,7 +57,7 @@ public class AppEntryController extends BaseController {
         String key = configProp.getAttop().get("key");
         query = query.substring(0, query.indexOf("&mac="));
         if(!mac.equals(MD5Util.getAttopMd5(query + key))){
-            throw new BusinessException("mac校验失败");
+            //throw new BusinessException("mac校验失败");
         }
         JSONObject jsonObject = new JSONObject();
         if(1 == methodId){
