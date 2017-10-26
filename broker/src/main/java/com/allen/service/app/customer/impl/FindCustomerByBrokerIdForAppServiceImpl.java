@@ -5,14 +5,13 @@ import com.allen.base.exception.BusinessException;
 import com.allen.dao.PageInfo;
 import com.allen.dao.customer.FindCustomerDao;
 import com.allen.service.app.customer.FindCustomerByBrokerIdForAppService;
+import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Allen on 2017/10/23 0023.
@@ -22,6 +21,8 @@ public class FindCustomerByBrokerIdForAppServiceImpl implements FindCustomerByBr
 
     @Autowired
     private FindCustomerDao findCustomerDao;
+    @Autowired
+    private FindBrokerByZZService findBrokerByZZService;
 
     @Override
     public JSONObject find(HttpServletRequest request) throws Exception {
@@ -49,6 +50,18 @@ public class FindCustomerByBrokerIdForAppServiceImpl implements FindCustomerByBr
         pageInfo.setCurrentPage(pageNum);
         pageInfo.setCountOfCurrentPage(pageSize);
         pageInfo = findCustomerDao.findPage(pageInfo, paramsMap, sortMap);
+        if(null != pageInfo.getPageResults() && 0 < pageInfo.getPageResults().size()){
+            List<Map> list = pageInfo.getPageResults();
+            List<Map> newList = new ArrayList<Map>(list.size());
+            for(Map map : list){
+                JSONObject json = findBrokerByZZService.findAttop(map.get("zz").toString());
+                map.put("name", json.get("name"));
+                map.put("nickName", json.get("nickname"));
+                map.put("icon", json.get("icon"));
+                newList.add(map);
+            }
+            pageInfo.setPageResults(newList);
+        }
         jsonObject.put("customerList", pageInfo.getPageResults());
         jsonObject.put("num", num);
         jsonObject.put("status", 1);
