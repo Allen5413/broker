@@ -84,7 +84,7 @@ public class FindYxTeamController extends BaseController {
         Product product = findYxProductByIdService.find(productDate.getProductId());
 
         //查询团长风采
-        Map<String, List<String>> imgMap = findYxTeamImgByZzService.findImgByZz(team.get("zz").toString());
+        Map<String, List<String[]>> imgMap = findYxTeamImgByZzService.findImgByZz(team.get("zz").toString());
 
         //查询团员信息
         PageInfo pageInfo = super.getPageInfo(request);

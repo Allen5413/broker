@@ -26,7 +26,8 @@ public class AddYxTeamImgServiceImpl implements AddYxTeamImgService {
             for(String fileName : fileNames) {
                 TeamImg teamImg = new TeamImg();
                 teamImg.setZz(zz);
-                teamImg.setImgUrl(domain+configProp.getUpload().get("teamImgPath")+zz+"_"+fileName);
+                teamImg.setImgUrl(domain + configProp.getUpload().get("teamImgPath") + zz + "_" + fileName);
+                teamImg.setImgSmallUrl(domain+configProp.getUpload().get("teamSmallImgPath")+zz+"_"+fileName);
                 teamImg.setCreator(zz);
                 yxTeamImgDao.save(teamImg);
             }

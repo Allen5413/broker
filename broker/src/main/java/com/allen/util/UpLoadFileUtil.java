@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -153,23 +154,41 @@ public class UpLoadFileUtil {
         }
     }
 
-
-
-
-    //按指定大小把图片进行缩和放（会遵循原图高宽比例）
-    //此处把图片压成400×500的缩略图
-//    Thumbnails.of(fromPic).size(400,500).toFile(toPic);//变为400*300,遵循原图比例缩或放到400*某个高度
-//
-//    按照指定比例进行缩小和放大
-//
-//    //按照比例进行缩小和放大
-//    Thumbnails.of(fromPic).scale(0.2f).toFile(toPic);//按比例缩小
-//    Thumbnails.of(fromPic).scale(2f);//按比例放大
-//
-//    图片尺寸不变，压缩图片文件大小
-//
-//    //图片尺寸不变，压缩图片文件大小outputQuality实现,参数1为最高质量
-//    Thumbnails.of(fromPic).scale(1f).outputQuality(0.25f).toFile(toPic);
-
-
+    /**
+          * 剪切文件
+          * @param oldPath String 如：c:/fqf.txt
+          * @param newPath String 如：d:/fqf.txt
+          */
+    public static void custAndThumbnailsFile(HttpServletRequest request, String oldPath, String newPath, String smallImgPath, String fileName) {
+        try {
+            String oldPath2 = request.getRealPath("")+oldPath;
+            String newPath2 = request.getRealPath("")+newPath+fileName;
+            String smallImgPath2 = request.getRealPath("")+smallImgPath+fileName;
+            File input = new File(oldPath2);
+            Thumbnails.Builder<File> fileBuilder = Thumbnails.of(input).scale(1.0).outputQuality(1.0);
+            BufferedImage src = fileBuilder.asBufferedImage();
+            int width = src.getWidth();
+            int height = src.getHeight();
+            if(width <= 1280 && height <= 1280){
+                copyFile(request, oldPath, newPath, fileName);
+            }else {
+                int newWidth = 1280;
+                int newHeight = 1280;
+                if(width > height){
+                    double temp = width / 1280;
+                    newHeight = (int) (height / temp);
+                }else{
+                    double temp = height / 1280;
+                    newWidth = (int) (width / temp);
+                }
+                //按比例缩放
+                Thumbnails.of(oldPath2).size(newWidth, newHeight).toFile(newPath2);
+            }
+            //生成缩略图固定尺寸，不按比例
+            Thumbnails.of(oldPath2).size(200,200).keepAspectRatio(false).toFile(smallImgPath2);
+            delFile(request, oldPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

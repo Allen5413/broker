@@ -32,7 +32,7 @@
           <div class="tim-date">${img.key}</div>
           <div class="album-pics">
             <c:forEach var="url" items="${img.value}">
-              <a class="pic" href="#"><img src="${url}"></a>
+              <a class="pic" href="#"><img src="${url[0]}"></a>
             </c:forEach>
           </div>
         </c:forEach>

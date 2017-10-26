@@ -53,7 +53,7 @@
           <div class="photos-list">
             <c:forEach var="img" items="${imgMap}">
               <c:forEach var="url" items="${img.value}">
-                <a class="pic" href="#"><img src="${url}"></a>
+                <a class="pic" href="#"><img src="${url[0]}"></a>
               </c:forEach>
             </c:forEach>
           </div>

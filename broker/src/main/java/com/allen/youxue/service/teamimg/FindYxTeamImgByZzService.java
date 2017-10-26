@@ -7,5 +7,5 @@ import java.util.Map;
  * Created by Allen on 2017/10/20.
  */
 public interface FindYxTeamImgByZzService {
-    public Map<String, List<String>> findImgByZz(String zz)throws Exception;
+    public Map<String, List<String[]>> findImgByZz(String zz)throws Exception;
 }

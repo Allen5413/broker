@@ -30,9 +30,9 @@ public class FindProjectByIdForAppServiceImpl implements FindProjectByIdForAppSe
         Project project = projectDao.findOne(Long.parseLong(projectId));
         if(null != project){
             jsonObject.put("id", project.getId());
-            jsonObject.put("name", project.getName());
-            jsonObject.put("pci", project.getPic());
-            jsonObject.put("protocol", project.getProtocol());
+            jsonObject.put("name", StringUtil.isEmpty(project.getName()) ? "" : project.getName());
+            jsonObject.put("pci", StringUtil.isEmpty(project.getPic()) ? "" : project.getPic());
+            jsonObject.put("protocol", StringUtil.isEmpty(project.getProtocol()) ? "" : project.getProtocol());
         }
         jsonObject.put("status", 1);
         return jsonObject;

@@ -17,6 +17,7 @@ public class TeamImg {
     private Long id;
     private String zz;                  //团员id
     private String imgUrl;              //照片url
+    private String imgSmallUrl;         //照片缩略图url
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
 
@@ -42,6 +43,14 @@ public class TeamImg {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getImgSmallUrl() {
+        return imgSmallUrl;
+    }
+
+    public void setImgSmallUrl(String imgSmallUrl) {
+        this.imgSmallUrl = imgSmallUrl;
     }
 
     public String getCreator() {

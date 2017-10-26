@@ -36,7 +36,7 @@ public class UploadYxMyImgController extends BaseController {
 
     @RequestMapping(value = "open")
     public String open(HttpServletRequest request) throws Exception {
-        Map<String, List<String>> map = findYxTeamImgByZzService.findImgByZz(UserUtil.getLoginUserForLoginName(request));
+        Map<String, List<String[]>> map = findYxTeamImgByZzService.findImgByZz(UserUtil.getLoginUserForLoginName(request));
         request.setAttribute("imgMap", map);
         return "/youxue/app/uploadMyImg";
     }
@@ -46,7 +46,7 @@ public class UploadYxMyImgController extends BaseController {
     public JSONObject uploadFile(HttpServletRequest request, @RequestParam("file") List<MultipartFile> uploadFileList)throws Exception{
         JSONObject jsonObject = new JSONObject();
         String fileName = UUID.randomUUID().toString();
-        String path = UpLoadFileUtil.uploadImg(request, uploadFileList, "jpg|JPG|png|PNG|bmp|BMP|jpge|JPGE", 1024*3, 5, configProp.getUpload().get("tempPath"), fileName);
+        String path = UpLoadFileUtil.uploadImg(request, uploadFileList, "jpg|JPG|png|PNG|bmp|BMP|jpge|JPGE", 1024*10, 5, configProp.getUpload().get("tempPath"), fileName);
         jsonObject.put("state", 0);
         jsonObject.put("path", path);
         jsonObject.put("fileName", fileName+path.substring(path.lastIndexOf("."), path.length()));
@@ -72,7 +72,7 @@ public class UploadYxMyImgController extends BaseController {
         }
         addYxTeamImgService.add(UserUtil.getLoginUserForLoginName(request), domain, fileNameArray);
         for(String fileName : fileNameArray){
-            UpLoadFileUtil.custFile(request, configProp.getUpload().get("tempPath")+fileName, configProp.getUpload().get("teamImgPath"), UserUtil.getLoginUserForLoginName(request)+"_"+fileName);
+            UpLoadFileUtil.custAndThumbnailsFile(request, configProp.getUpload().get("tempPath") + fileName, configProp.getUpload().get("teamImgPath"), configProp.getUpload().get("teamSmallImgPath"), UserUtil.getLoginUserForLoginName(request) + "_"+fileName);
         }
         jsonObject.put("state", 0);
         return jsonObject;
