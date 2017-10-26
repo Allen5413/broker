@@ -29,7 +29,7 @@ public class FindBrokerProjectForSchoolServiceImpl implements FindBrokerProjectF
         List<Object[]> objList = brokerProjectDao.findForSchool(projectId);
         Map<String, JSONObject> map = new HashMap<String, JSONObject>();
         if(null != objList && 0 < objList.size()){
-            int ratio = Integer.parseInt(objList.get(0)[1].toString());
+            float ratio = Float.parseFloat(objList.get(0)[1].toString());
             JSONObject attopJSON = attopService.findZzInfo(objList.get(0)[0].toString(), name);
             if("0".equals(attopJSON.get("status"))){
                 throw new BusinessException("接口获取学校信息失败！");
