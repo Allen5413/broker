@@ -24,7 +24,7 @@ public class EditCustomerRemarkForAppServiceImpl implements EditCustomerRemarkFo
     public JSONObject edit(HttpServletRequest request)throws Exception{
         JSONObject jsonObject = new JSONObject();
         String id = request.getParameter("id");
-        String remark = request.getParameter("remark");
+        String remark = StringUtil.getDecode(request, "remark");
         if(StringUtil.isEmpty(id)){
             throw new BusinessException("没有传入成员id");
         }

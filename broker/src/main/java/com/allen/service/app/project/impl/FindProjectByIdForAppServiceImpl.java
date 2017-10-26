@@ -31,6 +31,7 @@ public class FindProjectByIdForAppServiceImpl implements FindProjectByIdForAppSe
         if(null != project){
             jsonObject.put("id", project.getId());
             jsonObject.put("name", project.getName());
+            jsonObject.put("pci", project.getPic());
             jsonObject.put("protocol", project.getProtocol());
         }
         jsonObject.put("status", 1);

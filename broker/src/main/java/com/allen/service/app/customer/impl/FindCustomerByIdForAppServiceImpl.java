@@ -38,7 +38,7 @@ public class FindCustomerByIdForAppServiceImpl implements FindCustomerByIdForApp
         }
         jsonObject.put("zz", customer.getZz());
         jsonObject.put("isStar", customer.getIsStar());
-        jsonObject.put("remark", customer.getRemark());
+        jsonObject.put("remark", StringUtil.isEmpty(customer.getRemark()) ? "" : customer.getRemark());
 
         //查询7天登录次数统计
         List<Object[]> list = customerDayLoginCountDao.find7DayByZzAndProjectId(customer.getZz(), customer.getProjectId());
