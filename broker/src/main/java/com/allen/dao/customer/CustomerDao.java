@@ -21,6 +21,9 @@ public interface CustomerDao extends CrudRepository<Customer, Long> {
     @Query(nativeQuery = true, value = "select count(*) from customer c where c.broker_id = ?1")
     public BigInteger findByBrokerId(long brokerId)throws Exception;
 
+    @Query(nativeQuery = true, value = "select count(*) from broker b, customer c where b.id = c.broker_id and b.zz = ?1 and c.project_id = ?2")
+    public BigInteger findByBrokerZzAndProjectId(String zz, long projectId)throws Exception;
+
     @Modifying
     @Query(nativeQuery = true, value = "update customer set broker_id = null where broker_id = ?1 and project_id = ?2")
     public void cancelBroker(long brokerId, long projectId)throws Exception;

@@ -29,7 +29,7 @@
               <tr>
                 <td>${status.index+1}</td>
                 <td>${broker.name}</td>
-                <td></td>
+                <td>${broker.customerNum}</td>
                 <td>
                   <a class="btn-opr" href="#" onclick="detail('${broker.zz}');">查看</a>
                   <a class="btn-opr" href="#" onclick="black('${broker.zz}');">黑名单</a>

@@ -35,4 +35,16 @@ public class FindCustomerDao extends BaseQueryDao {
         String[] tableNames = {"Customer c"};
         return super.findListByHql(tableNames, fields, defaultWhere, paramsMap, sortMap);
     }
+
+    /**
+     * 查询用户最后登录的那天是否已经超过项目设置的频次天数
+     * @return
+     * @throws Exception
+     */
+    public List<Map> findEndDateIsOverdue()throws Exception{
+        String[] tableNames = {"customer c", "project p"};
+        String fields = "c.id, TIMESTAMPDIFF(DAY, DATE_FORMAT(c.end_login_time, '%Y-%m-%d') , DATE_FORMAT(now(), '%Y-%m-%d')) day, p.frequency";
+        String defaultWhere = "c.project_id = p.id";
+        return super.findListBySqlToMap(tableNames, fields, defaultWhere, null, null);
+    }
 }
