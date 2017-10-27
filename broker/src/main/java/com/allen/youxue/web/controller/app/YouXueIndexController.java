@@ -50,7 +50,7 @@ public class YouXueIndexController extends BaseController {
                        @RequestParam(value = "notCount", required = false)String notCount) throws Exception {
         List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(zz, projectId);
         boolean isHaveBroker = null != customerList && 0 < customerList.size() ? true : false;
-        if(!StringUtil.isEmpty(notCount)) {
+        if(StringUtil.isEmpty(notCount)) {
             //如果是app内部跳转到首页的话，就不计数
             editProjectVisitCountService.edit(projectId, 1);
             addCusotmerDayLoginCountService.add(zz, projectId);

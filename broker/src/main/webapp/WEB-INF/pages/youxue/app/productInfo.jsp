@@ -18,7 +18,19 @@
 <section class="section wp-t44">
   <div class="at-wrap">
     <div class="theme-pic">
-      <div class="pic"><img src="/youxue/images/item/item-01.png">
+      <div class="pic">
+        <c:if test="${product.id == 1}">
+          <img src="/youxue/images/item/item-01.png">
+        </c:if>
+        <c:if test="${product.id == 2}">
+          <img src="/youxue/images/item/item-02.png">
+        </c:if>
+        <c:if test="${product.id == 3}">
+          <img src="/youxue/images/item/item-03.png">
+        </c:if>
+        <c:if test="${product.id == 4}">
+          <img src="/youxue/images/item/item-04.png">
+        </c:if>
         <div class="item-tit">
           <div class="tit">${product.name}</div>
           <p class="sum-bar">
@@ -32,7 +44,14 @@
       </div>
     </div>
     <div class="intro-view">
-      <div class="title">校花团队（<span class="blue">${teamHeadNum}</span>）<a class="more" href="#">更多</a></div>
+      <div class="title">
+        校花团队 <span class="blue">${teamHeadNum}</span>
+        <a class="more" href="javascript:;" onclick="moreTeam()">更多</a>
+      </div>
+      <form id="form" name="form" action="${pageContext.request.contextPath}/youxueApp/findTeam/find.html" method="post">
+        <input type="hidden" id="productId" name="productId" value="${product.id}" />
+        <input type="hidden" id="productName" name="productName" value="${product.name}" />
+      </form>
       <div class="members-list">
         <c:forEach var="team" items="${pageInfo.pageResults}" begin="0" end="4">
           <a class="mem-cell" href="#">
@@ -54,3 +73,8 @@
 </section>
 </body>
 </html>
+<script>
+  function moreTeam(){
+    $("#form").submit();
+  }
+</script>

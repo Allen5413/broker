@@ -46,10 +46,10 @@
     </div>
     <c:forEach var="team" items="${teamList}">
       <div class="w-ico-item">
-        <a class="li-cell" href="#">
+        <a class="li-cell" href="javascript:;" onclick="location.href='${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}'">
           <div class="tag-cel"><i class="i-w1"></i>${team.pName}</div>
           <div class="txt-cel">
-            <c:if test="${team.isHead == 1}">校花团长<i class="i-arr" onclick="location.href='${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}'"></i></c:if>
+            <c:if test="${team.isHead == 1}">校花团长<i class="i-arr"></i></c:if>
             <c:if test="${team.isHead == 0}">
               <c:if test="${team.state == 0}">已报名</c:if>
               <c:if test="${team.state == 1}">资料待审核</c:if>
