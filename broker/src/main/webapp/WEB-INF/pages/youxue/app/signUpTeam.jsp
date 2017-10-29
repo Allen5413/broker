@@ -10,7 +10,7 @@
 <header>
   <div class="header">
     <div class="ct-lf">
-      <a href="javascript:;" onclick="history.go(-1)"><i class="i-back"></i></a>
+      <a href="javascript:;" onclick="history.go(-1);return false;"><i class="i-back"></i></a>
     </div>
     <div class="tit">跟着校花去游学</div>
   </div>

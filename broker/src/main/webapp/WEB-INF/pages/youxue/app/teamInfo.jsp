@@ -5,12 +5,18 @@
 <head>
   <%@ include file="common/meta.jsp"%>
   <%@ include file="common/taglibs.jsp"%>
+  <link href="http://cdn.bootcss.com/photoswipe/4.1.1/photoswipe.css" rel="stylesheet">
+  <link href="http://cdn.bootcss.com/photoswipe/4.1.1/default-skin/default-skin.css" rel="stylesheet">
+  <script src="http://cdn.bootcss.com/photoswipe/4.1.1/photoswipe.js"></script>
+  <script src="http://cdn.bootcss.com/photoswipe/4.1.1/photoswipe-ui-default.js"></script>
+  <script src="${pageContext.request.contextPath}/ps.js"></script>
+
 </head>
 <body>
 <header>
   <div class="header">
     <div class="ct-lf">
-      <a href="#" onclick="history.go(-1);"><i class="i-back"></i></a>
+      <a href="javascript:;" onclick="history.go(-1);return false;"><i class="i-back"></i></a>
     </div>
     <div class="tit">团队</div>
   </div>
@@ -53,7 +59,7 @@
           <div class="photos-list">
             <c:forEach var="img" items="${imgMap}">
               <c:forEach var="url" items="${img.value}">
-                <a class="pic" href="#"><img src="${url[0]}"></a>
+                <a class="pic" href="${url[1]}" data-med="${url[1]}"><img src="${url[0]}"></a>
               </c:forEach>
             </c:forEach>
           </div>
