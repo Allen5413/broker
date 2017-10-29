@@ -5,12 +5,6 @@
 <head>
   <%@ include file="common/meta.jsp"%>
   <%@ include file="common/taglibs.jsp"%>
-  <link href="http://cdn.bootcss.com/photoswipe/4.1.1/photoswipe.css" rel="stylesheet">
-  <link href="http://cdn.bootcss.com/photoswipe/4.1.1/default-skin/default-skin.css" rel="stylesheet">
-  <script src="http://cdn.bootcss.com/photoswipe/4.1.1/photoswipe.js"></script>
-  <script src="http://cdn.bootcss.com/photoswipe/4.1.1/photoswipe-ui-default.js"></script>
-  <script src="${pageContext.request.contextPath}/ps.js"></script>
-
 </head>
 <body>
 <header>
@@ -57,11 +51,15 @@
             <p>${team.label}</p>
           </div>
           <div class="photos-list">
-            <c:forEach var="img" items="${imgMap}">
-              <c:forEach var="url" items="${img.value}">
-                <a class="pic" href="${url[1]}" data-med="${url[1]}"><img src="${url[0]}"></a>
+            <div id="demo-test-gallery" class="demo-gallery">
+              <c:forEach var="img" items="${imgMap}">
+                <c:forEach var="url" items="${img.value}">
+                  <a href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
+                    <img src="${url[0]}" alt="" />
+                  </a>
+                </c:forEach>
               </c:forEach>
-            </c:forEach>
+            </div>
           </div>
         </div>
       </div>
@@ -91,5 +89,6 @@
     $("#bdmod").find(".bd-mod-view").eq(index).show().siblings().hide();
   })
 </script>
+<script src="${pageContext.request.contextPath}/photoswipe/js/startUp.js"></script>
 </body>
 </html>

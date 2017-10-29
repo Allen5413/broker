@@ -28,18 +28,23 @@
         <div class="opr-bar"><a class="btn-inline" href="javascript:;" onclick="sub()">发 布</a></div>
       </div>
       <div class="album-cells-list">
-        <c:forEach var="img" items="${imgMap}">
-          <div class="tim-date">${img.key}</div>
-          <div class="album-pics">
-            <c:forEach var="url" items="${img.value}">
-              <a class="pic" href="#"><img src="${url[0]}"></a>
-            </c:forEach>
-          </div>
-        </c:forEach>
+        <div id="demo-test-gallery" class="demo-gallery">
+          <c:forEach var="img" items="${imgMap}">
+            <div class="tim-date">${img.key}</div>
+            <div class="album-pics">
+              <c:forEach var="url" items="${img.value}">
+                <a href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
+                  <img src="${url[0]}" alt="" />
+                </a>
+              </c:forEach>
+            </div>
+          </c:forEach>
+        </div>
       </div>
     </div>
   </div>
 </section>
+<script src="${pageContext.request.contextPath}/photoswipe/js/startUp.js"></script>
 </body>
 </html>
 <script>
