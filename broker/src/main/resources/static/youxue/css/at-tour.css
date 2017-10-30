@@ -482,9 +482,18 @@ header{
 	display: flex;
 	flex-wrap: wrap;
 }
+.demo-gallery{
+	display: flex;
+	display: -webkit-box;
+	display: -webkit-flex;
+	flex-flow: wrap;
+	-webkit-flex-flow: wrap;
+	-ms-flex-flow: wrap;
+	width: 100%;
+}
 .photos-list .pic{
-	width: 33.3%;
-	padding: 0 3px 0 0;
+	width: 33%;
+	padding: 0 3px 5px 3px;
 	text-align: center;
 }
 .photos-list .pic img{
@@ -933,7 +942,7 @@ border-radius: 100%;
 }
 .steps-list .step-text{
 	position: relative;
-	left: -35px;
+	left: -36px;
 	display: flex;
 	padding: 20px 0;
 }
@@ -1124,6 +1133,12 @@ border-radius: 100%;
 .text-view .opr-bar{
 	padding:50px 0 20px;
 	text-align:center;
+}
+.text-view .title{
+	font-size: 16px;
+	text-align: center;
+	padding: 20px 0 10px;
+	font-weight: bold;
 }
 
 .agree-view{
@@ -1704,11 +1719,4 @@ line-height: 32px;
 	background: #f0f0f0;
 	padding: 4px 6px;
 	margin: 0 10px 10px 0;
-}
-
-.text-view .title{
-	font-size: 16px;
-	text-align: center;
-	padding: 20px 0 10px;
-	font-weight: bold;
 }

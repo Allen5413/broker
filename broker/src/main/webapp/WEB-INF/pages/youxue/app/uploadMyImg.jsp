@@ -20,7 +20,7 @@
     <div class="upload-photo-view">
       <div class="photo-btn-cell">
         <div id="tempImg" class="pics-upload bline">
-          <form id="form" name="form" enctype="multipart/form-data" method="post">
+          <form id="form" name="form" enctype="multipart/form-data" method="post" target="_blank">
             <a class="btn-upload" href="#"><i class="i-camera"></i><input type="file" name="file" class="uploadFile" onchange="uploadFile()"></a>
           </form>
         </div>
@@ -33,7 +33,7 @@
             <div class="tim-date">${img.key}</div>
             <div class="album-pics">
               <c:forEach var="url" items="${img.value}">
-                <a href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
+                <a class="pic" href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
                   <img src="${url[0]}" alt="" />
                 </a>
               </c:forEach>

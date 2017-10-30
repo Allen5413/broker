@@ -18,7 +18,6 @@
 <section class="section wp-t44">
   <div class="at-wrap">
     <div class="form-apply-view">
-      <div class="welcom-txt">欢迎词</div>
       <div class="form-item-cell ul-pdl">
         <div class="title">游学出行流程</div>
         <div class="steps-list">

@@ -54,7 +54,7 @@
             <div id="demo-test-gallery" class="demo-gallery">
               <c:forEach var="img" items="${imgMap}">
                 <c:forEach var="url" items="${img.value}">
-                  <a href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
+                  <a class="pic" href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
                     <img src="${url[0]}" alt="" />
                   </a>
                 </c:forEach>
