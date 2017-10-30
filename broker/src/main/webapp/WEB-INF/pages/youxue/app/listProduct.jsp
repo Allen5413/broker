@@ -64,3 +64,6 @@
 </section>
 </body>
 </html>
+<script>
+  setTimeout(function(){hideButtom();}, 500);
+</script>

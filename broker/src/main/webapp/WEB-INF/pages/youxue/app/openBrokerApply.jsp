@@ -60,6 +60,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function apply(){
     if($("#isRead").is(":checked")){
       $.ajax({

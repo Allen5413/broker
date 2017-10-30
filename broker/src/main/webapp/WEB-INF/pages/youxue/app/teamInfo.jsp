@@ -18,7 +18,6 @@
 <section class="section wp-t44">
   <div class="at-wrap">
     <div class="team-theme-view">
-      <img src="/youxue/images/item/item-0${product.id}.png">
       <div class="team-cel">
         <div class="uh-pic"><img src="${team.icon}"></div>
         <div class="tm-info">
@@ -92,3 +91,6 @@
 <script src="${pageContext.request.contextPath}/photoswipe/js/startUp.js"></script>
 </body>
 </html>
+<script>
+  setTimeout(function(){hideButtom();}, 500);
+</script>

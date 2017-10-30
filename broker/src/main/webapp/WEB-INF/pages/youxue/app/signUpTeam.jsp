@@ -81,6 +81,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function sub(){
     if(!$("#cb1").is(":checked") || !$("#cb2").is(":checked")){
       app.alert("请勾选下方2个条款", 1);

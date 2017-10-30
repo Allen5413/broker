@@ -49,6 +49,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function randomBroker(){
     $.ajax({
       url:"${pageContext.request.contextPath}/recommendBroker/randomBroker.json",

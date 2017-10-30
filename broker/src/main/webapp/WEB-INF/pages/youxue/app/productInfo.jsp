@@ -20,22 +20,19 @@
     <div class="theme-pic">
       <div class="pic">
         <c:if test="${product.id == 1}">
-          <img src="/youxue/images/item/item-01.png">
+          <img src="/youxue/images/item/detail-01.png">
         </c:if>
         <c:if test="${product.id == 2}">
-          <img src="/youxue/images/item/item-02.png">
+          <img src="/youxue/images/item/detail-02.png">
         </c:if>
         <c:if test="${product.id == 3}">
-          <img src="/youxue/images/item/item-03.png">
+          <img src="/youxue/images/item/detail-03.png">
         </c:if>
         <c:if test="${product.id == 4}">
-          <img src="/youxue/images/item/item-04.png">
+          <img src="/youxue/images/item/detail-04.png">
         </c:if>
         <div class="item-tit">
           <div class="tit">${product.name}</div>
-          <p class="sum-bar">
-            团队 ${teamNum}
-          </p>
         </div>
       </div>
       <div class="sign-up-bar">
@@ -54,7 +51,7 @@
       </form>
       <div class="members-list">
         <c:forEach var="team" items="${pageInfo.pageResults}" begin="0" end="4">
-          <a class="mem-cell" href="#">
+          <a class="mem-cell" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}">
             <div class="uhpic"><img src="${team.icon}"></div>
             <p>${team.nickName}</p>
           </a>
@@ -74,6 +71,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function moreTeam(){
     $("#form").submit();
   }

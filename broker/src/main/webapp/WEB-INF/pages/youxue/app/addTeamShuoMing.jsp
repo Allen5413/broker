@@ -85,6 +85,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function selectTeam(){
     $("#form").submit();
   }

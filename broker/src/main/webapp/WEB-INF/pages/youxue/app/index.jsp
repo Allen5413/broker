@@ -158,6 +158,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   <c:if test="${!isHaveBroker}">
     setTimeout(function(){
       //获取当前时间

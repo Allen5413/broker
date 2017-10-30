@@ -48,6 +48,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function uploadFile(){
     $.ajax({
       type: "POST",

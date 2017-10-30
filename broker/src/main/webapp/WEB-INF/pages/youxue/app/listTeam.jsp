@@ -57,6 +57,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   var modal = document.getElementById("show-select");
   var btn = document.getElementById("sift-ar");
   btn.onclick = function(){

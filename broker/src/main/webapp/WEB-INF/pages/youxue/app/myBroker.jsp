@@ -64,6 +64,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function huan(){
     $.ajax({
       url:"${pageContext.request.contextPath}/recommendBroker/randomBroker.json",

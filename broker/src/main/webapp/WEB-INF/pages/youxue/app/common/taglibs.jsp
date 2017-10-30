@@ -13,3 +13,4 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/youxue/css/at-tour.css"  />
 <script src="${pageContext.request.contextPath}/js/app.js"></script>
 <script src="${pageContext.request.contextPath}/youxue/js/at-ui.js"></script>
+<script src="${pageContext.request.contextPath}/js/attop.js"></script>

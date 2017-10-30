@@ -49,9 +49,8 @@ public class FindBrokerByZzForAppServiceImpl implements FindBrokerByZzForAppServ
 
             //获取所有项目
             jsonObject.put("projectList", projectDao.findAll());
-
-            jsonObject.put("status", 1);
         }
+        jsonObject.put("status", 1);
         return jsonObject;
     }
 }

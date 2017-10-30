@@ -8,6 +8,8 @@
     <h5>项目证书</h5>
     <ul class="pics-list">
       <li><img src="/youxue/images/item/tm-1-01.jpg"></li>
+      <li><img src="/youxue/images/item/tm-1-02.jpg"></li>
+      <li><img src="/youxue/images/item/tm-1-03.jpg"></li>
     </ul>
   </div>
 </div>

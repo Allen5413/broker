@@ -143,16 +143,11 @@ header{
 .theme-pic .pic img{width: 100%; display: block;}
 
 .theme-pic .item-tit{
-	position: absolute;
-	top: 50%;
-	margin-top: -20px;
-	color: #fff;
-	padding: 0 0 0 12px;
+	padding: 12px 0 0 12px;
 	font-size: 14px;
 }
 .theme-pic .item-tit .tit{
 	font-size: 21px;
-	padding: 0 0 10px;
 }
 .theme-pic .b-att{
 	background: #fff;
@@ -343,25 +338,43 @@ header{
 	display: block;
 }
 .team-theme-view .team-cel{
-	position: absolute;
-	top: 0%;
-	left: 0;
-	height: 100%;
+	width: 100%;
+	display: flex;
+	display: -webkit-box;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	-ms-flex-item-align: center;
+	/*position: absolute;
+	top: 50%;
+	margin-top: -61px;
+	left: 0;*/
 }
+.team-bgpic{position: relative;}
 .team-theme-view .team-cel .tit,
 .team-theme-view .team-cel .from,
 .team-theme-view .team-cel .fxx{
-	color: #fff;
+	/*color: #fff;*/
+}
+.team-theme-view .item-price{
+	padding: 12px 15px;
+}
+.team-theme-view .item-price .num{
+	font-size: 28px;
+	color: #49AEFF;
+}
+.item-price .small{
+	font-size: 16px;
 }
 .team-theme-view .opr-cel{width: 72px;}
 .team-theme-view .btn-go{
-	background: rgba(252,252,252,.9);
-	color: #49AEFF;
+	background: #49b1fe;
+	color: #fff;
 	display: inline-block;
-	padding: 3px 12px 3px;
+	padding: 5px 20px 5px;
 	border-radius: 15px;
 	position: relative;
-	top: -6px;
+	top: -4px;
 }
  @media screen and (min-width: 640px) {
    .team-theme-view .opr-cel{width: 120px;}

@@ -36,6 +36,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   if("${msg}" != ""){
     app.alert("${msg}", 1, function(){
       history.go(-1);

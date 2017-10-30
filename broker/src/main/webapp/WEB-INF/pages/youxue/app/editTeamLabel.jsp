@@ -28,6 +28,7 @@
 </body>
 </html>
 <script>
+  setTimeout(function(){hideButtom();}, 500);
   function sub(){
     $.ajax({
       cache: true,
