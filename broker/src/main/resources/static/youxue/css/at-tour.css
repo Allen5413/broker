@@ -1444,10 +1444,16 @@ border-radius: 100%;
 }
 .album-cells-list .tim-date{
 	padding: 10px 12px;
+	width: 100%;
 }
 .album-cells-list .album-pics{
 	display: flex;
+	display: -webkit-box;
+	display: -webkit-flex;
 	flex-flow: wrap;
+	-webkit-flex-flow: wrap;
+	-ms-flex-flow: wrap;
+	width: 100%;
 }
 .album-pics .pic{
 	width: 33.3%;	
