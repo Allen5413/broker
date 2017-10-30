@@ -21,7 +21,7 @@
       <div class="team-cel">
         <div class="uh-pic"><img src="${team.icon}"></div>
         <div class="tm-info">
-          <p class="tit">${team.nickname} <span class="fxx">(${team.sname})</span></p>
+          <p class="tit">${team.realname} <span class="fxx">(${team.sname})</span></p>
           <p class="from">
             ${product.name}
           </p>
