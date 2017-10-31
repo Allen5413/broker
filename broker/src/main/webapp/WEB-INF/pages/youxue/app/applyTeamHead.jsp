@@ -34,8 +34,8 @@
               <li class="item-cell">
                 <div class="uh"><img src="${broker.icon}"></div>
                 <div class="uinfo">
-                  <p class="p-tit">${broker.name}<span class="f-14">（${broker.sName}）</span></p>
-                  <p><i class="i-qq"></i>${broker.qq} <i class="i-tel"></i>${broker.mobile}</p>
+                  <p class="p-tit">${broker.name}<span class="f-14"><c:if test="${!empty broker.sName}">（${broker.sName}）</c:if></span></p>
+                  <p><c:if test="${!empty broker.qq}"><i class="i-qq"></i>${broker.qq}</c:if> <c:if test="${!empty broker.mobile}"><i class="i-tel"></i>${broker.mobile}</c:if></p>
                 </div>
               </li>
             </c:forEach>
@@ -67,8 +67,19 @@
               html += "<li class='item-cell'>";
               html += "<div class='uh'><img src='"+broker.icon+"'></div>";
               html += "<div class='uinfo'>";
-              html += "<p class='p-tit'>"+broker.name+"<span class='f-14'>（"+broker.sName+"）</span></p>";
-              html += "<p><i class='i-qq'></i>"+broker.qq+"<i class='i-tel'></i>"+broker.mobile+"</p>";
+              if(broker.sName != null && broker.sName != "" && 0 < broker.sName.length) {
+                html += "<p class='p-tit'>" + broker.name + "<span class='f-14'>（" + broker.sName + "）</span></p>";
+              }else{
+                html += "<p class='p-tit'>" + broker.name + "<span class='f-14'></span></p>";
+              }
+              html += "<p>";
+              if(broker.qq != null && broker.qq != "" && 0 < broker.qq.length) {
+                html += "<i class='i-qq'></i>"+broker.qq;
+              }
+              if(broker.mobile != null && broker.mobile != "" && 0 < broker.mobile.length) {
+                html += " <i class='i-tel'></i>"+broker.mobile;
+              }
+              html += "</p>";
               html += "</div>";
               html += "</li>";
             }

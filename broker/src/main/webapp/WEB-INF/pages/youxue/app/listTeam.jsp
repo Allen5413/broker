@@ -19,7 +19,7 @@
             <a class="team-cel" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}">
               <div class="uh-pic"><img src="${team.icon}"></div>
               <div class="tm-info">
-                <p class="tit">${team.name} <span class="fxx">(${team.sName})</span></p>
+                <p class="tit">${team.name} <span class="fxx"><c:if test="${!empty team.sName}">(${team.sName})</c:if></span></p>
                 <p class="from">
                   ${team.pName}
                   <span class="num">${team.teamNum+1} 人</span>

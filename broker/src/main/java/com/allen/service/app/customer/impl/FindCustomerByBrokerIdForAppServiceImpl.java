@@ -38,15 +38,12 @@ public class FindCustomerByBrokerIdForAppServiceImpl implements FindCustomerByBr
             throw new BusinessException("没有传入项目id");
         }
         PageInfo pageInfo = new PageInfo();
-        pageInfo.setCurrentPage(1);
-        pageInfo.setCountOfCurrentPage(9999999);
         Map<String, Object> paramsMap = new HashMap<String, Object>(2);
         paramsMap.put("c.broker_id", Long.parseLong(id));
         paramsMap.put("c.project_id", Long.parseLong(projectId));
         Map<String, Boolean> sortMap = new LinkedHashMap<String, Boolean>(2);
         sortMap.put("c.is_star", false);
-        sortMap.put("c.id", false);
-        long num = findCustomerDao.findPage(pageInfo, paramsMap, sortMap).getTotalCount();
+        sortMap.put("c.end_login_time", true);
         pageInfo.setCurrentPage(pageNum);
         pageInfo.setCountOfCurrentPage(pageSize);
         pageInfo = findCustomerDao.findPage(pageInfo, paramsMap, sortMap);
@@ -63,7 +60,7 @@ public class FindCustomerByBrokerIdForAppServiceImpl implements FindCustomerByBr
             pageInfo.setPageResults(newList);
         }
         jsonObject.put("customerList", pageInfo.getPageResults());
-        jsonObject.put("num", num);
+        jsonObject.put("num", pageInfo.getTotalCount());
         jsonObject.put("status", 1);
         return jsonObject;
     }
