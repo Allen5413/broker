@@ -84,20 +84,20 @@
   setTimeout(function(){hideButtom();}, 500);
   function sub(){
     if(!$("#cb1").is(":checked") || !$("#cb2").is(":checked")){
-      app.alert("请勾选下方2个条款", 1);
+      layer.alert("请勾选下方2个条款", {icon: 5});
       return false;
     }
     $("#yyDate").val($("#yyDateText").val());
     if($("#yyDate").val() == ""){
-      app.alert("请输入预约咨询时间", 1);
+      layer.alert("请输入预约咨询时间", {icon: 5});
       return false;
     }
     if($("#teamHeadId").val() == ""){
-      app.alert("请选择团长", 1);
+      layer.alert("请选择团长", {icon: 5});
       return false;
     }
     if($("#brokerZz").val() == ""){
-      app.alert("请到 我的-我的经纪人 去选择经纪人", 1);
+      layer.alert("请到 我的-我的经纪人 去选择经纪人", {icon: 5});
       return false;
     }
     $.ajax({
@@ -108,9 +108,9 @@
       async: false,
       success: function(data) {
         if(data.state == 0){
-          app.msg("您已报名成功", 0);
+          layer.msg("您已报名成功", {icon: 6});
         }else{
-          app.alert(data.msg, 1);
+          layer.alert(data.msg, {icon: 5});
         }
       }
     });
