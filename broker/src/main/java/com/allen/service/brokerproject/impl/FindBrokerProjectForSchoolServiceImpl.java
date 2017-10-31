@@ -52,10 +52,10 @@ public class FindBrokerProjectForSchoolServiceImpl implements FindBrokerProjectF
                             school.put("name", sName);
                             school.put("nickName", nickName);
                             school.put("num", snum);
-                            school.put("maxNum", snum * ratio / 100);
+                            school.put("maxNum", (int)Math.rint(snum * ratio / 100));
                             school.put("manNum", 1);
                         } else {
-                            manNum = Integer.parseInt(school.get(manNum).toString());
+                            manNum = Integer.parseInt(school.get("manNum").toString());
                             school.put("manNum", manNum + 1);
                         }
                         map.put(sCode, school);

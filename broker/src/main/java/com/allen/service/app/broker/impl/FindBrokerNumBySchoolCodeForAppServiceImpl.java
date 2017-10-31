@@ -53,7 +53,7 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         jsonObject.put("protocol", StringUtil.isEmpty(project.getProtocol()) ? "" : project.getProtocol());
 
         //计算学校最大申请人数
-        float maxNum = Integer.parseInt(sNum) * project.getRatio() / 100;
+        int maxNum = (int)Math.rint(Integer.parseInt(sNum) * project.getRatio() / 100);
         //查询学校当前已经申请人数
         List<JSONObject> list = findBrokerProjectBySchoolCodeService.find(Long.parseLong(projectId), sCode);
         int nowNum = null == list ? 0 : list.size();
