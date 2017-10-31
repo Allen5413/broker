@@ -40,8 +40,15 @@ public class PageYxTeamServiceImpl implements PageYxTeamService {
                 }
                 List list2 = (List) attopJSON.get("data");
                 if(list2 != null && 0 < list2.size()){
-                    JSONObject userSchool = (JSONObject) list2.get(0);
-                    JSONObject userSchool2 = (JSONObject) list2.get(1);
+                    JSONObject userSchool;
+                    JSONObject userSchool2;
+                    if(1 < list2.size()) {
+                        userSchool = (JSONObject) list2.get(0);
+                        userSchool2 = (JSONObject) list2.get(1);
+                    }else{
+                        userSchool = (JSONObject) list2.get(0);
+                        userSchool2 = userSchool;
+                    }
                     if(map.get("zz").toString().equals(userSchool.get("zz").toString())){
                         map.put("name", userSchool.get("realname").toString());
                         map.put("nickName", userSchool.get("nickname").toString());

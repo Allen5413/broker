@@ -42,11 +42,11 @@
             </td>
           </tr>
           <tr>
-            <td class="tag-b">申请经纪人说明：</td>
+            <td class="tag-b">项目说明：</td>
             <td><textarea id="content" name="content" class="textarea-intro" rows="8"></textarea></td>
           </tr>
           <tr>
-            <td class="tag-b">合作协议说明：</td>
+            <td class="tag-b">合作协议：</td>
             <td><textarea id="protocol" name="protocol" class="textarea-intro" rows="8"></textarea></td>
           </tr>
           <tr>
