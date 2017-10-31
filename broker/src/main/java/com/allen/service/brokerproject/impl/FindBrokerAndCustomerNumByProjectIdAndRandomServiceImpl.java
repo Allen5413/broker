@@ -5,6 +5,7 @@ import com.allen.base.exception.BusinessException;
 import com.allen.dao.brokerproject.BrokerProjectDao;
 import com.allen.service.attop.AttopService;
 import com.allen.service.brokerproject.FindBrokerAndCustomerNumByProjectIdAndRandomService;
+import com.allen.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +32,12 @@ public class FindBrokerAndCustomerNumByProjectIdAndRandomServiceImpl implements 
             for(String index : indexs){
                 List<Object[]> list = brokerProjectDao.findBrokerAndCustomerNumByProjectIdAndIndex(projectId, Integer.parseInt(index));
                 if(null != list && 0 < list.size()){
-                    String zz = list.get(0)[0].toString();
-                    int num = Integer.parseInt(list.get(0)[1].toString());
-                    zzNumJSON.put(zz, num);
-                    zzs += zz+",";
+                    if(null != list.get(0)[0] && !StringUtil.isEmpty(list.get(0)[0].toString())) {
+                        String zz = list.get(0)[0].toString();
+                        int num = Integer.parseInt(list.get(0)[1].toString());
+                        zzNumJSON.put(zz, num);
+                        zzs += zz + ",";
+                    }
                 }
             }
             zzs = zzs.substring(0, zzs.length()-1);
