@@ -21,11 +21,11 @@
       <div class="team-cel">
         <div class="uh-pic"><img src="${team.icon}"></div>
         <div class="tm-info">
-          <p class="tit">${team.realname} <span class="fxx">(${team.sname})</span></p>
+          <p class="tit">${team.realname} <span class="fxx"><c:if test="${!empty team.sname}">(${team.sname})</c:if></span></p>
           <p class="from">
             ${product.name}
           </p>
-          <p class="from">咨询QQ群：${team.teamQq}<a class="btn-go f-r" href="${pageContext.request.contextPath}/youxueApp/signUpTeam/open.html?productId=${product.id}&teamHeadId=${team.id}">去报名</a></p>
+          <p class="from">咨询QQ群：${team.teamQq}<a class="btn-go f-r" href="${pageContext.request.contextPath}/youxueApp/signUpTeam/openSignUp.html?productId=${product.id}&teamHeadId=${team.id}">去报名</a></p>
         </div>
       </div>
     </div>

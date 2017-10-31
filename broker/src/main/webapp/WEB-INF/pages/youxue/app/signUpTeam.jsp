@@ -23,7 +23,7 @@
         <ul class="ul-info">
           <li>
             <div class="tag-cel">校花团长</div>
-            <div class="txt-cel bline"><span class="uname">${teamHead.nickname}</span><img class="uhpic" src="${teamHead.icon}"></div>
+            <div class="txt-cel bline"><span class="uname">${teamHead.realname}</span><img class="uhpic" src="${teamHead.icon}"></div>
           </li>
           <li>
             <div class="tag-cel">项目名称</div>
@@ -44,11 +44,11 @@
           </li>
           <li>
             <div class="tag-cel">学 校</div>
-            <div class="txt-cel bline">${tean.sname}</div>
+            <div class="txt-cel bline">${team.sname}</div>
           </li>
           <li>
             <div class="tag-cel">手 机</div>
-            <div class="txt-cel bline">${tean.mobile}</div>
+            <div class="txt-cel bline">${team.mobile}</div>
           </li>
           <li>
             <div class="tag-cel">经纪人</div>
@@ -61,7 +61,7 @@
         <ul class="ul-info">
           <li>
             <div class="tag-cel">预约时间</div>
-            <div class="txt-cel bline"><input type="text" id="yyDateText" class="inputTxt" placeholder="2017-10-18 00:00"></div>
+            <div class="txt-cel bline"><input type="text" id="yyDateText" class="inputTxt"></div>
           </li>
         </ul>
         <div class="submit-btn">

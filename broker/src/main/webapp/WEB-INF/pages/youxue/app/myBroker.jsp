@@ -12,7 +12,7 @@
     <div class="ct-lf">
       <a href="javascript:;" onclick="history.go(-1);return false;"><i class="i-back"></i></a>
     </div>
-    <div class="tit">我的经纪人信息</div>
+    <div class="tit">我的游学经纪人</div>
   </div>
 </header>
 <c:if test="${!empty broker}">

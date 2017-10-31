@@ -35,7 +35,7 @@
         </a>
       </c:if>
       <a class="li-cell" href="${pageContext.request.contextPath}/youxueApp/findMyBroker/open.html">
-        <div class="tag-cel"><i class="i-w4"></i>我的经纪人</div>
+        <div class="tag-cel"><i class="i-w4"></i>我的游学经纪人</div>
         <div class="txt-cel">
           <c:if test="${!empty broker.icon}">
             <img src="${broker.icon}">
