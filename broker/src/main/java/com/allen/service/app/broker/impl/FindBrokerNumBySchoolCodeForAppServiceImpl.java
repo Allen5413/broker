@@ -49,8 +49,9 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         }
         jsonObject.put("id", project.getId());
         jsonObject.put("name", StringUtil.isEmpty(project.getName()) ? "" : project.getName());
-        jsonObject.put("pci", StringUtil.isEmpty(project.getPic()) ? "" : project.getPic());
+        jsonObject.put("pic", StringUtil.isEmpty(project.getPic()) ? "" : project.getPic());
         jsonObject.put("protocol", StringUtil.isEmpty(project.getProtocol()) ? "" : project.getProtocol());
+        jsonObject.put("content", StringUtil.isEmpty(project.getContent()) ? "" : project.getContent());
 
         //计算学校最大申请人数
         int maxNum = (int)Math.rint(Integer.parseInt(sNum) * project.getRatio() / 100);
