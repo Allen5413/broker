@@ -15,31 +15,29 @@
     <div class="tit">我的游学经纪人</div>
   </div>
 </header>
-<c:if test="${!empty broker}">
-  <section class="section wp-t50">
-    <div class="at-wrap">
-      <div class="w-info-view">
-        <div class="uh-cel">
-          <img src="${broker.icon}">
-        </div>
-        <div class="uinfo-cel">
-          <p class="tit">${broker.realname}</p>
-          <p>${broker.sname}</p>
-        </div>
+<section class="section wp-t50">
+  <div class="at-wrap">
+    <div class="w-info-view">
+      <div class="uh-cel">
+        <img src="${broker.icon}">
       </div>
-      <div class="w-ico-item">
-        <a class="li-cell" href="#">
-          <div class="tag-cel">联系电话</div>
-          <div class="txt-cel">${broker.mobile}</div>
-        </a>
-        <a class="li-cell" href="#">
-          <div class="tag-cel">联系QQ</div>
-          <div class="txt-cel">${broker.qq}</div>
-        </a>
+      <div class="uinfo-cel">
+        <p class="tit">${broker.realname}</p>
+        <p>${broker.sname}</p>
       </div>
     </div>
-  </section>
-</c:if>
+    <div class="w-ico-item">
+      <a class="li-cell" href="#">
+        <div class="tag-cel">联系电话</div>
+        <div class="txt-cel">${broker.mobile}</div>
+      </a>
+      <a class="li-cell" href="#">
+        <div class="tag-cel">联系QQ</div>
+        <div class="txt-cel">${broker.qq}</div>
+      </a>
+    </div>
+  </div>
+</section>
 <c:if test="${empty broker}">
   <div id="selectBrokerDiv" class="layer-trans" >
     <div class="pop-tips-txt">

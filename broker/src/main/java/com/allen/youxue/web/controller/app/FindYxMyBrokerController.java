@@ -1,17 +1,16 @@
 package com.allen.youxue.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
-import com.allen.entity.broker.Broker;
 import com.allen.entity.broker.Customer;
+import com.allen.entity.brokerproject.BrokerProject;
 import com.allen.service.broker.FindBrokerByIdService;
 import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.service.broker.RecommendBrokerService;
+import com.allen.service.brokerproject.FindBrokerAndCustomerNumByProjectIdAndRandomService;
+import com.allen.service.brokerproject.FindBrokerProjectByProjectIdService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
-import com.allen.youxue.entity.team.Team;
-import com.allen.youxue.service.team.EditYxTeamLabelByZzService;
-import com.allen.youxue.service.team.FindYxTeamByZzAndIsHeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +34,10 @@ public class FindYxMyBrokerController extends BaseController {
     private RecommendBrokerService recommendBrokerService;
     @Autowired
     private FindBrokerByZZService findBrokerByZZService;
+    @Autowired
+    private FindBrokerProjectByProjectIdService findBrokerProjectByProjectIdService;
+    @Autowired
+    private FindBrokerAndCustomerNumByProjectIdAndRandomService findBrokerAndCustomerNumByProjectIdAndRandomService;
 
     /**
      * @return
@@ -54,13 +57,22 @@ public class FindYxMyBrokerController extends BaseController {
                 List<JSONObject> brokerList = recommendBrokerService.find(json.get("scode").toString(), UserUtil.getLoginUserForProjectId(request));
                 request.setAttribute("brokerList", brokerList);
             }
+            return "youxue/app/myBroker";
         }else{
-            //得到当前用户的所在学校code
-            JSONObject json = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
-            //推荐经纪人
-            List<JSONObject> brokerList = recommendBrokerService.find(json.get("scode").toString(), UserUtil.getLoginUserForProjectId(request));
-            request.setAttribute("brokerList", brokerList);
+            //返回项目经纪人总数，然后随机取10名经纪人供用户选择
+            List<BrokerProject> list = findBrokerProjectByProjectIdService.findByState(UserUtil.getLoginUserForProjectId(request), BrokerProject.STATE_PASS);
+            request.setAttribute("brokerNum", null == list ? 0 : list.size());
+            return "youxue/app/addMyBroker";
         }
-        return "youxue/app/myBroker";
+    }
+
+
+    @RequestMapping(value = "findRndomBroker")
+    @ResponseBody
+    public JSONObject findRndomBroker(HttpServletRequest request, String indexs) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", findBrokerAndCustomerNumByProjectIdAndRandomService.find(UserUtil.getLoginUserForProjectId(request), indexs.split(",")));
+        jsonObject.put("state", 0);
+        return jsonObject;
     }
 }
