@@ -379,6 +379,37 @@ public class DateUtil {
     }
 
 
+    /**
+     * 根据传进来的时间，对边当前时间，返回几秒前，几分钟前这种格式
+     * @param dateStr
+     * @return
+     * @throws Exception
+     */
+    public static String getBeforeExplain(String dateStr)throws Exception{
+        if(StringUtil.isEmpty(dateStr)){
+            return "";
+        }
+        Date date = DateUtil.getFormatDate(dateStr, DateUtil.longDatePattern);
+        date.setMinutes(date.getMinutes()-2);
+        String result="";
+        Date now=new Date();
+        long a=now.getTime();
+        long b=date.getTime();
+        long c=(a-b)/1000;
+        if(c<60){
+            result=c+"秒前";
+        }else if(c<60*60){
+            result=c/60+"分钟前";
+        }else if(c<60*60*24){
+            result=c/3600+"小时前";
+        }else if(c<60*60*96){
+            result=c/(3600*24)+"天前";
+        }else{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd");
+            result = dateFormat.format(date);
+        }
+        return result;
+    }
 
 
     public static void main(String[] args) {

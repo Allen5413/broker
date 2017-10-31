@@ -16,8 +16,7 @@ import java.util.Map;
 @Service
 public class FindCustomerDao extends BaseQueryDao {
     public PageInfo findPage(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap)throws Exception{
-        String fields = "c.id, c.creator, c.create_time createTime, c.login_count loginCount, c.operate_time operateTime, c.operator, c.zz, c.end_login_time endLoginTime, c.broker_id brokerId, c.project_id projectId, c.is_star isStar, c.remark, " +
-                "ifnull(CASE WHEN TIMESTAMPDIFF(DAY, c.end_login_time , now()) = 0 THEN CONCAT(TIMESTAMPDIFF(HOUR, c.end_login_time , now()), '小时') ELSE CONCAT(TIMESTAMPDIFF(DAY, c.end_login_time , now()), '天') END, '') endDate ";
+        String fields = "c.id, c.creator, c.create_time createTime, c.login_count loginCount, c.operate_time operateTime, c.operator, c.zz, c.end_login_time endLoginTime, c.broker_id brokerId, c.project_id projectId, c.is_star isStar, c.remark, c.end_login_time endDate";
         String[] tableNames = {"customer c"};
         String defaultWhere = "1=1";
         return super.findPageByNativeSqlToMap(pageInfo, fields, defaultWhere, tableNames, paramsMap, sortMap);

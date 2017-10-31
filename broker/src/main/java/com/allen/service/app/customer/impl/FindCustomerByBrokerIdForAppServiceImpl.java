@@ -6,6 +6,7 @@ import com.allen.dao.PageInfo;
 import com.allen.dao.customer.FindCustomerDao;
 import com.allen.service.app.customer.FindCustomerByBrokerIdForAppService;
 import com.allen.service.broker.FindBrokerByZZService;
+import com.allen.util.DateUtil;
 import com.allen.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,7 @@ public class FindCustomerByBrokerIdForAppServiceImpl implements FindCustomerByBr
                 map.put("name", json.get("name"));
                 map.put("nickName", json.get("nickname"));
                 map.put("icon", json.get("icon"));
+                map.put("endDate", DateUtil.getBeforeExplain(map.get("endDate").toString()));
                 newList.add(map);
             }
             pageInfo.setPageResults(newList);
