@@ -44,11 +44,11 @@ public class EditProjectController extends BaseController {
      */
     @RequestMapping(value = "editor")
     @ResponseBody
-    public JSONObject editor(HttpServletRequest request, Project project) throws Exception {
+    public JSONObject editor(HttpServletRequest request, Project project, String fileName, String oldFileName, String domain) throws Exception {
         JSONObject jsonObject = new JSONObject();
         if(null != project) {
             project.setOperator(UserUtil.getLoginUserForName(request));
-            editProjectService.add(project, UserUtil.getLoginUserForLoginId(request));
+            editProjectService.edit(project, UserUtil.getLoginUserForLoginId(request), fileName, oldFileName, domain, request);
         }
         jsonObject.put("state", 0);
         return jsonObject;

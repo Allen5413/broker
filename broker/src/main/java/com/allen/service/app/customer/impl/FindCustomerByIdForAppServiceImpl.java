@@ -6,6 +6,7 @@ import com.allen.dao.customer.CustomerDao;
 import com.allen.dao.customerdaylogincount.CustomerDayLoginCountDao;
 import com.allen.entity.broker.Customer;
 import com.allen.service.app.customer.FindCustomerByIdForAppService;
+import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class FindCustomerByIdForAppServiceImpl implements FindCustomerByIdForApp
     private CustomerDao customerDao;
     @Autowired
     private CustomerDayLoginCountDao customerDayLoginCountDao;
+    @Autowired
+    private FindBrokerByZZService findBrokerByZZService;
 
     @Override
     public JSONObject find(HttpServletRequest request) throws Exception {
@@ -36,7 +39,13 @@ public class FindCustomerByIdForAppServiceImpl implements FindCustomerByIdForApp
         if(null == customer){
             throw new BusinessException("没有找到成员信息");
         }
+        JSONObject attopJSON = findBrokerByZZService.findAttop(customer.getZz());
         jsonObject.put("zz", customer.getZz());
+        jsonObject.put("icon", attopJSON.get("icon"));
+        jsonObject.put("qq", attopJSON.get("qq"));
+        jsonObject.put("nickName", attopJSON.get("nickname"));
+        jsonObject.put("sName", attopJSON.get("sname"));
+        jsonObject.put("mobile", attopJSON.get("mobile"));
         jsonObject.put("isStar", customer.getIsStar());
         jsonObject.put("remark", StringUtil.isEmpty(customer.getRemark()) ? "" : customer.getRemark());
 

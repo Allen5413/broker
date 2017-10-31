@@ -6,8 +6,23 @@
 <div class="container-view">
   <div class="mod-com-view">
     <div class="mod-content">
+      <form id="picForm" name="picForm" enctype="multipart/form-data" method="post">
+        <table class="set-table-info">
+          <tr>
+            <td class="tag-b">展示图片：</td>
+            <td>
+              <input type="file" name="file" class="input-txt-220" onchange="addPic()" />
+              <br />
+              <img id="pic" name="pic" src="${project.pic}" />
+            </td>
+          </tr>
+        </table>
+      </form>
       <form id="form" name="form" action="${pageContext.request.contextPath}/editProject/editor.json">
         <input type="hidden" name="id" value="${project.id}" />
+        <input type="hidden" id="oldFileName" name="oldFileName" value="${project.pic}" />
+        <input type="hidden" id="fileName" name="fileName" value="${project.pic}" />
+        <input type="hidden" id="domain" name="domain" value="http://localhost:8080" />
         <table class="set-table-info">
           <tr>
             <td class="tag-b">项目名称：</td>
@@ -29,6 +44,14 @@
             </td>
           </tr>
           <tr>
+            <td class="tag-b">申请经纪人说明：</td>
+            <td><textarea id="content" name="content" class="textarea-intro" rows="8">${project.content}</textarea></td>
+          </tr>
+          <tr>
+            <td class="tag-b">合作协议说明：</td>
+            <td><textarea id="protocol" name="protocol" class="textarea-intro" rows="8">${project.protocol}</textarea></td>
+          </tr>
+          <tr>
             <td class="tag-b"></td>
             <td>
               <a class="btn-com" href="#" onclick="addProject();">保存提交</a>
@@ -46,5 +69,26 @@
       return false;
     }
     app.edit("${pageContext.request.contextPath}/editProject/editor.json", $("#form").serialize(), "${pageContext.request.contextPath}/pageProject/page.html", "");
+  }
+
+  function addPic(){
+    $.ajax({
+      type: "POST",
+      enctype: 'multipart/form-data',
+      url: "${pageContext.request.contextPath}/addProject/upload.json",
+      data: new FormData($("#picForm")[0]),
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 600000,
+      success: function (data) {
+        if(data.state == 0) {
+          $("#pic").attr("src", data.path);
+          $("#fileName").val(data.fileName);
+        }else{
+          app.alert(data.msg, 1);
+        }
+      }
+    });
   }
 </script>

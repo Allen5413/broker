@@ -51,5 +51,6 @@ public class AddProjectServiceImpl implements AddProjectService {
         }
 
         project.setPic(domain + configProp.getUpload().get("projectPic") + project.getId() + "_" + fileName);
+        projectDao.save(project);
     }
 }

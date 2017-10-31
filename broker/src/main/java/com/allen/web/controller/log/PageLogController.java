@@ -27,7 +27,7 @@ public class PageLogController extends BaseController {
         PageInfo pageInfo = super.getPageInfo(request);
         Map<String, Object> params = new HashMap<String, Object>();
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
-        sortMap.put("l.id", true);
+        sortMap.put("l.id", false);
         pageInfo = pageLogService.find(pageInfo, params, sortMap);
         request.setAttribute("pageInfo", pageInfo);
         request.setAttribute("reqParams", super.getParameters(request));
