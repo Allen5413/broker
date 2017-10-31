@@ -46,10 +46,9 @@ public class FindBrokerByZzForAppServiceImpl implements FindBrokerByZzForAppServ
             pageInfo.setCountOfCurrentPage(999999);
             pageInfo = findBrokerProjectDao.findPage(pageInfo, paramsMap, sortMap);
             jsonObject.put("brokerProjectList", pageInfo.getPageResults());
-
-            //获取所有项目
-            jsonObject.put("projectList", projectDao.findAll());
         }
+        //获取所有项目
+        jsonObject.put("projectList", projectDao.findAll());
         jsonObject.put("status", 1);
         return jsonObject;
     }
