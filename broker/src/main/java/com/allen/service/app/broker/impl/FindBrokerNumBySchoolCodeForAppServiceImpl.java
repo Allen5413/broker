@@ -54,9 +54,11 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         jsonObject.put("pic", StringUtil.isEmpty(project.getPic()) ? "" : project.getPic());
         jsonObject.put("protocol", StringUtil.isEmpty(project.getProtocol()) ? "" : project.getProtocol());
         jsonObject.put("content", StringUtil.isEmpty(project.getContent()) ? "" : project.getContent());
+        jsonObject.put("userState", 0);
 
         if(StringUtil.isEmpty(sCode)){
-            jsonObject.put("status", 2);
+            jsonObject.put("status", 1);
+            jsonObject.put("userState", 1);
             return jsonObject;
         }
 
@@ -65,7 +67,8 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         if(null != broker) {
             BrokerProject brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), Long.parseLong(projectId));
             if (null != brokerProject) {
-                jsonObject.put("status", 3);
+                jsonObject.put("status", 1);
+                jsonObject.put("userState", 2);
                 return jsonObject;
             }
         }

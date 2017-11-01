@@ -5,6 +5,7 @@ import com.allen.dao.PageInfo;
 import com.allen.dao.brokerproject.FindBrokerProjectDao;
 import com.allen.dao.project.ProjectDao;
 import com.allen.entity.broker.Broker;
+import com.allen.entity.brokerproject.BrokerProject;
 import com.allen.service.app.broker.FindBrokerByZzForAppService;
 import com.allen.service.broker.FindBrokerByZZService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class FindBrokerByZzForAppServiceImpl implements FindBrokerByZzForAppServ
             //获取经纪人关联的项目
             Map<String, Object> paramsMap = new HashMap<String, Object>(1);
             paramsMap.put("bp.broker_id", broker.getId());
+            paramsMap.put("bp.state", BrokerProject.STATE_PASS);
             Map<String, Boolean> sortMap = new HashMap<String, Boolean>(1);
             sortMap.put("bp.id", false);
             PageInfo pageInfo = new PageInfo();
