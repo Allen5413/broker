@@ -31,4 +31,13 @@ public interface CustomerDao extends CrudRepository<Customer, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "update customer set broker_id = null where broker_id = ?1")
     public void cancelBroker(long brokerId)throws Exception;
+
+    /**
+     * 删除一个项目下的成员
+     * @param projectId
+     * @throws Exception
+     */
+    @Modifying
+    @Query(nativeQuery = true, value = "delete from customer where project_id = ?1")
+    public void delByProjectId(long projectId)throws Exception;
 }

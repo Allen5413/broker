@@ -24,7 +24,7 @@ public class User {
     private String name;                        //姓名
     private String phone;                       //手机
     private Integer state;                      //用户状态
-    private Integer type;                       //用户类型[0：超级管理员；]
+    private Integer type;                       //用户类型[0：超级管理员；1：至善管理员]
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人

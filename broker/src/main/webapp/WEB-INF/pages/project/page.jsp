@@ -44,6 +44,9 @@
                 <td>${project.schoolCount}</td>
                 <td>
                   <a class="btn-opr" href="#" onclick="app.clickResources('${pageContext.request.contextPath}/editProject/open.html?id=${project.id}&reqParams=${reqParams}');">编辑</a>
+                  <c:if test="${sessionScope.type eq '0'}">
+                    <a class="btn-opr" href="#" onclick="del(${project.id})">删除</a>
+                  </c:if>
                 </td>
               </tr>
             </c:forEach>
@@ -54,3 +57,22 @@
     </div>
   </div>
 </div>
+<script>
+  function del(id){
+    $.ajax({
+      cache: true,
+      type: "POST",
+      url:"${pageContext.request.contextPath}/delProject/del.json",
+      data:{"id":id},
+      async: false,
+      success: function(data) {
+        if(data.state == 0){
+          app.msg("操作成功！", 0);
+          app.clickResources("${pageContext.request.contextPath}/pageProject/page.html", "");
+        }else{
+          app.msg(data.msg, 1);
+        }
+      }
+    });
+  }
+</script>
