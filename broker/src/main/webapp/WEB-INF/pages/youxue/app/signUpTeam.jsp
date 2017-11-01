@@ -61,7 +61,9 @@
         <ul class="ul-info">
           <li>
             <div class="tag-cel">预约时间</div>
-            <div class="txt-cel bline"><input type="text" id="yyDateText" class="inputTxt"></div>
+            <div class="txt-cel bline" onclick="changeDate()">
+              <input type="text" name="yyDateText" id="yyDateText" />
+            </div>
           </li>
         </ul>
         <div class="submit-btn">
@@ -82,6 +84,38 @@
 </html>
 <script>
   setTimeout(function(){hideButtom();}, 500);
+
+  $(function() {
+    $(function() {
+      var currYear = (new Date()).getFullYear();
+      var opt = {};
+      opt.date = {
+        preset: 'date'
+      };
+      opt.datetime = {
+        preset: 'datetime'
+      };
+      opt.time = {
+        preset: 'time'
+      };
+      opt.default = {
+        theme: 'android-ics light', //皮肤样式
+        display: 'modal', //显示方式
+        mode: 'scroller', //日期选择模式
+        lang: 'zh',
+        startYear: currYear - 10, //开始年份
+        endYear: currYear + 10, //结束年份
+        minDate: new Date(),
+        onSelect:function(valueText,inst){
+          //$("#year").val(valueText);
+        }
+      };
+      $("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+      var optDateTime = $.extend(opt['datetime'], opt['default']);
+      $("#yyDateText").mobiscroll(optDateTime).datetime(optDateTime);
+    });
+  });
+
   function sub(){
     if(!$("#cb1").is(":checked") || !$("#cb2").is(":checked")){
       layer.alert("请勾选下方2个条款", {icon: 5});
@@ -114,5 +148,9 @@
         }
       }
     });
+  }
+
+  function changeDate(){
+    $("#yyDateText").click();
   }
 </script>

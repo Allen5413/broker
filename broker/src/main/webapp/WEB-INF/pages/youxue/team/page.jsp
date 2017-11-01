@@ -75,6 +75,7 @@
             <th>是否团长</th>
             <th>经纪人</th>
             <th>状态</th>
+            <th>预约时间</th>
             <th>备注</th>
             <th>操作</th>
           </tr>
@@ -100,6 +101,7 @@
                   <c:if test="${team.state eq '3'}">审核未通过</c:if>
                   <c:if test="${team.state eq '4'}">已缴费</c:if>
                 </td>
+                <td>${team.yyDate}</td>
                 <td>${team.remark}</td>
                 <td>
                   <c:if test="${team.isHead == 0}">
