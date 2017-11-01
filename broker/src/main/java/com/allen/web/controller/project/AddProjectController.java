@@ -63,7 +63,7 @@ public class AddProjectController extends BaseController {
     public JSONObject uploadFile(HttpServletRequest request, @RequestParam("file") List<MultipartFile> uploadFileList)throws Exception{
         JSONObject jsonObject = new JSONObject();
         String fileName = UUID.randomUUID().toString();
-        String path = UpLoadFileUtil.uploadImg(request, uploadFileList, "jpg|JPG|png|PNG|bmp|BMP|jpge|JPGE", 1024 * 1, 5, configProp.getUpload().get("tempPath"), fileName);
+        String path = UpLoadFileUtil.uploadImg(request, uploadFileList, "jpg|JPG|png|PNG|bmp|BMP|jpeg|JPEG", 1024 * 1, 5, configProp.getUpload().get("tempPath"), fileName);
         jsonObject.put("state", 0);
         jsonObject.put("path", path);
         jsonObject.put("fileName", fileName+path.substring(path.lastIndexOf("."), path.length()));
