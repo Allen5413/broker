@@ -22,11 +22,15 @@ import java.util.Map.Entry;
 public class AttopUtil {
 
     public static void main(String[] args) {
-        String shopId="1001";
-        String secret="BL4vOSGzQ3iE7ah1umNdvAV8escNQPlzkTP1NcTuhWBg4WObrXFPew5e28lXafjot2SQniZ4WbDIBuFSgNz9bqUoxZ44EUxT7hWbcdZCeIrTowhN3nBCdHeO1DFMFtlg";
-        String portUrl="http://ttt.attop.com/dangport/attop.do";
+//        String shopId="1001";
+//        String secret="BL4vOSGzQ3iE7ah1umNdvAV8escNQPlzkTP1NcTuhWBg4WObrXFPew5e28lXafjot2SQniZ4WbDIBuFSgNz9bqUoxZ44EUxT7hWbcdZCeIrTowhN3nBCdHeO1DFMFtlg";
+//        String portUrl="http://ttt.attop.com/dangport/attop.do";
 
-        JSONObject json = getPortMsg(201,"zz=100001&msg="+toUrlEncode("千"), shopId, secret, portUrl);
+        String shopId = "1002";
+        String secret = "8ioi548wl7nHnp3LBNzFRC6VmbvATOBr4j7vZb5BMlU1anz21SuOujIFziWHJGwZKcc12uyF9hFWccKxKLg39JjFqpVLdhJ2wQHQOZ5D7KzILr6R0gc1Me4FTw04cGMU";
+        String portUrl = "http://www.attop.com/dangport/attop.do";
+
+        JSONObject json = getPortMsg(201,"zz=281536&msg=", shopId, secret, portUrl);
         System.out.println(json);
     }
 
