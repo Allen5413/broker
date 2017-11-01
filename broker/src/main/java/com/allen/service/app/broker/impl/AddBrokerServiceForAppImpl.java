@@ -71,9 +71,9 @@ public class AddBrokerServiceForAppImpl implements AddBrokerForAppService {
             if(Broker.ISBLACK_YES == broker.getIsBlack()){
                 throw new BusinessException("对不起，您已被取消申请新项目经纪人资格");
             }
-            brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), 1l);
+            brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), Long.parseLong(projectId));
             if(null != brokerProject){
-                throw new BusinessException("您目前已是游学项目的经纪人");
+                throw new BusinessException("您目前已是"+project.getName()+"项目的经纪人");
             }
         }else{
             broker = new Broker();

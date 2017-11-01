@@ -2,8 +2,12 @@ package com.allen.service.app.broker.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.allen.base.exception.BusinessException;
+import com.allen.entity.broker.Broker;
+import com.allen.entity.brokerproject.BrokerProject;
 import com.allen.entity.project.Project;
 import com.allen.service.app.broker.FindBrokerNumBySchoolCodeForAppService;
+import com.allen.service.broker.FindBrokerByZZService;
+import com.allen.service.brokerproject.FindBrokerProjectByBIdAndPIdService;
 import com.allen.service.brokerproject.FindBrokerProjectBySchoolCodeService;
 import com.allen.service.project.FindProjectByIdService;
 import com.allen.util.StringUtil;
@@ -23,6 +27,10 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
     private FindProjectByIdService findProjectByIdService;
     @Autowired
     private FindBrokerProjectBySchoolCodeService findBrokerProjectBySchoolCodeService;
+    @Autowired
+    private FindBrokerByZZService findBrokerByZZService;
+    @Autowired
+    private FindBrokerProjectByBIdAndPIdService findBrokerProjectByBIdAndPIdService;
 
     @Override
     public JSONObject find(HttpServletRequest request) throws Exception {
@@ -37,12 +45,6 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         if(StringUtil.isEmpty(projectId)){
             throw new BusinessException("没有传入项目id");
         }
-        if(StringUtil.isEmpty(sCode)){
-            throw new BusinessException("没有传入学校code");
-        }
-        if(StringUtil.isEmpty(sNum)){
-            throw new BusinessException("没有传入学校在校生人数");
-        }
         Project project = findProjectByIdService.find(Long.parseLong(projectId));
         if(null == project){
             throw new BusinessException("没有找到项目");
@@ -53,8 +55,27 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         jsonObject.put("protocol", StringUtil.isEmpty(project.getProtocol()) ? "" : project.getProtocol());
         jsonObject.put("content", StringUtil.isEmpty(project.getContent()) ? "" : project.getContent());
 
+        if(StringUtil.isEmpty(sCode)){
+            jsonObject.put("status", 2);
+            return jsonObject;
+        }
+
+        //查询是否已经成为了经纪人
+        Broker broker = findBrokerByZZService.find(zz);
+        if(null != broker) {
+            BrokerProject brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), Long.parseLong(projectId));
+            if (null != brokerProject) {
+                jsonObject.put("status", 3);
+                return jsonObject;
+            }
+        }
+
+
         //计算学校最大申请人数
-        int maxNum = (int)Math.rint(Integer.parseInt(sNum) * project.getRatio() / 100);
+        int maxNum = 0;
+        if(!StringUtil.isEmpty(sNum)){
+            maxNum = (int)Math.rint(Integer.parseInt(sNum) * project.getRatio() / 100);
+        }
         //查询学校当前已经申请人数
         List<JSONObject> list = findBrokerProjectBySchoolCodeService.find(Long.parseLong(projectId), sCode);
         int nowNum = null == list ? 0 : list.size();
