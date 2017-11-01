@@ -12,7 +12,7 @@ import java.util.List;
 public interface CustomerDayLoginCountDao extends CrudRepository<CustomerDayLoginCount, Long> {
     public CustomerDayLoginCount findByZzAndProjectIdAndDate(String zz, long projectId, String date)throws Exception;
 
-    @Query(nativeQuery = true, value = "select t.date, IFNULL(c.count,0) count FROM " +
+    @Query(nativeQuery = true, value = "select DATE_FORMAT(t.date, '%d'), IFNULL(c.count,0) count FROM " +
             "(" +
             "    SELECT curdate() as date " +
             "    union all " +
