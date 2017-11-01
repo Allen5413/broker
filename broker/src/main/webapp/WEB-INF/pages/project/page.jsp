@@ -13,7 +13,6 @@
   <div class="mod-com-view">
     <div class="title-tabs">
       <a href="#">项目列表</a>
-      <a class="btn-com f-r" href="#" onclick="app.clickResources('${pageContext.request.contextPath}/addProject/open.html?reqParams=${reqParams}');">添加项目</a>
     </div>
     <div class="mod-content">
       <div class="data-table-list">
