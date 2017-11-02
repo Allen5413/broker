@@ -80,7 +80,7 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
             maxNum = (int)Math.rint(Integer.parseInt(sNum) * project.getRatio() / 100);
         }
         //查询学校当前已经申请人数
-        List<JSONObject> list = findBrokerProjectBySchoolCodeService.find(Long.parseLong(projectId), sCode);
+        List<JSONObject> list = findBrokerProjectBySchoolCodeService.findWaitAndPass(Long.parseLong(projectId), sCode);
         int nowNum = null == list ? 0 : list.size();
         jsonObject.put("maxNum", maxNum);
         jsonObject.put("num", nowNum);

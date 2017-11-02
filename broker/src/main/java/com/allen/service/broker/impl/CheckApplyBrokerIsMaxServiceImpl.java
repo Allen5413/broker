@@ -27,7 +27,7 @@ public class CheckApplyBrokerIsMaxServiceImpl implements CheckApplyBrokerIsMaxSe
         //计算学校最大申请人数
         int maxNum = (int)Math.rint(snum * project.getRatio() / 100);
         //查询学校当前已经申请人数
-        List<JSONObject> list = findBrokerProjectBySchoolCodeService.find(projectId, sCode);
+        List<JSONObject> list = findBrokerProjectBySchoolCodeService.findWaitAndPass(projectId, sCode);
         int nowNum = null == list ? 0 : list.size();
         if(maxNum <= nowNum){
             return true;

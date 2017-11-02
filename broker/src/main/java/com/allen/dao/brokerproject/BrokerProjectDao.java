@@ -22,6 +22,13 @@ public interface BrokerProjectDao extends CrudRepository<BrokerProject, Long> {
             ") t")
     public List<Object[]> findForSchool(long projectId)throws Exception;
 
+    @Query(nativeQuery = true, value = "select GROUP_CONCAT(t.zz) zz, t.ratio from " +
+            "(" +
+            "SELECT DISTINCT bp.creator zz, p.ratio " +
+            "FROM broker_project bp, project p where bp.project_id = p.id and state != 2 and p.id = ?1 " +
+            ") t")
+    public List<Object[]> findWaitAndPassForSchool(long projectId)throws Exception;
+
     /**
      * 查询一个项目下的一个下标的经纪人和他下面的成员数量
      * @param projectId
