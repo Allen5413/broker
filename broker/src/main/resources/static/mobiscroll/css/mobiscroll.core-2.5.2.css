@@ -183,6 +183,7 @@
 .dw-i {
     position: relative;
     height: 100%;
+	text-align:center;
 }
 /* Wheel +/- buttons */
 .dwwb {

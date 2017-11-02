@@ -24,7 +24,7 @@
 .android-ics .dwv {
     height: 36px;
     line-height: 36px;
-    padding: 0;
+    padding: 0 15px;
     border-bottom: 2px solid #31b6e7;
     font-size: 18px;
 }
@@ -178,6 +178,7 @@
 }
 .android-ics.light .dwb {
     color: #000;
+	text-align:center;
 }
 .android-ics.light .dwb-a {
     color: #fff;

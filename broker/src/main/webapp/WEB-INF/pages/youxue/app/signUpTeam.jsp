@@ -62,7 +62,7 @@
           <li>
             <div class="tag-cel">预约时间</div>
             <div class="txt-cel bline" onclick="changeDate()">
-              <input type="text" name="yyDateText" id="yyDateText" />
+              <input type="text" name="yyDateText" id="yyDateText" readonly class="inputTxt" placeholder="请选择预约时间" />
             </div>
           </li>
         </ul>
