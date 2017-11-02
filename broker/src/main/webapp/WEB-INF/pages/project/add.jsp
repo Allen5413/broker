@@ -35,6 +35,10 @@
             <td><input type="text" id="frequency" name="frequency" class="input-txt-220" />天</td>
           </tr>
           <tr>
+            <td class="tag-b">最少成员数：</td>
+            <td><input type="text" id="minNum" name="minNum" class="input-txt-220" />人</td>
+          </tr>
+          <tr>
             <td class="tag-b">审批模式：</td>
             <td>
               <label><input type="radio" name="auditType" value="0" checked> 自动 </label>

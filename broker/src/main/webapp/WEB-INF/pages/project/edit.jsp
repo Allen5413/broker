@@ -37,6 +37,10 @@
             <td><input type="text" id="frequency" name="frequency" value="${project.frequency}" class="input-txt-220" />天</td>
           </tr>
           <tr>
+            <td class="tag-b">最少成员数：</td>
+            <td><input type="text" id="minNum" name="minNum" value="${project.minNum}" class="input-txt-220" />人</td>
+          </tr>
+          <tr>
             <td class="tag-b">审批模式：</td>
             <td>
               <label><input type="radio" name="auditType" value="0" <c:if test="${project.auditType == 0}">checked="checked"</c:if> > 自动 </label>

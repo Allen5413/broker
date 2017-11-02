@@ -51,6 +51,9 @@ public class EditProjectServiceImpl implements EditProjectService {
         if(project2.getFrequency() != project.getFrequency()){
             content += "客户访问频次由<span style='color:red'>"+project2.getFrequency()+"</span>改为<span style='color:red'>"+project.getFrequency()+"</span>  ";
         }
+        if(project2.getMinNum() != project.getMinNum()){
+            content += "经纪人最少成员数由<span style='color:red'>"+project2.getMinNum()+"</span>改为<span style='color:red'>"+project.getMinNum()+"</span>  ";
+        }
         if(project2.getRatio() != project.getRatio()){
             content += "比例由<span style='color:red'>"+project2.getRatio()+"%</span>改为<span style='color:red'>"+project.getRatio()+"%</span>  ";
         }
@@ -85,6 +88,7 @@ public class EditProjectServiceImpl implements EditProjectService {
             project2.setRatio(project.getRatio());
             project2.setContent(project.getContent());
             project2.setProtocol(project.getProtocol());
+            project2.setMinNum(project.getMinNum());
             project2.setOperator(project.getOperator());
             project2.setOperateTime(DateUtil.getLongNowTime());
             projectDao.save(project2);

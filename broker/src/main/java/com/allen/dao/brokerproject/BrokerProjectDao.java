@@ -45,6 +45,15 @@ public interface BrokerProjectDao extends CrudRepository<BrokerProject, Long> {
     public void delByBrokerId(long brokerId)throws Exception;
 
     /**
+     * 删除一个经纪人关联的一个项目
+     * @param brokerId
+     * @throws Exception
+     */
+    @Modifying
+    @Query(nativeQuery = true, value = "delete from broker_project where broker_id = ?1 and project_id = ?2")
+    public void delByBrokerIdAndProjectId(long brokerId, long projectId)throws Exception;
+
+    /**
      * 删除一个项目下的经纪人
      * @param projectId
      * @throws Exception

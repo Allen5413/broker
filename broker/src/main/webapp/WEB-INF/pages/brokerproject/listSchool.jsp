@@ -75,6 +75,6 @@
     $("#projectId2").val($("#projectId").val());
     $("#schoolCode").val(schoolCode);
     $("#schoolName").val(schoolName);
-    app.searchFormPage($('#detailForm'), $('#detailForm').attr('action'))
+    app.searchFormPage($('#detailForm'), $('#detailForm').attr('action'));
   }
 </script>

@@ -40,4 +40,8 @@ public interface CustomerDao extends CrudRepository<Customer, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "delete from customer where project_id = ?1")
     public void delByProjectId(long projectId)throws Exception;
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update customer set broker_id = null where broker_id = ?1 and project_id = ?2")
+    public void editBrokerIsNullByBrokerIdAndProjectId(long brokerId, long projectId)throws Exception;
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.allen.base.exception.BusinessException;
 import com.allen.dao.brokerproject.BrokerProjectDao;
 import com.allen.dao.customer.CustomerDao;
+import com.allen.dao.project.ProjectDao;
 import com.allen.entity.broker.Customer;
 import com.allen.service.attop.AttopService;
 import com.allen.service.brokerproject.FindBrokerProjectBySchoolCodeService;
@@ -26,6 +27,8 @@ public class FindBrokerProjectBySchoolCodeServiceImpl implements FindBrokerProje
     private AttopService attopService;
     @Autowired
     private CustomerDao customerDao;
+    @Autowired
+    private ProjectDao projectDao;
 
     @Override
     public List<JSONObject> find(Long projectId, String schoolCode) throws Exception {
@@ -48,6 +51,7 @@ public class FindBrokerProjectBySchoolCodeServiceImpl implements FindBrokerProje
                             manJSON.put("name", userSchool.get("realname"));
                             manJSON.put("nickName", userSchool.get("nickname"));
                             manJSON.put("customerNum", customerDao.findByBrokerZzAndProjectId(userSchool.get("zz").toString(), projectId));
+                            manJSON.put("minNum", projectDao.findOne(projectId).getMinNum());
                             resultList.add(manJSON);
                         }
                     }

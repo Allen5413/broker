@@ -29,36 +29,38 @@ public class FindBrokerProjectForSchoolServiceImpl implements FindBrokerProjectF
         List<Object[]> objList = brokerProjectDao.findForSchool(projectId);
         Map<String, JSONObject> map = new HashMap<String, JSONObject>();
         if(null != objList && 0 < objList.size()){
-            float ratio = Float.parseFloat(objList.get(0)[1].toString());
-            JSONObject attopJSON = attopService.findZzInfo(objList.get(0)[0].toString(), name);
-            if("0".equals(attopJSON.get("status"))){
-                throw new BusinessException("接口获取学校信息失败！");
-            }
-            List schoolList = (List) attopJSON.get("data");
-            if(schoolList != null && 0 < schoolList.size()){
-                int manNum = 0;
-                for(int i=0; i<schoolList.size(); i++){
-                    JSONObject userSchool = (JSONObject) schoolList.get(i);
-                    String sCode = userSchool.get("scode").toString();
-                    if(!StringUtil.isEmpty(sCode)) {
-                        String sName = userSchool.get("sname").toString();
-                        String nickName = userSchool.get("nickname").toString();
-                        int snum = Integer.parseInt(userSchool.get("snum").toString());
+            if(objList.get(0)[0] != null && !StringUtil.isEmpty(objList.get(0)[0].toString())) {
+                float ratio = Float.parseFloat(objList.get(0)[1].toString());
+                JSONObject attopJSON = attopService.findZzInfo(objList.get(0)[0].toString(), name);
+                if ("0".equals(attopJSON.get("status"))) {
+                    throw new BusinessException("接口获取学校信息失败！");
+                }
+                List schoolList = (List) attopJSON.get("data");
+                if (schoolList != null && 0 < schoolList.size()) {
+                    int manNum = 0;
+                    for (int i = 0; i < schoolList.size(); i++) {
+                        JSONObject userSchool = (JSONObject) schoolList.get(i);
+                        String sCode = userSchool.get("scode").toString();
+                        if (!StringUtil.isEmpty(sCode)) {
+                            String sName = userSchool.get("sname").toString();
+                            String nickName = userSchool.get("nickname").toString();
+                            int snum = Integer.parseInt(userSchool.get("snum").toString());
 
-                        JSONObject school = (JSONObject) map.get(sCode);
-                        if (null == school) {
-                            school = new JSONObject();
-                            school.put("code", sCode);
-                            school.put("name", sName);
-                            school.put("nickName", nickName);
-                            school.put("num", snum);
-                            school.put("maxNum", (int)Math.rint(snum * ratio / 100));
-                            school.put("manNum", 1);
-                        } else {
-                            manNum = Integer.parseInt(school.get("manNum").toString());
-                            school.put("manNum", manNum + 1);
+                            JSONObject school = (JSONObject) map.get(sCode);
+                            if (null == school) {
+                                school = new JSONObject();
+                                school.put("code", sCode);
+                                school.put("name", sName);
+                                school.put("nickName", nickName);
+                                school.put("num", snum);
+                                school.put("maxNum", (int) Math.rint(snum * ratio / 100));
+                                school.put("manNum", 1);
+                            } else {
+                                manNum = Integer.parseInt(school.get("manNum").toString());
+                                school.put("manNum", manNum + 1);
+                            }
+                            map.put(sCode, school);
                         }
-                        map.put(sCode, school);
                     }
                 }
             }

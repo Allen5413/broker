@@ -27,6 +27,7 @@ public class Project {
     private float ratio;          //在校生总人数比例
     private int frequency;      //客户访问频次
     private int visitCount;          //访问次数
+    private int minNum;            //经纪人该项目的最少成员数
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
     private String operator;                    //操作人
@@ -134,5 +135,13 @@ public class Project {
 
     public void setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
+    }
+
+    public int getMinNum() {
+        return minNum;
+    }
+
+    public void setMinNum(int minNum) {
+        this.minNum = minNum;
     }
 }
