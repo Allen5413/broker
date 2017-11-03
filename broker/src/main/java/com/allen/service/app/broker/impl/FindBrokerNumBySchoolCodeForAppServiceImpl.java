@@ -39,6 +39,9 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         String projectId = request.getParameter("projectId");
         String sCode = request.getParameter("sCode");
         String sNum = request.getParameter("sNum");
+        System.out.println("sCode:   "+sCode);
+        System.out.println("sNum:   "+sNum);
+        System.out.println("zz:   "+zz);
         if(StringUtil.isEmpty(zz)){
             throw new BusinessException("没有传入zz");
         }

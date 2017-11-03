@@ -30,8 +30,8 @@
               <tr>
                 <td>${status.index+1}</td>
                 <td>${broker.name}</td>
-                <td>${broker.customerNum == 0 ? "不限" : broker.customerNum}</td>
-                <td>${broker.minNum}</td>
+                <td>${broker.customerNum}</td>
+                <td>${broker.minNum == 0 ? "不限" : broker.minNum}</td>
                 <td>
                   <a class="btn-opr" href="#" onclick="detail('${broker.zz}');">查看</a>
                   <a class="btn-opr" href="#" onclick="black('${broker.zz}');">黑名单</a>
