@@ -39,10 +39,6 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         String projectId = request.getParameter("projectId");
         String sCode = request.getParameter("sCode");
         String sNum = request.getParameter("sNum");
-        System.out.println("zz:   "+zz);
-        System.out.println("projectId:   "+projectId);
-        System.out.println("sCode:   "+sCode);
-        System.out.println("sNum:   "+sNum);
         if(StringUtil.isEmpty(zz)){
             throw new BusinessException("没有传入zz");
         }
@@ -69,10 +65,22 @@ public class FindBrokerNumBySchoolCodeForAppServiceImpl implements FindBrokerNum
         //查询是否已经成为了经纪人
         Broker broker = findBrokerByZZService.find(zz);
         if(null != broker) {
+            jsonObject.put("status", 1);
+            if(Broker.ISBLACK_YES == broker.getIsBlack()){
+                jsonObject.put("userState", 5);
+                return jsonObject;
+            }
             BrokerProject brokerProject = findBrokerProjectByBIdAndPIdService.find(broker.getId(), Long.parseLong(projectId));
             if (null != brokerProject) {
-                jsonObject.put("status", 1);
-                jsonObject.put("userState", 2);
+                if(BrokerProject.STATE_PASS == brokerProject.getState()) {
+                    jsonObject.put("userState", 2);
+                }
+                if(BrokerProject.STATE_WAIT == brokerProject.getState()) {
+                    jsonObject.put("userState", 3);
+                }
+                if(BrokerProject.STATE_NOT == brokerProject.getState()) {
+                    jsonObject.put("userState", 4);
+                }
                 return jsonObject;
             }
         }
