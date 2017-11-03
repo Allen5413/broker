@@ -27,70 +27,73 @@ public class RecommendBrokerServiceImpl implements RecommendBrokerService {
 
     @Override
     public List<JSONObject> find(String schoolCode, long projectId) throws Exception {
+        List<JSONObject> resultList = new ArrayList<JSONObject>();
+        String zzs = "";
         //查询所有该项目的经纪人
         List<Object[]> objList = brokerProjectDao.findForSchool(projectId);
-        String zzs = objList.get(0)[0].toString();
-        List<JSONObject> resultList = new ArrayList<JSONObject>();
-        //通过接口获取经纪人所在学校，然后匹配相同学校的
-        if(null != objList && 0 < objList.size()) {
-            JSONObject attopJSON = attopService.findZzInfo(zzs, "");
-            if ("0".equals(attopJSON.get("status"))) {
-                throw new BusinessException("接口获取学校信息失败！");
-            }
-            List schoolList = (List) attopJSON.get("data");
-            if(schoolList != null && 0 < schoolList.size()){
-                for(int i=0; i<schoolList.size(); i++){
-                    JSONObject manJSON = new JSONObject();
-                    JSONObject userSchool = (JSONObject) schoolList.get(i);
-                    String sCode = userSchool.get("scode").toString();
-                    if(!StringUtil.isEmpty(sCode) && sCode.equals(schoolCode)){
-                        manJSON.put("zz", userSchool.get("zz"));
-                        manJSON.put("name", userSchool.get("realname"));
-                        manJSON.put("nickName", userSchool.get("nickname"));
-                        manJSON.put("mobile", userSchool.get("mobile"));
-                        manJSON.put("sName", userSchool.get("sname"));
-                        manJSON.put("qq", userSchool.get("qq"));
-                        manJSON.put("icon", userSchool.get("icon"));
-                        resultList.add(manJSON);
-                        zzs = zzs.replace(userSchool.get("zz").toString(), "");
-                    }
-                }
-            }
-        }
-        //如果相同学校的经纪人不够的话，从其他学校的经纪人补位，凑齐4个推荐经纪人
-        String[] zzArray = zzs.split(",");
-        if(null != zzArray) {
-            int surplusNum = zzArray.length < (4 - resultList.size()) ? zzs.split(",").length : 4 - resultList.size();
-            zzs = "";
-            int j = 0;
-            for (int i = 0; i < zzArray.length; i++) {
-                if(!StringUtil.isEmpty(zzArray[i])){
-                    zzs += zzArray[i]+",";
-                    j++;
-                    if(j == surplusNum){
-                        break;
-                    }
-                }
-            }
-            if(zzs.length() > 1){
-                zzs = zzs.substring(0, zzs.length()-1);
+        if(null != objList && 0 < objList.size()){
+            if(null != objList.get(0) && null != objList.get(0)[0] && !StringUtil.isEmpty(objList.get(0)[0].toString())) {
+                zzs = objList.get(0)[0].toString();
+                //通过接口获取经纪人所在学校，然后匹配相同学校的
                 JSONObject attopJSON = attopService.findZzInfo(zzs, "");
                 if ("0".equals(attopJSON.get("status"))) {
                     throw new BusinessException("接口获取学校信息失败！");
                 }
                 List schoolList = (List) attopJSON.get("data");
-                if(schoolList != null && 0 < schoolList.size()){
-                    for(int i=0; i<schoolList.size(); i++){
+                if (schoolList != null && 0 < schoolList.size()) {
+                    for (int i = 0; i < schoolList.size(); i++) {
                         JSONObject manJSON = new JSONObject();
                         JSONObject userSchool = (JSONObject) schoolList.get(i);
-                        manJSON.put("zz", userSchool.get("zz"));
-                        manJSON.put("name", userSchool.get("realname"));
-                        manJSON.put("nickName", userSchool.get("nickname"));
-                        manJSON.put("mobile", userSchool.get("mobile"));
-                        manJSON.put("sName", userSchool.get("sname"));
-                        manJSON.put("qq", userSchool.get("qq"));
-                        manJSON.put("icon", userSchool.get("icon"));
-                        resultList.add(manJSON);
+                        String sCode = userSchool.get("scode").toString();
+                        if (!StringUtil.isEmpty(sCode) && sCode.equals(schoolCode)) {
+                            manJSON.put("zz", userSchool.get("zz"));
+                            manJSON.put("name", userSchool.get("realname"));
+                            manJSON.put("nickName", userSchool.get("nickname"));
+                            manJSON.put("mobile", userSchool.get("mobile"));
+                            manJSON.put("sName", userSchool.get("sname"));
+                            manJSON.put("qq", userSchool.get("qq"));
+                            manJSON.put("icon", userSchool.get("icon"));
+                            resultList.add(manJSON);
+                            zzs = zzs.replace(userSchool.get("zz").toString(), "");
+                        }
+                    }
+                }
+                //如果相同学校的经纪人不够的话，从其他学校的经纪人补位，凑齐4个推荐经纪人
+                String[] zzArray = zzs.split(",");
+                if (null != zzArray) {
+                    int surplusNum = zzArray.length < (4 - resultList.size()) ? zzs.split(",").length : 4 - resultList.size();
+                    zzs = "";
+                    int j = 0;
+                    for (int i = 0; i < zzArray.length; i++) {
+                        if (!StringUtil.isEmpty(zzArray[i])) {
+                            zzs += zzArray[i] + ",";
+                            j++;
+                            if (j == surplusNum) {
+                                break;
+                            }
+                        }
+                    }
+                    if (zzs.length() > 1) {
+                        zzs = zzs.substring(0, zzs.length() - 1);
+                        attopJSON = attopService.findZzInfo(zzs, "");
+                        if ("0".equals(attopJSON.get("status"))) {
+                            throw new BusinessException("接口获取学校信息失败！");
+                        }
+                        schoolList = (List) attopJSON.get("data");
+                        if (schoolList != null && 0 < schoolList.size()) {
+                            for (int i = 0; i < schoolList.size(); i++) {
+                                JSONObject manJSON = new JSONObject();
+                                JSONObject userSchool = (JSONObject) schoolList.get(i);
+                                manJSON.put("zz", userSchool.get("zz"));
+                                manJSON.put("name", userSchool.get("realname"));
+                                manJSON.put("nickName", userSchool.get("nickname"));
+                                manJSON.put("mobile", userSchool.get("mobile"));
+                                manJSON.put("sName", userSchool.get("sname"));
+                                manJSON.put("qq", userSchool.get("qq"));
+                                manJSON.put("icon", userSchool.get("icon"));
+                                resultList.add(manJSON);
+                            }
+                        }
                     }
                 }
             }
