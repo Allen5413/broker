@@ -49,6 +49,7 @@ public class AppEntryController extends BaseController {
     public JSONObject entry(HttpServletRequest request) throws Exception {
         String zz = request.getParameter("zz");
         String mac = request.getParameter("mac");
+        String notMac = request.getParameter("notMac");
         if(StringUtil.isEmpty(request.getParameter("methodId"))){
             throw new BusinessException("协议号为空");
         }
@@ -56,8 +57,8 @@ public class AppEntryController extends BaseController {
         String query = request.getQueryString();
         String key = configProp.getAttop().get("key");
         query = query.substring(0, query.indexOf("&mac="));
-        if(!mac.equals(MD5Util.getAttopMd5(query + key))){
-            //throw new BusinessException("mac校验失败");
+        if(!mac.equals(MD5Util.getAttopMd5(query + key)) && StringUtil.isEmpty(notMac)){
+            throw new BusinessException("mac校验失败");
         }
         JSONObject jsonObject = new JSONObject();
         if(1 == methodId){
