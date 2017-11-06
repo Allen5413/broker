@@ -17,6 +17,7 @@
             <th>序号</th>
             <th>ZZ号</th>
             <th>姓名</th>
+            <th>学校</th>
             <th>手机</th>
             <th>QQ</th>
             <th>项目</th>
@@ -34,6 +35,7 @@
                 <td>${status.index+1}</td>
                 <td>${broker.creator}</td>
                 <td>${broker.name}</td>
+                <td>${broker.sName}</td>
                 <td>${broker.mobile}</td>
                 <td>${broker.qq}</td>
                 <td>${broker.pName}</td>

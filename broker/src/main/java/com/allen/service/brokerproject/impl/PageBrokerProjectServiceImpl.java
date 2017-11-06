@@ -41,6 +41,7 @@ public class PageBrokerProjectServiceImpl implements PageBrokerProjectService {
                     map.put("nickName", userSchool.get("nickname"));
                     map.put("qq", userSchool.get("qq"));
                     map.put("mobile", userSchool.get("mobile"));
+                    map.put("sName", userSchool.get("sname"));
                     resultList.add(map);
                 }
             }
