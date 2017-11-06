@@ -107,6 +107,9 @@
                   <c:if test="${team.isHead == 0}">
                     <a class="btn-opr" href="#" onclick="editState(${team.id})">编辑状态</a>
                   </c:if>
+                  <c:if test="${team.isHead == 1}">
+                    <a class="btn-opr" href="#" onclick="editQq(${team.id})">编辑QQ</a>
+                  </c:if>
                 </td>
               </tr>
             </c:forEach>
@@ -124,6 +127,27 @@
         cache: true,
         type: "POST",
         url:"${pageContext.request.contextPath}/youxue/editTeam/editState.json",
+        data:$("#editForm").serialize(),
+        async: false,
+        success: function(data) {
+          if(data.state == 0){
+            app.msg("操作成功！", 0);
+            layer.close(index);
+            app.clickResources("${pageContext.request.contextPath}/youxue/pageTeam/page.html", "${reqParams}");
+          }else{
+            app.msg(data.msg, 1);
+          }
+        }
+      });
+    });
+  }
+
+  function editQq(id){
+    app.openDialog("${pageContext.request.contextPath}/youxue/editTeam/openEditQq.html?id="+id, "编辑咨询QQ群", "400", "180", function(index){
+      $.ajax({
+        cache: true,
+        type: "POST",
+        url:"${pageContext.request.contextPath}/youxue/editTeam/editQq.json",
         data:$("#editForm").serialize(),
         async: false,
         success: function(data) {

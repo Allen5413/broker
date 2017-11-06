@@ -49,4 +49,28 @@ public class EditYxTeamController extends BaseController {
         jsonObject.put("state", 0);
         return jsonObject;
     }
+
+    /**
+     * @return
+     */
+    @RequestMapping(value = "openEditQq")
+    public String openEditQq(HttpServletRequest request, long id,
+                       @RequestParam(value = "reqParams", required = false)String reqParams)throws Exception{
+        request.setAttribute("reqParams", !StringUtil.isEmpty(reqParams) ? new String(reqParams.getBytes("iso-8859-1"), "gbk") : "");
+        request.setAttribute("team", findYxTeamByIdService.find(id));
+        return "youxue/team/editQq";
+    }
+
+    /**
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "editQq")
+    @ResponseBody
+    public JSONObject editQq(HttpServletRequest request, long id, String qq) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        editYxTeamService.editQq(id, qq, UserUtil.getLoginUserForLoginId(request), UserUtil.getLoginUserForName(request));
+        jsonObject.put("state", 0);
+        return jsonObject;
+    }
 }

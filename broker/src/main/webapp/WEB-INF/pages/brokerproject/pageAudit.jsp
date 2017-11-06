@@ -17,6 +17,8 @@
             <th>序号</th>
             <th>ZZ号</th>
             <th>姓名</th>
+            <th>手机</th>
+            <th>QQ</th>
             <th>项目</th>
             <th>申请时间</th>
             <th>操作内容</th>
@@ -32,6 +34,8 @@
                 <td>${status.index+1}</td>
                 <td>${broker.creator}</td>
                 <td>${broker.name}</td>
+                <td>${broker.mobile}</td>
+                <td>${broker.qq}</td>
                 <td>${broker.pName}</td>
                 <td>${broker.createTime}</td>
                 <td>

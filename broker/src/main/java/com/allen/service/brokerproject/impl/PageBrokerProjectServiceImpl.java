@@ -39,6 +39,8 @@ public class PageBrokerProjectServiceImpl implements PageBrokerProjectService {
                     JSONObject userSchool = (JSONObject) schoolList.get(0);
                     map.put("name", userSchool.get("realname"));
                     map.put("nickName", userSchool.get("nickname"));
+                    map.put("qq", userSchool.get("qq"));
+                    map.put("mobile", userSchool.get("mobile"));
                     resultList.add(map);
                 }
             }

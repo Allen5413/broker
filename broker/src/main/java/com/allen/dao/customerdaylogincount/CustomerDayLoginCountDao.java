@@ -28,6 +28,6 @@ public interface CustomerDayLoginCountDao extends CrudRepository<CustomerDayLogi
             "    union all " +
             "    SELECT date_sub(curdate(), interval 6 day) as click_date " +
             ") t LEFT JOIN customer_day_login_count c on t.date = DATE_FORMAT(c.date,'%Y-%m-%d') and c.zz = ?1 and c.project_id = ?2 " +
-            "order by t.date desc")
+            "order by t.date")
     public List<Object[]> find7DayByZzAndProjectId(String zz, long projectId)throws Exception;
 }

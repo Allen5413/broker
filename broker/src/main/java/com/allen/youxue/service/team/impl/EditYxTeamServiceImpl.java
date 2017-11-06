@@ -37,6 +37,20 @@ public class EditYxTeamServiceImpl implements EditYxTeamService {
         }
     }
 
+    @Override
+    public void editQq(long id, String qq, long loginId, String loginName) throws Exception {
+        Team team = yxTeamDao.findOne(id);
+        String oldQq = team.getQq();
+        if(null != team){
+            team.setQq(qq);
+            team.setOperator(loginName);
+            team.setOperateTime(DateUtil.getLongNowTime());
+            yxTeamDao.save(team);
+            //记录操作日志
+            addLogService.add(loginId, loginName, Log.TYPE_EDIT, "修改了团员"+team.getZz()+"的咨询QQ群<span style='color:red'>"+oldQq+"</span>修改为<span style='color:red'>"+qq+"</span>");
+        }
+    }
+
     private String getStateName(int state){
         switch (state) {
             case Team.STATE_SIGN:
