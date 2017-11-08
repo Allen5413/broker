@@ -110,6 +110,9 @@
                   <c:if test="${team.isHead == 1}">
                     <a class="btn-opr" href="#" onclick="editQq(${team.id})">编辑QQ</a>
                   </c:if>
+                  <c:if test="${(team.isHead == 0 && team.state ne '4') || team.isHead == 1}">
+                    <a class="btn-opr" href="#" onclick="del(${team.id})">删除</a>
+                  </c:if>
                 </td>
               </tr>
             </c:forEach>
@@ -161,5 +164,9 @@
         }
       });
     });
+  }
+
+  function del(id){
+    app.del("您确定要删除该人员？", "${pageContext.request.contextPath}/youxue/delYxTeam/del.json", {"id":id}, "${pageContext.request.contextPath}/youxue/pageTeam/page.html", "${reqParams}");
   }
 </script>

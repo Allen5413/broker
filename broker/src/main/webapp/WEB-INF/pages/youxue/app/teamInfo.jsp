@@ -79,6 +79,7 @@
   </div>
 </section>
 <div id="showBig_pic" class="show-bigPic">
+  <a class="close" href="javascript:;" onclick="picClose();">×</a>
   <div class="picArea" onclick="picClose();">
     <img id="imgBig">
   </div>

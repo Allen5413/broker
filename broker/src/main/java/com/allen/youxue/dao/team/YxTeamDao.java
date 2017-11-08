@@ -16,6 +16,7 @@ public interface YxTeamDao extends CrudRepository<Team, Long> {
     public List<Team> findByIsHead(int isHead)throws Exception;
     public List<Team> findByZzAndIsHead(String zz, int isHead)throws Exception;
     public Team findByZzAndParentId(String zz, long parentId)throws Exception;
+    public List<Team> findByParentId(long id)throws Exception;
 
     /**
      * 统计一个团的团员人数
