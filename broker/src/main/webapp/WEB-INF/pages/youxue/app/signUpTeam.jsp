@@ -80,6 +80,22 @@
   <input type="hidden" id="teamHeadId" name="teamHeadId" value="${teamHead.id}" />
   <input type="hidden" id="brokerZz" name="brokerZz" value="${broker.zz}" />
 </form>
+<div id="loginDiv" class="layer-trans" style="display: ${isLogin ? 'block' : 'none'}">
+  <div class="pop-tips-txt">
+    <div class="title">您未登录，请登录至善账号</div>
+    <div class="pop-input-view">
+      <p class="item-input">
+        <span class="i-tg">ZZ：</span>
+        <input type="text" id="loginZz">
+      </p>
+      <p class="item-input">
+        <span class="i-tg">密码：</span>
+        <input type="password" id="loginPwd">
+      </p>
+      <p><button class="but-submit" onclick="login()">登 录</button></p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 <script>
@@ -152,5 +168,33 @@
 
   function changeDate(){
     $("#yyDateText").click();
+  }
+
+  function login(){
+    var zz = $("#loginZz").val();
+    var pwd = $("#loginPwd").val();
+    if(zz == ""){
+      layer.alert("请输入ZZ", {icon: 5});
+      return false;
+    }
+    if(pwd == ""){
+      layer.alert("请输入密码", {icon: 5});
+      return false;
+    }
+    $.ajax({
+      cache: true,
+      type: "POST",
+      url:"${pageContext.request.contextPath}/youxueApp/loginApp.json",
+      data:{"zz":zz, "pwd":pwd},
+      async: false,
+      success: function(data) {
+        if(data.state == 0){
+          history.go(0);
+          return false;
+        }else{
+          layer.alert(data.msg, {icon: 5});
+        }
+      }
+    });
   }
 </script>

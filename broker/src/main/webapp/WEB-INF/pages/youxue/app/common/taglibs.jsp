@@ -4,10 +4,10 @@
 <!-- layer -->
 <script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 <!-- photoswipe -->
-<link href="${pageContext.request.contextPath}/photoswipe/css/photoswipe.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/photoswipe/css/default-skin/default-skin.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/photoswipe/js/photoswipe.js"></script>
-<script src="${pageContext.request.contextPath}/photoswipe/js/photoswipe-ui-default.js"></script>
+<%--<link href="${pageContext.request.contextPath}/photoswipe/css/photoswipe.css" rel="stylesheet">--%>
+<%--<link href="${pageContext.request.contextPath}/photoswipe/css/default-skin/default-skin.css" rel="stylesheet">--%>
+<%--<script src="${pageContext.request.contextPath}/photoswipe/js/photoswipe.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/photoswipe/js/photoswipe-ui-default.js"></script>--%>
 <!-- mobiscroll -->
 <script src="${pageContext.request.contextPath}/mobiscroll/js/mobiscroll.core-2.5.2.js?v=1.0.0" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/mobiscroll/js/mobiscroll.core-2.5.2-zh.js?v=1.0.0" type="text/javascript"></script>

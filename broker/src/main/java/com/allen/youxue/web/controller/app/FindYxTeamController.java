@@ -109,30 +109,34 @@ public class FindYxTeamController extends BaseController {
     public String find(HttpServletRequest request) throws Exception {
         //查询个人信息
         JSONObject user = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
-        //查询报名产品的信息
-        PageInfo pageInfo = super.getPageInfo(request);
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("t.zz", UserUtil.getLoginUserForLoginName(request));
-        params.put("c.project_id", 1l);
-        Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
-        sortMap.put("t.id", false);
-        pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, false);
-        request.setAttribute("user", user);
-        request.setAttribute("teamList", pageInfo.getPageResults());
-        //查询登录用户是不是校花团长
-        List<Team> teamList = findYxTeamByZzAndIsHeadService.find(UserUtil.getLoginUserForLoginName(request), Team.ISHEAD_YES);
-        boolean isHead = null != teamList && 0 < teamList.size() ? true : false;
-        if(isHead){
-            //查询最新上传的一张相册
-            request.setAttribute("imgUrl", findYxTeamImgByZzForNewImgService.find(UserUtil.getLoginUserForLoginName(request)));
-        }
-        request.setAttribute("isHead", isHead);
-        //查询我的经纪人
-        List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(UserUtil.getLoginUserForLoginName(request), 1l);
-        if(null != customerList && 0 < customerList.size()){
-            Customer customer = customerList.get(0);
-            JSONObject broker = findBrokerByIdService.findAttop(customer.getBrokerId());
-            request.setAttribute("broker", broker);
+        if(null != user) {
+            //查询报名产品的信息
+            PageInfo pageInfo = super.getPageInfo(request);
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("t.zz", UserUtil.getLoginUserForLoginName(request));
+            params.put("c.project_id", 1l);
+            Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
+            sortMap.put("t.id", false);
+            pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, false);
+            request.setAttribute("user", user);
+            request.setAttribute("teamList", pageInfo.getPageResults());
+            //查询登录用户是不是校花团长
+            List<Team> teamList = findYxTeamByZzAndIsHeadService.find(UserUtil.getLoginUserForLoginName(request), Team.ISHEAD_YES);
+            boolean isHead = null != teamList && 0 < teamList.size() ? true : false;
+            if (isHead) {
+                //查询最新上传的一张相册
+                request.setAttribute("imgUrl", findYxTeamImgByZzForNewImgService.find(UserUtil.getLoginUserForLoginName(request)));
+            }
+            request.setAttribute("isHead", isHead);
+            //查询我的经纪人
+            List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(UserUtil.getLoginUserForLoginName(request), 1l);
+            if (null != customerList && 0 < customerList.size()) {
+                Customer customer = customerList.get(0);
+                JSONObject broker = findBrokerByIdService.findAttop(customer.getBrokerId());
+                request.setAttribute("broker", broker);
+            }
+        }else{
+            request.setAttribute("isLogin", true);
         }
         return "/youxue/app/user";
     }

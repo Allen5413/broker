@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
 
     //不需要拦截的路径
-    private static final String[] IGNORE_URI = {"/login", "/css", "/app", "/ueditor", "/youxueApp/index", "/youxue/login"};
+    private static final String[] IGNORE_URI = {"/login", "/css", "/app", "/ueditor", "/youxueApp", "/youxue/login", "/recommendBroker"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -55,6 +55,13 @@ modal.onclick = function(){
 }
 
 
-
-
-
+function picBig(url) {
+    var v_layer = document.getElementById('showBig_pic');
+    v_layer.style.display = "block";
+	var img_big = document.getElementById('imgBig');
+    img_big.src = url;
+}
+function picClose() {
+    var v = document.getElementById('showBig_pic');
+	v.style.display = "none";
+}

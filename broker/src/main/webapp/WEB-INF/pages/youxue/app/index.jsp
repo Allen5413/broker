@@ -159,7 +159,7 @@
 </html>
 <script>
   setTimeout(function(){hideButtom();}, 500);
-  <c:if test="${!isHaveBroker}">
+  <c:if test="${!isHaveBroker && !empty sessionScope.loginName}">
     setTimeout(function(){
       //获取当前时间
       var date = new Date();

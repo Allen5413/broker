@@ -6,6 +6,7 @@ import com.allen.service.broker.FindBrokerByIdService;
 import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.service.broker.RecommendBrokerService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdHaveBrokerService;
+import com.allen.util.StringUtil;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
 import com.allen.youxue.dao.team.YxTeamDao;
@@ -53,6 +54,10 @@ public class SignUpYxTeamController extends BaseController {
 
     @RequestMapping(value = "openSignUp")
     public String openSignUp(HttpServletRequest request, long productId, long teamHeadId) throws Exception {
+        if(StringUtil.isEmpty(UserUtil.getLoginUserForLoginName(request))){
+            request.setAttribute("isLogin", true);
+            return "/youxue/app/signUpTeam";
+        }
         JSONObject teamHead = findYxTeamByIdService.findAttop(teamHeadId);
         JSONObject team = findBrokerByZZService.findAttop(UserUtil.getLoginUserForLoginName(request));
         Product product = findYxProductByIdService.find(productId);

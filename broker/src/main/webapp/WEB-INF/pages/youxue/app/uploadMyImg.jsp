@@ -33,8 +33,9 @@
             <div class="tim-date">${img.key}</div>
             <div class="album-pics">
               <c:forEach var="url" items="${img.value}">
-                <a class="pic" href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
-                  <img src="${url[0]}" alt="" />
+                <a class="pic" href="javascript:;">
+                  <img src="${url[0]}" onclick="picBig('${url[1]}')" />
+                  <span class="x-del" onclick="delImg2('${url[1]}', '${url[0]}')">×</span>
                 </a>
               </c:forEach>
             </div>
@@ -44,7 +45,11 @@
     </div>
   </div>
 </section>
-<script src="${pageContext.request.contextPath}/photoswipe/js/startUp.js"></script>
+<div id="showBig_pic" class="show-bigPic">
+  <div class="picArea" onclick="picClose();">
+    <img id="imgBig">
+  </div>
+</div>
 </body>
 </html>
 <script>
@@ -66,7 +71,7 @@
           $("#tempImg").html(html);
           $("#fileNames").val($("#fileNames").val()+data.fileName+",");
         }else{
-          app.alert(data.msg, 1);
+          layer.alert(data.msg, {icon: 5});
         }
       }
     });
@@ -85,7 +90,7 @@
           fileNames = fileNames.replace(fileName+",", "");
           $("#fileNames").val(fileNames);
         }else {
-          app.msg(data.msg, 1);
+          layer.alert(data.msg, {icon: 5});
         }
       }
     });
@@ -107,7 +112,24 @@
         if(data.state == 0){
           location.href = "${pageContext.request.contextPath}/youxueApp/uploadMyImg/open.html";
         }else {
-          app.msg(data.msg, 1);
+          layer.alert(data.msg, {icon: 5});
+        }
+      }
+    });
+  }
+
+  function delImg2(path, smallPath){
+    $.ajax({
+      url:"${pageContext.request.contextPath}/youxueApp/delYxTeamImg/del.json",
+      method : 'POST',
+      async:false,
+      data:{"path":path, "smallPath":smallPath},
+      success:function(data){
+        if(data.state == 0){
+          history.go(0);
+          return false;
+        }else {
+          layer.alert(data.msg, {icon: 5});
         }
       }
     });

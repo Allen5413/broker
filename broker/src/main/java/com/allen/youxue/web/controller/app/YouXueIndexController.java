@@ -9,6 +9,7 @@ import com.allen.service.customerdaylogincount.AddCusotmerDayLoginCountService;
 import com.allen.service.project.EditProjectVisitCountService;
 import com.allen.service.project.FindProjectByIdService;
 import com.allen.util.StringUtil;
+import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
 import com.allen.youxue.service.product.FindYxProductForAppService;
 import com.allen.youxue.service.team.FindYxTeamHeadService;
@@ -46,8 +47,11 @@ public class YouXueIndexController extends BaseController {
     private AddCusotmerDayLoginCountService addCusotmerDayLoginCountService;
 
     @RequestMapping(value = "open")
-    public String find(HttpServletRequest request, String zz, long projectId,
+    public String find(HttpServletRequest request, long projectId,
+                       @RequestParam(value = "zz", required = false)String zz,
+                       @RequestParam(value = "brokerZz", required = false)String brokerZz,
                        @RequestParam(value = "notCount", required = false)String notCount) throws Exception {
+        String loginName = UserUtil.getLoginUserForLoginName(request);
         List<Customer> customerList = findCustomerByZzAndProjectIdHaveBrokerService.find(zz, projectId);
         boolean isHaveBroker = null != customerList && 0 < customerList.size() ? true : false;
         if(StringUtil.isEmpty(notCount)) {
@@ -68,8 +72,13 @@ public class YouXueIndexController extends BaseController {
         request.setAttribute("xg", list.get(1));
         request.setAttribute("jq", list.get(2));
         request.setAttribute("yl", list.get(3));
-        request.getSession().setAttribute("loginName", zz);
+        if(StringUtil.isEmpty(loginName) || (!loginName.equals(zz) && !StringUtil.isEmpty(zz))) {
+            request.getSession().setAttribute("loginName", zz);
+        }
         request.getSession().setAttribute("projectId", projectId);
+        if(!StringUtil.isEmpty(brokerZz)){
+            request.getSession().setAttribute("brokerZz", brokerZz);
+        }
         return "/youxue/app/index";
     }
 }

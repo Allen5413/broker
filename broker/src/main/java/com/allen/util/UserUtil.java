@@ -66,6 +66,15 @@ public class UserUtil {
     }
 
     /**
+     * 获取登录用户的推荐经纪人zz
+     * @param request
+     * @return
+     */
+    public static String getLoginUserForBrokerZz(HttpServletRequest request){
+        return request.getSession().getAttribute("brokerZz").toString();
+    }
+
+    /**
      * 获取登录用户的操作后是否需要中心管理员审核
      * @param request
      * @return

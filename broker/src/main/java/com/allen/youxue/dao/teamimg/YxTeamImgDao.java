@@ -1,6 +1,7 @@
 package com.allen.youxue.dao.teamimg;
 
 import com.allen.youxue.entity.team.TeamImg;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -20,4 +21,13 @@ public interface YxTeamImgDao extends CrudRepository<TeamImg, Long> {
      */
     @Query(nativeQuery = true, value = "select t.img_url from yx_team_img t where t.zz = ?1 order by t.create_time desc limit 1")
     public String findByZzForNewImg(String zz)throws Exception;
+
+    /**
+     * 删除成员的一个照片
+     * @param imgUrl
+     * @throws Exception
+     */
+    @Modifying
+    @Query(nativeQuery = true, value = "delete from yx_team_img where img_url = ?1")
+    public void delByImgUrl(String imgUrl)throws Exception;
 }

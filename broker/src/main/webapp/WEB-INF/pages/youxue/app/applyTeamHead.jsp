@@ -55,7 +55,7 @@
       url:"${pageContext.request.contextPath}/recommendBroker/randomBroker.json",
       method : 'POST',
       async:false,
-      data:{},
+      data:{"projectId":${sessionScope.projectId}},
       success:function(data){
         if(data.state == 0){
           $("#brokerInfoUl").html("");

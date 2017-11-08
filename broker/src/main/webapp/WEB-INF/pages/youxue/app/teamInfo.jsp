@@ -53,8 +53,8 @@
             <div id="demo-test-gallery" class="demo-gallery">
               <c:forEach var="img" items="${imgMap}">
                 <c:forEach var="url" items="${img.value}">
-                  <a class="pic" href="${url[1]}" data-size="1600x1068" data-med="${url[1]}" data-med-size="1024x1024">
-                    <img src="${url[0]}" alt="" />
+                  <a class="pic" href="javascript:;">
+                    <img src="${url[0]}" onclick="picBig('${url[1]}')" />
                   </a>
                 </c:forEach>
               </c:forEach>
@@ -78,6 +78,11 @@
     </div>
   </div>
 </section>
+<div id="showBig_pic" class="show-bigPic">
+  <div class="picArea" onclick="picClose();">
+    <img id="imgBig">
+  </div>
+</div>
 <script>
   $(".tabs-title").on("click","li",function(){
     // 设index为当前点击
@@ -88,7 +93,6 @@
     $("#bdmod").find(".bd-mod-view").eq(index).show().siblings().hide();
   })
 </script>
-<script src="${pageContext.request.contextPath}/photoswipe/js/startUp.js"></script>
 </body>
 </html>
 <script>
