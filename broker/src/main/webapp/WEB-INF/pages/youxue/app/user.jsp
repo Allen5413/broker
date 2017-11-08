@@ -107,7 +107,7 @@
         </p>
         <div class="pop-cells"></div>
       </div>
-      <p class="alignCenter"><button class="but-submit" onclick="copyUrl('http://localhost:8080/youxueApp/fenXiangYx/fenxiang.html?brokerZz=${sessionScope.loginName}')">点此复制</button></p>
+      <%--<p class="alignCenter"><button class="but-submit" onclick="copyUrl('http://localhost:8080/youxueApp/fenXiangYx/fenxiang.html?brokerZz=${sessionScope.loginName}')">点此复制</button></p>--%>
     </div>
   </div>
 </div>

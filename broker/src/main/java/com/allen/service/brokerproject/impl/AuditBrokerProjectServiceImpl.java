@@ -44,6 +44,9 @@ public class AuditBrokerProjectServiceImpl implements AuditBrokerProjectService 
         log.setOperatorName(loginName);
         log.setContent("审批通过经纪人"+brokerProject.getCreator()+"申请的"+project.getName()+"项目");
         logDao.save(log);
+
+        //发送系统消息
+        attopService.sendMsg(brokerProject.getCreator(), "恭喜您成为至善游学项目经纪人，欢迎您加入到至善游学项目经纪人群：462195368");
     }
 
     @Override
