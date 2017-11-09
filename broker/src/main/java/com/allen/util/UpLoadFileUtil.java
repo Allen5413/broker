@@ -2,6 +2,7 @@ package com.allen.util;
 
 import com.allen.base.exception.BusinessException;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -168,6 +169,7 @@ public class UpLoadFileUtil {
             BufferedImage src = fileBuilder.asBufferedImage();
             int width = src.getWidth();
             int height = src.getHeight();
+            //生成大图
             if(width <= 1280 && height <= 1280){
                 copyFile(request, oldPath, newPath, fileName);
             }else {
@@ -184,8 +186,29 @@ public class UpLoadFileUtil {
                 Thumbnails.of(oldPath2).size(newWidth, newHeight).toFile(newPath2);
                 commpressPicCycle(newPath2, 500, 0.9);
             }
+            //生成缩略图
+            int newWidth = 200;
+            int newHeight = 200;
+            if(width >= height){
+                if(height >= 200){
+                    double temp = height / 200;
+                    newWidth = (int)(width / temp);
+                }else{
+                    double temp = 200 / height;
+                    newWidth = (int)(width * temp);
+                }
+            }else{
+                if(width >= 200){
+                    double temp = width / 200;
+                    newHeight = (int)(height / temp);
+                }else{
+                    double temp = 200 / width;
+                    newHeight = (int)(height * temp);
+                }
+            }
             //生成缩略图固定尺寸，不按比例
-            Thumbnails.of(oldPath2).size(200, 200).keepAspectRatio(false).toFile(smallImgPath2);
+            Thumbnails.of(oldPath2).size(newWidth, newHeight).keepAspectRatio(false).toFile(smallImgPath2);
+            Thumbnails.of(smallImgPath2).sourceRegion(Positions.CENTER,200,200).size(200, 200).toFile(smallImgPath2);
             commpressPicCycle(smallImgPath2, 50, 0.9);
             delFile(request, oldPath);
         } catch (Exception e) {
