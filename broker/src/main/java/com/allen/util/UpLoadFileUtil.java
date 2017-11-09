@@ -5,12 +5,11 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -110,11 +109,11 @@ public class UpLoadFileUtil {
     }
 
     /**
-     * 复制单个文件
-     * @param oldPath String 原文件路径 如：c:/fqf.txt
-     * @param newPath String 复制后路径 如：f:/fqf.txt
-     * @return boolean
-     */
+     * 复制单个文件
+     * @param oldPath String 原文件路径 如：c:/fqf.txt
+     * @param newPath String 复制后路径 如：f:/fqf.txt
+     * @return boolean
+     */
     public static void copyFile(HttpServletRequest request, String oldPath, String newPath, String fileName) {
         try {
             int bytesum = 0;
@@ -141,10 +140,10 @@ public class UpLoadFileUtil {
     }
 
     /**
-     * 剪切文件
-     * @param oldPath String 如：c:/fqf.txt
-     * @param newPath String 如：d:/fqf.txt
-     */
+     * 剪切文件
+     * @param oldPath String 如：c:/fqf.txt
+     * @param newPath String 如：d:/fqf.txt
+     */
     public static void custFile(HttpServletRequest request, String oldPath, String newPath, String fileName) {
         try {
             copyFile(request, oldPath, newPath, fileName);
@@ -155,10 +154,10 @@ public class UpLoadFileUtil {
     }
 
     /**
-          * 剪切文件
-          * @param oldPath String 如：c:/fqf.txt
-          * @param newPath String 如：d:/fqf.txt
-          */
+     * 剪切并压缩文件
+     * @param oldPath String 如：c:/fqf.txt
+     * @param newPath String 如：d:/fqf.txt
+     */
     public static void custAndThumbnailsFile(HttpServletRequest request, String oldPath, String newPath, String smallImgPath, String fileName) {
         try {
             String oldPath2 = request.getRealPath("")+oldPath;
@@ -183,12 +182,38 @@ public class UpLoadFileUtil {
                 }
                 //按比例缩放
                 Thumbnails.of(oldPath2).size(newWidth, newHeight).toFile(newPath2);
+                commpressPicCycle(newPath2, 500, 0.9);
             }
             //生成缩略图固定尺寸，不按比例
-            Thumbnails.of(oldPath2).size(200,200).keepAspectRatio(false).toFile(smallImgPath2);
+            Thumbnails.of(oldPath2).size(200, 200).keepAspectRatio(false).toFile(smallImgPath2);
+            commpressPicCycle(smallImgPath2, 50, 0.9);
             delFile(request, oldPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 把图片压缩到指定内存大小内
+     * @param desPath
+     * @param desFileSize
+     * @param accuracy
+     * @throws IOException
+     */
+    private static void commpressPicCycle(String desPath, long desFileSize, double accuracy) throws IOException {
+        File srcFileJPG = new File(desPath);
+        long srcFileSizeJPG = srcFileJPG.length();
+        // 2、判断大小，如果小于500kb，不压缩；如果大于等于500kb，压缩
+        if (srcFileSizeJPG <= desFileSize * 1024) {
+            return;
+        }
+        // 计算宽高  
+        BufferedImage bim = ImageIO.read(srcFileJPG);
+        int srcWdith = bim.getWidth();
+        int srcHeigth = bim.getHeight();
+        int desWidth = new BigDecimal(srcWdith).multiply(new BigDecimal(accuracy)).intValue();
+        int desHeight = new BigDecimal(srcHeigth).multiply(new BigDecimal(accuracy)).intValue();
+        Thumbnails.of(desPath).size(desWidth, desHeight).outputQuality(accuracy).toFile(desPath);
+        commpressPicCycle(desPath, desFileSize, accuracy);
     }
 }
