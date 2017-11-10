@@ -172,6 +172,6 @@
   }
 
   function searchPic(zz){
-
+    app.clickResources("${pageContext.request.contextPath}/youxue/findYxTeamImgByZz/open.html", {"zz":zz});
   }
 </script>

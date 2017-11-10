@@ -245,3 +245,33 @@ body{background: #ececec;}
 .data-cols-list .tit .num{font-size: 28px;}
 .data-cols-list .txt{padding: 15px; max-width: 120px; margin: 0 auto;}
 
+.pics-view{}
+.pics-view:after{
+	clear: both;
+	content: "";
+	display: block;
+}
+.pics-view .pic-cel{
+	float: left;
+	width: 25%;
+	text-align: center;
+	position: relative;
+}
+.pics-view .pic-cel .delete{
+	position: absolute;
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	background: rgba(255,255,255,.9);
+	color: #f00;
+	bottom: 0;
+	left: 0;
+	font-size: 12px;
+	text-align: center;
+}
+.pics-view .pic-cel img{
+	max-width: 100%;
+	margin: 5px;
+	display: block;
+}
+
