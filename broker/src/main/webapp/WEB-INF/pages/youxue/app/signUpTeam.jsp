@@ -85,8 +85,8 @@
     <div class="title">您未登录，请登录至善账号</div>
     <div class="pop-input-view">
       <p class="item-input">
-        <span class="i-tg">ZZ：</span>
-        <input type="text" id="loginZz">
+        <span class="i-tg">用户名：</span>
+        <input type="text" id="loginName">
       </p>
       <p class="item-input">
         <span class="i-tg">密码：</span>
@@ -171,10 +171,10 @@
   }
 
   function login(){
-    var zz = $("#loginZz").val();
-    var pwd = $("#loginPwd").val();
-    if(zz == ""){
-      layer.alert("请输入ZZ", {icon: 5});
+    var loginName = $("#loginName").val().trim();
+    var pwd = $("#loginPwd").val().trim();
+    if(loginName == ""){
+      layer.alert("请输入用户名", {icon: 5});
       return false;
     }
     if(pwd == ""){
@@ -185,7 +185,7 @@
       cache: true,
       type: "POST",
       url:"${pageContext.request.contextPath}/youxueApp/loginApp.json",
-      data:{"zz":zz, "pwd":pwd},
+      data:{"loginName":loginName, "pwd":pwd},
       async: false,
       success: function(data) {
         if(data.state == 0){

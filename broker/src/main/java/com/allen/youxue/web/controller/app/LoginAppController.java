@@ -6,6 +6,7 @@ import com.allen.base.exception.BusinessException;
 import com.allen.dao.customer.CustomerDao;
 import com.allen.entity.broker.Broker;
 import com.allen.entity.broker.Customer;
+import com.allen.service.attop.AttopService;
 import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.service.customer.AddCustomerService;
 import com.allen.service.customer.FindCustomerByZzAndProjectIdService;
@@ -37,15 +38,18 @@ public class LoginAppController {
     private AddCustomerService addCustomerService;
     @Autowired
     private CustomerDao customerDao;
+    @Autowired
+    private AttopService attopService;
 
     @RequestMapping("loginApp")
     @ResponseBody
-    public JSONObject userLogin(@RequestParam("zz")String zz,
+    public JSONObject userLogin(@RequestParam("loginName")String loginName,
                                 @RequestParam("pwd")String pwd,
                                 HttpServletRequest request)throws Exception{
         JSONObject jsonObject = new JSONObject();
-        if(!HttpRequestUtil.vaildLogin(zz, pwd, configProp.getAttop().get("loginUrl"))){
-            throw new BusinessException("ZZ号或者密码错误！");
+        String zz = attopService.login(loginName, pwd);
+        if(StringUtil.isEmpty(zz)){
+            throw new BusinessException("用户名或者密码错误！");
         }
         request.getSession().setAttribute("loginName", zz);
         //是否有推荐经纪人

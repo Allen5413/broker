@@ -108,6 +108,7 @@
                     <a class="btn-opr" href="#" onclick="editState(${team.id})">编辑状态</a>
                   </c:if>
                   <c:if test="${team.isHead == 1}">
+                    <a class="btn-opr" href="#" onclick="searchPic('${team.zz}')">团长风采</a>
                     <a class="btn-opr" href="#" onclick="editQq(${team.id})">编辑QQ</a>
                   </c:if>
                   <c:if test="${(team.isHead == 0 && team.state ne '4') || team.isHead == 1}">
@@ -168,5 +169,9 @@
 
   function del(id){
     app.del("您确定要删除该人员？", "${pageContext.request.contextPath}/youxue/delYxTeam/del.json", {"id":id}, "${pageContext.request.contextPath}/youxue/pageTeam/page.html", "${reqParams}");
+  }
+
+  function searchPic(zz){
+
   }
 </script>

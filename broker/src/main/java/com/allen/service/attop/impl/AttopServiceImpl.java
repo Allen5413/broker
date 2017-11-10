@@ -32,4 +32,17 @@ public class AttopServiceImpl implements AttopService {
         String portUrl = configProp.getAttop().get("portUrl");
         return AttopUtil.getPortMsg(200, "zz=" + zz + "&name=" + AttopUtil.toUrlEncode(StringUtil.isEmpty(name) ? "" : name), shopId, secret, portUrl);
     }
+
+    @Override
+    public String login(String loginName, String pwd) throws Exception {
+        String shopId = configProp.getAttop().get("shopId");
+        String secret = configProp.getAttop().get("secret");
+        String portUrl = configProp.getAttop().get("portUrl");
+        JSONObject json = AttopUtil.getPortMsg(202, "username=" + AttopUtil.toUrlEncode(loginName) + "&password=" + AttopUtil.getMd5(pwd), shopId, secret, portUrl);
+        if(json.get("status").toString().equals("1")){
+            return json.get("zz").toString();
+        }else{
+            return "";
+        }
+    }
 }
