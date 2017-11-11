@@ -4,8 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.allen.base.exception.BusinessException;
 import com.allen.dao.PageInfo;
 import com.allen.service.attop.AttopService;
+import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.youxue.dao.team.FindYxTeamDao;
 import com.allen.youxue.dao.team.YxTeamDao;
+import com.allen.youxue.dao.teamimg.YxTeamImgDao;
+import com.allen.youxue.entity.team.TeamImg;
 import com.allen.youxue.service.team.PageYxTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +29,35 @@ public class PageYxTeamServiceImpl implements PageYxTeamService {
     private YxTeamDao yxTeamDao;
     @Autowired
     private AttopService attopService;
+    @Autowired
+    private YxTeamImgDao yxTeamImgDao;
+    @Autowired
+    private FindBrokerByZZService findBrokerByZZService;
 
     @Override
     public PageInfo findPage(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap, boolean isCountTeamNum) throws Exception {
+        pageInfo = findYxTeamDao.findPage(pageInfo, paramsMap, sortMap);
+        if(null != pageInfo.getPageResults() && 0 < pageInfo.getPageResults().size()){
+            List<Map> list = pageInfo.getPageResults();
+            List<Map> list2 = new ArrayList<Map>(list.size());
+            for(int i=0; i<list.size(); i++) {
+                Map map = list.get(i);
+                List<TeamImg> teamImgList = yxTeamImgDao.findByZzAndIsCover(map.get("zz").toString(), TeamImg.ISCOVER_YES);
+                if(null != teamImgList && 0 < teamImgList.size()){
+                    map.put("imgUrl", teamImgList.get(0).getImgUrl());
+                }else{
+                    JSONObject json = findBrokerByZZService.findAttop(map.get("zz").toString());
+                    map.put("imgUrl", json.get("icon"));
+                }
+                list2.add(map);
+            }
+            pageInfo.setPageResults(list2);
+        }
+        return pageInfo;
+    }
+
+    @Override
+    public PageInfo findPageForAttop(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap, boolean isCountTeamNum) throws Exception {
         pageInfo = findYxTeamDao.findPage(pageInfo, paramsMap, sortMap);
         if(null != pageInfo.getPageResults() && 0 < pageInfo.getPageResults().size()){
             List<Map> list = new ArrayList<Map>(pageInfo.getPageResults().size());

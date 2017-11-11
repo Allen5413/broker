@@ -16,7 +16,7 @@ public class FindYxTeamImgDao extends BaseQueryDao {
     public List<Map> findByZz(String zz)throws Exception{
         String fields = "DATE_FORMAT(create_time, '%Y-%m-%d') date, img_url url, img_small_url smallUrl";
         String[] tableNames = {"yx_team_img"};
-        String defaultWhere = "1=1";
+        String defaultWhere = "is_cover = 0";
         Map<String, Object> paramsMap = new HashMap<String, Object>(1);
         paramsMap.put("zz", zz);
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>(1);

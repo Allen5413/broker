@@ -3,10 +3,12 @@ package com.allen.youxue.web.controller.app;
 import com.alibaba.fastjson.JSONObject;
 import com.allen.base.config.ConfigProp;
 import com.allen.base.exception.BusinessException;
+import com.allen.util.StringUtil;
 import com.allen.util.UpLoadFileUtil;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
 import com.allen.youxue.service.teamimg.AddYxTeamImgService;
+import com.allen.youxue.service.teamimg.FindYxTeamImgByZzForCoverService;
 import com.allen.youxue.service.teamimg.FindYxTeamImgByZzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,12 +35,20 @@ public class UploadYxMyImgController extends BaseController {
     private AddYxTeamImgService addYxTeamImgService;
     @Autowired
     private FindYxTeamImgByZzService findYxTeamImgByZzService;
+    @Autowired
+    private FindYxTeamImgByZzForCoverService findYxTeamImgByZzForCoverService;
 
     @RequestMapping(value = "open")
     public String open(HttpServletRequest request) throws Exception {
         Map<String, List<String[]>> map = findYxTeamImgByZzService.findImgByZz(UserUtil.getLoginUserForLoginName(request));
         request.setAttribute("imgMap", map);
         return "/youxue/app/uploadMyImg";
+    }
+
+    @RequestMapping(value = "openCover")
+    public String openCover(HttpServletRequest request) throws Exception {
+        request.setAttribute("imgUrl", findYxTeamImgByZzForCoverService.find(UserUtil.getLoginUserForLoginName(request)));
+        return "/youxue/app/uploadMyCoverImg";
     }
 
     @RequestMapping(value = "upload")
@@ -74,6 +84,20 @@ public class UploadYxMyImgController extends BaseController {
         for(String fileName : fileNameArray){
             UpLoadFileUtil.custAndThumbnailsFile(request, configProp.getUpload().get("tempPath") + fileName, configProp.getUpload().get("teamImgPath"), configProp.getUpload().get("teamSmallImgPath"), UserUtil.getLoginUserForLoginName(request) + "_"+fileName);
         }
+        jsonObject.put("state", 0);
+        return jsonObject;
+    }
+
+
+    @RequestMapping(value = "addCoverImg")
+    @ResponseBody
+    public JSONObject addCoverImg(HttpServletRequest request, String fileNames, String domain)throws Exception{
+        JSONObject jsonObject = new JSONObject();
+        if(StringUtil.isEmpty(fileNames)){
+            throw new BusinessException("请选择要上传的照片");
+        }
+        addYxTeamImgService.addCover(request, UserUtil.getLoginUserForLoginName(request), domain, fileNames);
+        UpLoadFileUtil.custAndThumbnailsFile(request, configProp.getUpload().get("tempPath") + fileNames, configProp.getUpload().get("teamCoverImgPath"), UserUtil.getLoginUserForLoginName(request) + "_"+fileNames);
         jsonObject.put("state", 0);
         return jsonObject;
     }

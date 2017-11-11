@@ -1363,7 +1363,7 @@ border-radius: 100%;
 	right: 12px;
 }
 .w-ico-item .li-cell:last-child:after{height: 0;}
-.i-w1,.i-w2,.i-w3,.i-w4,.i-w5{
+.i-w1,.i-w2,.i-w3,.i-w4,.i-w5,.i-w6{
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -1391,6 +1391,9 @@ border-radius: 100%;
 }
 .i-w5{
 	background-image: url(../images/ico-w-5.png);
+}
+.i-w6{
+	background-image: url(../images/ico-w-6.png);
 }
 .photo-btn-cell{
 	background: #fff;
@@ -1960,4 +1963,61 @@ line-height: 32px;
 	color: #fff;
 	font-size: 28px;
 	line-height: 36px;
+}
+.list-teams-pic{
+	padding: 0;
+	display: flex;
+	display: -webkit-flex;
+	flex-flow: wrap;
+	-webkit-flex-flow: wrap;
+	-ms-flex-flow: wrap;
+}
+.list-teams-pic li{
+	width: 50%;
+	padding: 0 3px 6px 0;
+}
+.list-teams-pic li:nth-child(2n){
+	padding:0 0 6px 3px;
+}
+.list-teams-pic .upic-cel{
+	display: block;
+	position: relative;
+}
+.upic-cel img{
+	width: 100%;
+	display: block;
+}
+.upic-cel .tit-bar{
+	position: absolute;
+	background: rgba(0,0,0,.4);
+	bottom: 0;
+	left: 0;
+	padding: 2px 5px;
+	line-height: 1.6em;
+	width: 100%;
+	color: #fff;
+	font-size: 13px;
+}
+.upic-cel .from{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	display:-webkit-box; 
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:1;
+	height: 24px; 
+	line-height: 24px;
+	width: 80%;
+}
+.upic-cel .num{
+	position: absolute;
+	right: 0;
+	padding: 3px 5px;
+	background: rgba(255,120,0,.7);
+	bottom: 1px;
+	color: #fff;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	font-size: 14px;
+	text-align: right;
+	max-width: 60px;
 }

@@ -217,6 +217,24 @@ public class UpLoadFileUtil {
     }
 
     /**
+     * 剪切并压缩文件
+     * @param oldPath String 如：c:/fqf.txt
+     * @param newPath String 如：d:/fqf.txt
+     */
+    public static void custAndThumbnailsFile(HttpServletRequest request, String oldPath, String newPath, String fileName) {
+        try {
+            String oldPath2 = request.getRealPath("")+oldPath;
+            String newPath2 = request.getRealPath("")+newPath+fileName;
+            //按比例缩放
+            Thumbnails.of(oldPath2).size(500, 500).keepAspectRatio(false).toFile(newPath2);
+            commpressPicCycle(newPath2, 100, 0.9);
+            delFile(request, oldPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 把图片压缩到指定内存大小内
      * @param desPath
      * @param desFileSize

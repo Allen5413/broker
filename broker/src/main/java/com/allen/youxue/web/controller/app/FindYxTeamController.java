@@ -15,9 +15,11 @@ import com.allen.youxue.entity.team.TeamImg;
 import com.allen.youxue.service.product.FindYxProductAllService;
 import com.allen.youxue.service.product.FindYxProductByIdService;
 import com.allen.youxue.service.productdate.FindYxProductDateByIdService;
+import com.allen.youxue.service.team.EditYxTeamService;
 import com.allen.youxue.service.team.FindYxTeamByIdService;
 import com.allen.youxue.service.team.FindYxTeamByZzAndIsHeadService;
 import com.allen.youxue.service.team.PageYxTeamService;
+import com.allen.youxue.service.teamimg.FindYxTeamImgByZzForCoverService;
 import com.allen.youxue.service.teamimg.FindYxTeamImgByZzForNewImgService;
 import com.allen.youxue.service.teamimg.FindYxTeamImgByZzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,10 @@ public class FindYxTeamController extends BaseController {
     private FindCustomerByZzAndProjectIdHaveBrokerService findCustomerByZzAndProjectIdHaveBrokerService;
     @Autowired
     private FindBrokerByIdService findBrokerByIdService;
+    @Autowired
+    private FindYxTeamImgByZzForCoverService findYxTeamImgByZzForCoverService;
+    @Autowired
+    private EditYxTeamService editYxTeamService;
 
     @RequestMapping(value = "find")
     public String find(HttpServletRequest request,
@@ -97,6 +103,9 @@ public class FindYxTeamController extends BaseController {
         pageInfo.setCountOfCurrentPage(999999);
         pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, false);
 
+        //累加团长浏览次数
+        editYxTeamService.editVisitCount(teamId);
+
         request.setAttribute("team", team);
         request.setAttribute("imgMap", imgMap);
         request.setAttribute("productDate", productDate);
@@ -124,6 +133,8 @@ public class FindYxTeamController extends BaseController {
             List<Team> teamList = findYxTeamByZzAndIsHeadService.find(UserUtil.getLoginUserForLoginName(request), Team.ISHEAD_YES);
             boolean isHead = null != teamList && 0 < teamList.size() ? true : false;
             if (isHead) {
+                //查询封面照
+                request.setAttribute("coverImgUrl", findYxTeamImgByZzForCoverService.find(UserUtil.getLoginUserForLoginName(request)));
                 //查询最新上传的一张相册
                 request.setAttribute("imgUrl", findYxTeamImgByZzForNewImgService.find(UserUtil.getLoginUserForLoginName(request)));
             }

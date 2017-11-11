@@ -12,12 +12,17 @@ import java.util.Date;
 @Entity
 @Table(name = "yx_team_img")
 public class TeamImg {
+
+    public final static int ISCOVER_NOT = 0;
+    public final static int ISCOVER_YES = 1;
+
     @Id
     @GeneratedValue
     private Long id;
-    private String zz;                  //团员id
+    private String zz;                  //团员zz
     private String imgUrl;              //照片url
     private String imgSmallUrl;         //照片缩略图url
+    private int isCover;                //是否封面图[0：不是；1：是]
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
 
@@ -67,5 +72,13 @@ public class TeamImg {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public int getIsCover() {
+        return isCover;
+    }
+
+    public void setIsCover(int isCover) {
+        this.isCover = isCover;
     }
 }

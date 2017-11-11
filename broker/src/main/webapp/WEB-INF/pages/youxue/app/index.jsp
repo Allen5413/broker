@@ -12,7 +12,7 @@
     <div class="theme-pic">
       <div class="pic"><img src="/youxue/images/banner.jpg"></div>
       <div class="th-tabs">
-        <div class="tab">
+        <div class="tab" onclick="location.href='${pageContext.request.contextPath}/youxueApp/findTeam/find.html'">
           <p class="num">${teamHeadCount}</p>
           <p>校花</p>
         </div>
@@ -124,7 +124,7 @@
     <ul class="nav-tabs">
       <li><a class="on" href="javascript:;">首页</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findProduct/open.html">项目</a></li>
-      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团队</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团长</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/user.html">我的</a></li>
     </ul>
   </div>

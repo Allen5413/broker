@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class FindYxTeamDao extends BaseQueryDao {
     public PageInfo findPage(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap)throws Exception{
-        String fields = "t.id, t.zz, t.is_head isHead, t.state, p.name pName, b.zz bZz, t.remark, t.yy_date yyDate";
+        String fields = "t.id, t.zz, t.is_head isHead, t.state, p.name pName, b.zz bZz, t.remark, t.yy_date yyDate, t.visit_count visitCount";
         String[] tableNames = {"yx_product p", "yx_product_date pd", "yx_team t", "customer c", "broker b"};
         String defaultWhere = "pd.id = t.product_date_id and pd.product_id = p.id and t.zz = c.zz and p.project_id = c.project_id and c.broker_id = b.id";
         return super.findPageByNativeSqlToMap(pageInfo, fields, defaultWhere, tableNames, paramsMap, sortMap);

@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface YxTeamImgDao extends CrudRepository<TeamImg, Long> {
     public List<TeamImg> findByZz(String zz)throws Exception;
+    public List<TeamImg> findByZzAndIsCover(String zz, int isCover)throws Exception;
 
     /**
      * 查询一个客户上传的最新的一张照片
@@ -19,8 +20,17 @@ public interface YxTeamImgDao extends CrudRepository<TeamImg, Long> {
      * @return
      * @throws Exception
      */
-    @Query(nativeQuery = true, value = "select t.img_url from yx_team_img t where t.zz = ?1 order by t.create_time desc limit 1")
+    @Query(nativeQuery = true, value = "select t.img_url from yx_team_img t where t.zz = ?1 and t.is_cover = 0 order by t.create_time desc limit 1")
     public String findByZzForNewImg(String zz)throws Exception;
+
+    /**
+     * 查询一个客户上传的封面照
+     * @param zz
+     * @return
+     * @throws Exception
+     */
+    @Query(nativeQuery = true, value = "select t.img_url from yx_team_img t where t.zz = ?1 and t.is_cover = 1")
+    public String findByZzForCover(String zz)throws Exception;
 
     /**
      * 删除成员的一个照片

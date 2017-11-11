@@ -20,6 +20,15 @@
     </div>
     <div class="w-ico-item">
       <c:if test="${isHead}">
+        <a class="li-cell" href="${pageContext.request.contextPath}/youxueApp/uploadMyImg/openCover.html">
+          <div class="tag-cel"><i class="i-w6"></i>我的形象照</div>
+          <div class="txt-cel">
+            <c:if test="${!empty coverImgUrl}">
+              <img src="${coverImgUrl}">
+            </c:if>
+            <i class="i-arr"></i>
+          </div>
+        </a>
         <a class="li-cell" href="${pageContext.request.contextPath}/youxueApp/uploadMyImg/open.html">
           <div class="tag-cel"><i class="i-w2"></i>我的相册</div>
           <div class="txt-cel">
@@ -72,7 +81,7 @@
     <ul class="nav-tabs">
       <li><a href="${pageContext.request.contextPath}/youxueApp/index/open.html?zz=${sessionScope.loginName}&projectId=${sessionScope.projectId}&notCount=0">首页</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findProduct/open.html">项目</a></li>
-      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团队</a></li>
+      <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">团长</a></li>
       <li><a class="on" href="javascript:;">我的</a></li>
     </ul>
   </div>

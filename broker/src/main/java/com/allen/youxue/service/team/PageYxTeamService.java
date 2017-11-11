@@ -9,4 +9,5 @@ import java.util.Map;
  */
 public interface PageYxTeamService {
     public PageInfo findPage(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap, boolean isCountTeamNum)throws Exception;
+    public PageInfo findPageForAttop(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap, boolean isCountTeamNum)throws Exception;
 }

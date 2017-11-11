@@ -51,6 +51,13 @@ public class EditYxTeamServiceImpl implements EditYxTeamService {
         }
     }
 
+    @Override
+    public void editVisitCount(long id) throws Exception {
+        Team team = yxTeamDao.findOne(id);
+        team.setVisitCount(team.getVisitCount()+1);
+        yxTeamDao.save(team);
+    }
+
     private String getStateName(int state){
         switch (state) {
             case Team.STATE_SIGN:

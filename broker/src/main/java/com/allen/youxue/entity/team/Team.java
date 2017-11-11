@@ -34,6 +34,7 @@ public class Team {
     private String yyDate;          //预约咨询时间
     private String qq;              //团咨询qq群
     private Long parentId;          //团长id
+    private int visitCount;          //团长的浏览次数
     private String remark;          //备注
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
@@ -158,5 +159,13 @@ public class Team {
 
     public void setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
+    }
+
+    public int getVisitCount() {
+        return visitCount;
+    }
+
+    public void setVisitCount(int visitCount) {
+        this.visitCount = visitCount;
     }
 }

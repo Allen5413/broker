@@ -10,21 +10,15 @@
 <section class="section wp-t50">
   <div class="at-wrap">
     <div class="teams-itm-view">
-      <div class="sift-cell" >
-        <a id="sift-ar" href="#">${empty param.productName ? "全部" : param.productName} <i class="i-arr"></i></a>
-      </div>
-      <ul class="list-item">
+      <ul class="list-teams-pic">
         <c:forEach var="team" items="${list}">
           <li>
-            <a class="team-cel" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}">
-              <div class="uh-pic"><img src="${team.icon}"></div>
-              <div class="tm-info">
-                <p class="tit">${team.name} <span class="fxx"><c:if test="${!empty team.sName}">(${team.sName})</c:if></span></p>
-                <p class="from">
-                  ${team.pName}
-                  <span class="num">${team.teamNum+1} 人</span>
-                </p>
+            <a class="upic-cel" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}">
+              <img src="${team.imgUrl}">
+              <div class="tit-bar">
+                <p class="from">${team.pName} </p>
               </div>
+              <span class="num">${team.visitCount}</span>
             </a>
           </li>
         </c:forEach>
@@ -35,7 +29,7 @@
     <ul class="nav-tabs">
       <li><a href="${pageContext.request.contextPath}/youxueApp/index/open.html?zz=${sessionScope.loginName}&projectId=${sessionScope.projectId}&notCount=0">首页</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findProduct/open.html">项目</a></li>
-      <li><a class="on" href="javascript:;">团队</a></li>
+      <li><a class="on" href="javascript:;">团长</a></li>
       <li><a href="${pageContext.request.contextPath}/youxueApp/findTeam/user.html">我的</a></li>
     </ul>
   </div>

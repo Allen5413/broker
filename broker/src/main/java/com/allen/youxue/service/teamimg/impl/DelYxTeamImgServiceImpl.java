@@ -1,5 +1,6 @@
 package com.allen.youxue.service.teamimg.impl;
 
+import com.allen.util.StringUtil;
 import com.allen.util.UpLoadFileUtil;
 import com.allen.youxue.dao.teamimg.YxTeamImgDao;
 import com.allen.youxue.entity.team.TeamImg;
@@ -24,8 +25,12 @@ public class DelYxTeamImgServiceImpl implements DelYxTeamImgService {
     @Transactional
     public void del(HttpServletRequest request, String path, String smallPath) throws Exception {
         yxTeamImgDao.delByImgUrl(path);
-        UpLoadFileUtil.delFile(request, path.substring(path.indexOf("/upload"), path.length()));
-        UpLoadFileUtil.delFile(request, smallPath.substring(smallPath.indexOf("/upload"), smallPath.length()));
+        if(!StringUtil.isEmpty(path)) {
+            UpLoadFileUtil.delFile(request, path.substring(path.indexOf("/upload"), path.length()));
+        }
+        if(!StringUtil.isEmpty(smallPath)) {
+            UpLoadFileUtil.delFile(request, smallPath.substring(smallPath.indexOf("/upload"), smallPath.length()));
+        }
     }
 
     @Override
