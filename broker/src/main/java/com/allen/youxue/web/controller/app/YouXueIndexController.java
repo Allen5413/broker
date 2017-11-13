@@ -1,6 +1,7 @@
 package com.allen.youxue.web.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
+import com.allen.dao.PageInfo;
 import com.allen.entity.broker.Customer;
 import com.allen.service.broker.FindBrokerByZZService;
 import com.allen.service.broker.RecommendBrokerService;
@@ -11,14 +12,17 @@ import com.allen.service.project.FindProjectByIdService;
 import com.allen.util.StringUtil;
 import com.allen.util.UserUtil;
 import com.allen.web.controller.BaseController;
+import com.allen.youxue.entity.team.Team;
 import com.allen.youxue.service.product.FindYxProductForAppService;
 import com.allen.youxue.service.team.FindYxTeamHeadService;
+import com.allen.youxue.service.team.PageYxTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +49,8 @@ public class YouXueIndexController extends BaseController {
     private FindYxProductForAppService findYxProductForAppService;
     @Autowired
     private AddCusotmerDayLoginCountService addCusotmerDayLoginCountService;
+    @Autowired
+    private PageYxTeamService pageYxTeamService;
 
     @RequestMapping(value = "open")
     public String find(HttpServletRequest request, long projectId,
@@ -79,6 +85,16 @@ public class YouXueIndexController extends BaseController {
         if(!StringUtil.isEmpty(brokerZz)){
             request.getSession().setAttribute("brokerZz", brokerZz);
         }
+        //查询人气校花
+        PageInfo pageInfo = super.getPageInfo(request);
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("c.project_id", projectId);
+        params.put("t.is_head", Team.ISHEAD_YES);
+        Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
+        sortMap.put("t.visit_count", false);
+        pageInfo.setCountOfCurrentPage(3);
+        pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, true);
+        request.setAttribute("teamList", pageInfo.getPageResults());
         return "/youxue/app/index";
     }
 }

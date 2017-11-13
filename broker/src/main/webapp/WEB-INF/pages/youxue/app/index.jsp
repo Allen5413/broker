@@ -22,6 +22,14 @@
         </div>
       </div>
     </div>
+    <div class="team-heads">
+      <div class="title">人气校花<a class="more" href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html">更多</a></div>
+      <div class="th-pics-list">
+        <c:forEach var="team" items="${teamList}">
+          <a class="th-pic" href="${pageContext.request.contextPath}/youxueApp/findTeam/findInfo.html?teamId=${team.id}"><img src="${team.imgUrl}"></a>
+        </c:forEach>
+      </div>
+    </div>
     <div class="intro-view">
       <div class="intro-text">
         <p>世界那么大，不想去看看？</p>

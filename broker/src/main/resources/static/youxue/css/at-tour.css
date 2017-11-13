@@ -186,7 +186,7 @@ header{
 
 .th-tabs{
 	display: flex;
-	padding: 10px 15px;
+	padding: 5px 15px 10px;
 }
 .th-tabs .tab{
 	width: 49%;
@@ -199,7 +199,7 @@ header{
 }
 .th-tabs .tab .num{
 	font-size: 22px;
-	padding: 0 0 5px;
+	padding: 0;
 	color: #303030;
 }
 
@@ -250,8 +250,7 @@ header{
 	transform: scaleY(0.5);
 	background: #e7e7e7;
 }
-.item-view .title .more,
-.intro-view .title .more{
+.title .more{
 	float: right;
 	position: relative;
 	font-size: 14px;
@@ -259,8 +258,7 @@ header{
 	margin-right: 10px;
 	top: 1px;
 }
-.item-view .title .more:after,
-.intro-view .title .more:after{
+.title .more:after{
 	position: absolute;
 	content: "";
 	background: url(../images/arr.png) center no-repeat;
@@ -2020,4 +2018,38 @@ line-height: 32px;
 	font-size: 14px;
 	text-align: right;
 	max-width: 60px;
+}
+.team-heads{
+	background: #fff;
+	margin-bottom: 15px;
+}
+.team-heads .title{
+	position: relative;
+	padding: 10px 15px;
+}
+.team-heads .title:after{
+	position: absolute;
+	display: block;
+	content: "";
+	width: 100%;
+	height: 1px;
+	-webkit-transform: scaleY(0.5);
+	-moz-transform: scaleY(0.5);
+	-ms-transform: scaleY(0.5);
+	transform: scaleY(0.5);
+	background: #e7e7e7;
+	bottom: 0;
+	left: 0;
+}
+.th-pics-list{
+	display: flex;
+	display: -webkit-flex;
+	padding: 15px 10px 15px;
+}
+.team-heads .th-pic{
+	width: 33.3%;
+	padding: 0 5px;
+}
+.team-heads .th-pic img{
+	max-width: 100%;
 }
