@@ -209,7 +209,7 @@ public class UpLoadFileUtil {
             //生成缩略图固定尺寸，不按比例
             Thumbnails.of(oldPath2).size(newWidth, newHeight).keepAspectRatio(false).toFile(smallImgPath2);
             Thumbnails.of(smallImgPath2).sourceRegion(Positions.CENTER,200,200).size(200, 200).toFile(smallImgPath2);
-            commpressPicCycle(smallImgPath2, 50, 0.9);
+            commpressPicCycle(smallImgPath2, 50, 0.7);
             delFile(request, oldPath);
         } catch (Exception e) {
             e.printStackTrace();

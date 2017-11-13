@@ -54,7 +54,7 @@ public class FindYxProductController extends BaseController {
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
         sortMap.put("t.id", false);
         pageInfo.setCountOfCurrentPage(999999);
-        pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, false);
+        pageInfo = pageYxTeamService.findPageForAttop(pageInfo, params, sortMap, false);
         request.setAttribute("product", product);
         request.setAttribute("teamNum", teamNum);
         request.setAttribute("pageInfo", pageInfo);
