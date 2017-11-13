@@ -10,7 +10,7 @@
 <header>
   <div class="header">
     <div class="ct-lf">
-      <a href="javascript:;" onclick="history.go(-1);return false;"><i class="i-back"></i></a>
+      <a href="${pageContext.request.contextPath}/youxueApp/findTeam/find.html"><i class="i-back"></i></a>
     </div>
     <div class="tit">团队</div>
   </div>
@@ -30,21 +30,12 @@
       </div>
     </div>
     <ul class="tabs-title">
-      <li class="tab on"><a href="javascript:;">行程</a></li>
-      <li class="tab"><a href="javascript:;">团长风采</a></li>
+      <li class="tab on"><a href="javascript:;">团长风采</a></li>
+      <li class="tab"><a href="javascript:;">行程</a></li>
       <li class="tab"><a href="javascript:;">团员</a></li>
     </ul>
     <div id="bdmod">
       <div class="bd-mod-view" style="display:block;">
-        <div class="trip-team-cell">
-          <div class="title">行程时间</div>
-          <div class="txt-cell">
-            <p>${productDate.date}</p>
-          </div>
-          ${product.trip}
-        </div>
-      </div>
-      <div class="bd-mod-view">
         <div class="pics-team-cell">
           <div class="intro">
             <p>${team.label}</p>
@@ -60,6 +51,15 @@
               </c:forEach>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="bd-mod-view">
+        <div class="trip-team-cell">
+          <div class="title">行程时间</div>
+          <div class="txt-cell">
+            <p>${productDate.date}</p>
+          </div>
+          ${product.trip}
         </div>
       </div>
       <div class="bd-mod-view">
