@@ -75,7 +75,7 @@ public class FindYxTeamController extends BaseController {
         params.put("t.is_head", Team.ISHEAD_YES);
         params.put("p.id", productId);
         Map<String, Boolean> sortMap = new HashMap<String, Boolean>();
-        sortMap.put("t.id", false);
+        sortMap.put("t.visit_count", false);
         pageInfo.setCountOfCurrentPage(999999);
         pageInfo = pageYxTeamService.findPage(pageInfo, params, sortMap, true);
         request.setAttribute("produceList", findYxProductAllService.find());

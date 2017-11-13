@@ -34,7 +34,7 @@
             <div class="album-pics">
               <c:if test="${!empty imgUrl}">
                 <a class="pic" href="javascript:;">
-                  <img src="${imgUrl}" onclick="picBig('${imgUrl}')" />
+                  <img src="${imgUrl}" />
                   <span class="x-del" onclick="delImg2('${imgUrl}')">×</span>
                 </a>
               </c:if>
