@@ -271,7 +271,7 @@ body{background: #ececec;}
 }
 .pics-view .pic-cel img{
 	max-width: 100%;
-	margin: 5px;
+	margin: 5px auto;
 	display: block;
 }
 

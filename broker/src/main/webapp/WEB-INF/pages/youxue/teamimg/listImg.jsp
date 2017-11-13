@@ -39,7 +39,7 @@
             <div class="pics-view">
               <c:forEach var="imgUrl" items="${imgMap}" >
                 <c:forEach var="url" items="${imgUrl.value}">
-                  <div class="pic-cel"><img src="${url[0]}"><a class="delete" href="#" onclick="del('${url[1]}', '${url[0]}')">删除</a></div>
+                  <div class="pic-cel"><img src="${url[0]}" width="200" height="200"><a class="delete" href="#" onclick="del('${url[1]}', '${url[0]}')">删除</a></div>
                 </c:forEach>
               </c:forEach>
             </div>
