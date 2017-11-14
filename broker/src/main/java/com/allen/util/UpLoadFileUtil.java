@@ -6,9 +6,13 @@ import net.coobird.thumbnailator.geometry.Positions;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -184,7 +188,7 @@ public class UpLoadFileUtil {
                 }
                 //按比例缩放
                 Thumbnails.of(oldPath2).size(newWidth, newHeight).toFile(newPath2);
-                commpressPicCycle(newPath2, 500, 0.9);
+                compressPic(newPath2, newPath2, 500, 0.98f);
             }
             //生成缩略图
             int newWidth = 200;
@@ -209,7 +213,7 @@ public class UpLoadFileUtil {
             //生成缩略图固定尺寸，不按比例
             Thumbnails.of(oldPath2).size(newWidth, newHeight).keepAspectRatio(false).toFile(smallImgPath2);
             Thumbnails.of(smallImgPath2).sourceRegion(Positions.CENTER,200,200).size(200, 200).toFile(smallImgPath2);
-            commpressPicCycle(smallImgPath2, 50, 0.7);
+            compressPic(smallImgPath2, smallImgPath2, 50, 0.98f);
             delFile(request, oldPath);
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,11 +227,37 @@ public class UpLoadFileUtil {
      */
     public static void custAndThumbnailsFile(HttpServletRequest request, String oldPath, String newPath, String fileName) {
         try {
+            //生成形象照
+            File input = new File(request.getRealPath("")+oldPath);
+            Thumbnails.Builder<File> fileBuilder = Thumbnails.of(input).scale(1.0).outputQuality(1.0);
+            BufferedImage src = fileBuilder.asBufferedImage();
+            int width = src.getWidth();
+            int height = src.getHeight();
+            int newWidth = 500;
+            int newHeight = 500;
+            if(width >= height){
+                if(height >= 500){
+                    double temp = height / 500;
+                    newWidth = (int)(width / temp);
+                }else{
+                    double temp = 500 / height;
+                    newWidth = (int)(width * temp);
+                }
+            }else{
+                if(width >= 500){
+                    double temp = width / 500;
+                    newHeight = (int)(height / temp);
+                }else{
+                    double temp = 500 / width;
+                    newHeight = (int)(height * temp);
+                }
+            }
             String oldPath2 = request.getRealPath("")+oldPath;
             String newPath2 = request.getRealPath("")+newPath+fileName;
             //按比例缩放
-            Thumbnails.of(oldPath2).size(500, 500).keepAspectRatio(false).toFile(newPath2);
-            commpressPicCycle(newPath2, 100, 0.9);
+            Thumbnails.of(oldPath2).size(newWidth, newHeight).keepAspectRatio(false).toFile(newPath2);
+            Thumbnails.of(newPath2).sourceRegion(Positions.CENTER,500,500).size(500, 500).toFile(newPath2);
+            compressPic(newPath2, newPath2, 100, 0.98f);
             delFile(request, oldPath);
         } catch (Exception e) {
             e.printStackTrace();
@@ -256,5 +286,51 @@ public class UpLoadFileUtil {
         int desHeight = new BigDecimal(srcHeigth).multiply(new BigDecimal(accuracy)).intValue();
         Thumbnails.of(desPath).size(desWidth, desHeight).outputQuality(accuracy).toFile(desPath);
         commpressPicCycle(desPath, desFileSize, accuracy);
+    }
+
+    /**
+     * 降低图片品质，保持图片尺寸不变
+     * @param srcFilePath
+     * @param descFilePath
+     * @return
+     */
+    private static void compressPic(String srcFilePath, String descFilePath, long desFileSize, float accuracy)throws Exception{
+        File srcFileJPG = new File(srcFilePath);
+        long srcFileSizeJPG = srcFileJPG.length();
+        // 2、判断大小，如果小于desFileSize kb，不压缩；如果大于等于 desFileSize kb，压缩
+        if (srcFileSizeJPG <= desFileSize * 1024) {
+            return;
+        }
+        File file = null;
+        BufferedImage src = null;
+        FileOutputStream out = null;
+        ImageWriter imgWrier;
+        ImageWriteParam imgWriteParams;
+        // 指定写图片的方式为 jpg
+        imgWrier = ImageIO.getImageWritersByFormatName("jpg").next();
+        imgWriteParams = new javax.imageio.plugins.jpeg.JPEGImageWriteParam(null);
+        // 要使用压缩，必须指定压缩方式为MODE_EXPLICIT
+        imgWriteParams.setCompressionMode(imgWriteParams.MODE_EXPLICIT);
+        // 这里指定压缩的程度，参数qality是取值0~1范围内，
+        imgWriteParams.setCompressionQuality(accuracy);
+        imgWriteParams.setProgressiveMode(imgWriteParams.MODE_DISABLED);
+        ColorModel colorModel = ColorModel.getRGBdefault();
+        // 指定压缩时使用的色彩模式
+        imgWriteParams.setDestinationType(new javax.imageio.ImageTypeSpecifier(colorModel, colorModel.createCompatibleSampleModel(16, 16)));
+        if(StringUtil.isEmpty(srcFilePath)) {
+            return;
+        } else {
+            file = new File(srcFilePath);
+            src = ImageIO.read(file);
+            out = new FileOutputStream(descFilePath);
+            imgWrier.reset();
+            // 必须先指定 out值，才能调用write方法, ImageOutputStream可以通过任何 OutputStream构造
+            imgWrier.setOutput(ImageIO.createImageOutputStream(out));
+            // 调用write方法，就可以向输入流写图片
+            imgWrier.write(null, new IIOImage(src, null, null), imgWriteParams);
+            out.flush();
+            out.close();
+            compressPic(srcFilePath, descFilePath, desFileSize, accuracy);
+        }
     }
 }
