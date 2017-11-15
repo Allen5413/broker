@@ -188,7 +188,7 @@ public class UpLoadFileUtil {
                 }
                 //按比例缩放
                 Thumbnails.of(oldPath2).size(newWidth, newHeight).toFile(newPath2);
-                compressPic(newPath2, newPath2, 500, 0.98f);
+                compressPic(newPath2, newPath2, 500, 0.98f, 0);
             }
             //生成缩略图
             int newWidth = 200;
@@ -213,7 +213,7 @@ public class UpLoadFileUtil {
             //生成缩略图固定尺寸，不按比例
             Thumbnails.of(oldPath2).size(newWidth, newHeight).keepAspectRatio(false).toFile(smallImgPath2);
             Thumbnails.of(smallImgPath2).sourceRegion(Positions.CENTER,200,200).size(200, 200).toFile(smallImgPath2);
-            compressPic(smallImgPath2, smallImgPath2, 50, 0.98f);
+            compressPic(smallImgPath2, smallImgPath2, 50, 0.98f, 0);
             delFile(request, oldPath);
         } catch (Exception e) {
             e.printStackTrace();
@@ -257,7 +257,7 @@ public class UpLoadFileUtil {
             //按比例缩放
             Thumbnails.of(oldPath2).size(newWidth, newHeight).keepAspectRatio(false).toFile(newPath2);
             Thumbnails.of(newPath2).sourceRegion(Positions.CENTER,500,500).size(500, 500).toFile(newPath2);
-            compressPic(newPath2, newPath2, 100, 0.98f);
+            compressPic(newPath2, newPath2, 100, 0.95f, 0);
             delFile(request, oldPath);
         } catch (Exception e) {
             e.printStackTrace();
@@ -294,11 +294,11 @@ public class UpLoadFileUtil {
      * @param descFilePath
      * @return
      */
-    private static void compressPic(String srcFilePath, String descFilePath, long desFileSize, float accuracy)throws Exception{
+    private static void compressPic(String srcFilePath, String descFilePath, long desFileSize, float accuracy, int maxNum)throws Exception{
         File srcFileJPG = new File(srcFilePath);
         long srcFileSizeJPG = srcFileJPG.length();
-        // 2、判断大小，如果小于desFileSize kb，不压缩；如果大于等于 desFileSize kb，压缩
-        if (srcFileSizeJPG <= desFileSize * 1024) {
+        // 2、判断大小，如果小于desFileSize kb，不压缩；如果大于等于 desFileSize kb，压缩; 如果递归5次还不能满足大小要求，强制跳出
+        if (srcFileSizeJPG <= desFileSize * 1024 || 5 < maxNum) {
             return;
         }
         File file = null;
@@ -330,7 +330,8 @@ public class UpLoadFileUtil {
             imgWrier.write(null, new IIOImage(src, null, null), imgWriteParams);
             out.flush();
             out.close();
-            compressPic(srcFilePath, descFilePath, desFileSize, accuracy);
+            maxNum++;
+            compressPic(srcFilePath, descFilePath, desFileSize, accuracy, maxNum);
         }
     }
 }
