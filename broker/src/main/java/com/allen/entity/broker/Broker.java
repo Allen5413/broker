@@ -21,6 +21,7 @@ public class Broker {
 
     private Long id;
     private String zz;
+    private String schoolNo;            //学校No
     private Integer isBlack;            //是否拉黑[0：正常；1：拉黑]
     private Integer blackType;          //拉黑类型[0：6个月; 1：永久]
     private Date blackTime;             //拉黑时间
@@ -92,5 +93,13 @@ public class Broker {
 
     public void setBlackTime(Date blackTime) {
         this.blackTime = blackTime;
+    }
+
+    public String getSchoolNo() {
+        return schoolNo;
+    }
+
+    public void setSchoolNo(String schoolNo) {
+        this.schoolNo = schoolNo;
     }
 }

@@ -80,6 +80,7 @@ public class AddBrokerServiceForAppImpl implements AddBrokerForAppService {
             broker.setZz(zz);
             broker.setIsBlack(Broker.ISBLACK_NOT);
             broker.setCreator(zz);
+            broker.setSchoolNo(sCode);
             brokerDao.save(broker);
         }
         brokerProject = new BrokerProject();
