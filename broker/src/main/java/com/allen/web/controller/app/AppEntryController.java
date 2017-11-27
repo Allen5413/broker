@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.allen.base.config.ConfigProp;
 import com.allen.base.exception.BusinessException;
 import com.allen.service.app.broker.AddBrokerForAppService;
+import com.allen.service.app.broker.FindBrokerBySchoolNoForAppService;
 import com.allen.service.app.broker.FindBrokerByZzForAppService;
 import com.allen.service.app.broker.FindBrokerNumBySchoolCodeForAppService;
+import com.allen.service.app.chief.FindChiefBySchoolNoForAppService;
 import com.allen.service.app.customer.EditCustomerIsStarForAppService;
 import com.allen.service.app.customer.EditCustomerRemarkForAppService;
 import com.allen.service.app.customer.FindCustomerByBrokerIdForAppService;
@@ -44,6 +46,10 @@ public class AppEntryController extends BaseController {
     private FindCustomerByIdForAppService findCustomerByIdForAppService;
     @Autowired
     private ConfigProp configProp;
+    @Autowired
+    private FindBrokerBySchoolNoForAppService findBrokerBySchoolNoForAppService;
+    @Autowired
+    private FindChiefBySchoolNoForAppService findChiefBySchoolNoForAppService;
 
     @RequestMapping(value = "/appEntry")
     public JSONObject entry(HttpServletRequest request) throws Exception {
@@ -92,6 +98,21 @@ public class AppEntryController extends BaseController {
         if(8 == methodId){
             //获取项目详情
             jsonObject = findProjectByIdForAppService.find(request);
+        }
+        if(9 == methodId){
+            //获取经济人列表接口：（根据学校NO来获取经济人（每次访问随机1批））
+            //朱总培训项目用
+            jsonObject = findBrokerBySchoolNoForAppService.find(request);
+        }
+        if(10 == methodId){
+            //获取某个经济人接口：（根据ZZ获取）；返回：0不是经济人，1是经济人
+            //朱总培训项目用
+            jsonObject = findBrokerByZzForAppService.isBroker(request);
+        }
+        if(11 == methodId){
+            //获取一个高校的总监zz
+            //朱总培训项目用
+            jsonObject = findChiefBySchoolNoForAppService.find(request);
         }
         return jsonObject;
     }
