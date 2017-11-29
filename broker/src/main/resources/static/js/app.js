@@ -590,6 +590,31 @@ App.prototype.del = function(confirmStr, url, params, url2, params2){
 }
 
 /**
+ * 常用的删除数据的操作
+ * @param confirmStr
+ * @param url
+ * @param btnObj
+ */
+App.prototype.del = function(confirmStr, url, params, func){
+    app.confirm(confirmStr, function(index){
+        $.ajax({
+            url: url,
+            method: 'POST',
+            async: false,
+            data: params,
+            success: function (data) {
+                if (data.state == 0) {
+                    layer.close(index);
+                    func();
+                } else {
+                    app.msg(data.msg, 1);
+                }
+            }
+        });
+    });
+}
+
+/**
  * 常用的操作数据的操作
  * @param confirmStr
  * @param url

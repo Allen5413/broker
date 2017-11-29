@@ -8,6 +8,8 @@ import com.allen.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Allen on 2017/10/12.
  */
@@ -44,5 +46,18 @@ public class AttopServiceImpl implements AttopService {
         }else{
             return "";
         }
+    }
+
+    @Override
+    public List<JSONObject> findSchoolAll() throws Exception {
+        List<JSONObject> list = null;
+        String shopId = configProp.getAttop().get("shopId");
+        String secret = configProp.getAttop().get("secret");
+        String portUrl = configProp.getAttop().get("portUrl");
+        JSONObject json = AttopUtil.getPortMsg(203, "", shopId, secret, portUrl);
+        if(null != json){
+            list = (List<JSONObject>) json.get("data");
+        }
+        return list;
     }
 }

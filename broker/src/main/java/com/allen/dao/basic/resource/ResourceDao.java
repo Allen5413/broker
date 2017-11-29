@@ -15,7 +15,7 @@ public interface ResourceDao extends CrudRepository<Resource, Long> {
      * @param userId
      * @return
      */
-    @Query("select r from Resource r, UserGroupResource ugr, UserGroupUser ugu where r.id = ugr.resourceId and ugr.userGroupId = ugu.userGroupId and r.projectId = 0 and ugu.userId = ?1 order by r.menuId, r.sno")
+    @Query("select r from Resource r, UserGroupResource ugr, UserGroupUser ugu, Menu m where r.id = ugr.resourceId and ugr.userGroupId = ugu.userGroupId and r.menuId = m.id and r.projectId = 0 and ugu.userId = ?1 order by m.sno, r.sno")
     public List<Resource> findByUserId(long userId);
 
     /**
@@ -23,6 +23,6 @@ public interface ResourceDao extends CrudRepository<Resource, Long> {
      * @param userId
      * @return
      */
-    @Query("select r from Resource r, UserGroupResource ugr, UserGroupUser ugu where r.id = ugr.resourceId and ugr.userGroupId = ugu.userGroupId and ugu.userId = ?1 and r.projectId = ?2 order by r.menuId, r.sno")
+    @Query("select r from Resource r, UserGroupResource ugr, UserGroupUser ugu, Menu m where r.id = ugr.resourceId and ugr.userGroupId = ugu.userGroupId and r.menuId = m.id and ugu.userId = ?1 and r.projectId = ?2 order by m.sno, r.sno")
     public List<Resource> findByUserId(long userId, long projectId);
 }

@@ -3,7 +3,7 @@
 <div id="tit-top-fixed" class="pos-rev-cell">
   <div class="title">操作日志查询</div>
   <ul class="search-view">
-    <form id="pageForm" name="pageForm" action="${pageContext.request.contextPath}/pageProject/page.html">
+    <form id="pageForm" name="pageForm" action="${pageContext.request.contextPath}/pageLog/page.html">
       <input type="hidden" id="rows" name="rows" />
       <input type="hidden" id="currentPage" name="page" value="${pageInfo.currentPage}"/>
     </form>

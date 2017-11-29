@@ -7,17 +7,15 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * Created by Allen on 2017/11/27.
+ * Created by Allen on 2017/11/28.
  */
 @Entity
-@Table(name = "chief")
-public class Chief {
+@Table(name = "recommend_man")
+public class RecommendMan {
     @Id
     @GeneratedValue
     private Long id;
     private String zz;
-    private String schoolNo;            //学校No
-    private String recommendZz;         //推荐人zz
     private String creator;                     //创建人
     private Date createTime = new Date();       //创建时间
 
@@ -37,14 +35,6 @@ public class Chief {
         this.zz = zz;
     }
 
-    public String getSchoolNo() {
-        return schoolNo;
-    }
-
-    public void setSchoolNo(String schoolNo) {
-        this.schoolNo = schoolNo;
-    }
-
     public String getCreator() {
         return creator;
     }
@@ -59,13 +49,5 @@ public class Chief {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public String getRecommendZz() {
-        return recommendZz;
-    }
-
-    public void setRecommendZz(String recommendZz) {
-        this.recommendZz = recommendZz;
     }
 }
