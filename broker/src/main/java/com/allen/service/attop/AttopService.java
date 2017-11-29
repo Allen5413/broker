@@ -40,4 +40,9 @@ public interface AttopService {
      * @throws Exception
      */
     public List<JSONObject> findSchoolAll()throws Exception;
+
+    /**
+     * 获取高校的月活跃人数
+     */
+    public int findSchoolActiveByNo(String no)throws Exception;
 }

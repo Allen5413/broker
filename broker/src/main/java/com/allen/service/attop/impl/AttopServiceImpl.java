@@ -60,4 +60,16 @@ public class AttopServiceImpl implements AttopService {
         }
         return list;
     }
+
+    @Override
+    public int findSchoolActiveByNo(String no) throws Exception {
+        String shopId = configProp.getAttop().get("shopId");
+        String secret = configProp.getAttop().get("secret");
+        String portUrl = configProp.getAttop().get("portUrl");
+        JSONObject json = AttopUtil.getPortMsg(204, "no=" + no, shopId, secret, portUrl);
+        if(null != json){
+            return null == json.get("num") ? 0 : Integer.parseInt(json.get("num").toString());
+        }
+        return 0;
+    }
 }

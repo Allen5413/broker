@@ -18,7 +18,7 @@ public class SchoolActive {
     private String no;
     private String date;       //只记录年月
     private long num;
-    private int numPercent;     //活跃度百分比
+    private float numPercent;     //活跃度百分比
 
     public long getId() {
         return id;
@@ -52,11 +52,11 @@ public class SchoolActive {
         this.num = num;
     }
 
-    public int getNumPercent() {
+    public float getNumPercent() {
         return numPercent;
     }
 
-    public void setNumPercent(int numPercent) {
+    public void setNumPercent(float numPercent) {
         this.numPercent = numPercent;
     }
 }
