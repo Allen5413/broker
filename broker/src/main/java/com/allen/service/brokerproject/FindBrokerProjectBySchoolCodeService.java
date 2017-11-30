@@ -26,4 +26,12 @@ public interface FindBrokerProjectBySchoolCodeService {
      * @throws Exception
      */
     public List<JSONObject> findWaitAndPass(Long projectId, String schoolCode)throws Exception;
+
+    /**
+     * 根据项目分组查询各个项目的经纪人情况
+     * @param no
+     * @return
+     * @throws Exception
+     */
+    public List<Map> findGroupByProject(String no)throws Exception;
 }

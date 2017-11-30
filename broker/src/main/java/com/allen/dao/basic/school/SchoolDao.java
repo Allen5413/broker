@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface SchoolDao extends CrudRepository<School, Long> {
 
+    public School findByNo(String no)throws Exception;
+
     /**
      * 查询学生人数大于0的学校
      * @return

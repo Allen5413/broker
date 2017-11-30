@@ -3,6 +3,7 @@ package com.allen.service.brokerproject.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.allen.base.exception.BusinessException;
 import com.allen.dao.brokerproject.BrokerProjectDao;
+import com.allen.dao.brokerproject.FindBrokerProjectDao;
 import com.allen.dao.customer.CustomerDao;
 import com.allen.dao.project.ProjectDao;
 import com.allen.entity.broker.Customer;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Allen on 2017/10/12.
@@ -29,6 +31,8 @@ public class FindBrokerProjectBySchoolCodeServiceImpl implements FindBrokerProje
     private CustomerDao customerDao;
     @Autowired
     private ProjectDao projectDao;
+    @Autowired
+    private FindBrokerProjectDao findBrokerProjectDao;
 
     @Override
     public List<JSONObject> find(Long projectId, String schoolCode) throws Exception {
@@ -90,5 +94,10 @@ public class FindBrokerProjectBySchoolCodeServiceImpl implements FindBrokerProje
             }
         }
         return resultList;
+    }
+
+    @Override
+    public List<Map> findGroupByProject(String no) throws Exception {
+        return findBrokerProjectDao.findBySchoolNoGroupByProject(no);
     }
 }

@@ -66,7 +66,7 @@
                   </c:if>
                 </td>
                 <td>
-                  <a class="btn-opr" href="#" onclick="">查看详情</a>
+                  <a class="btn-opr" href="#" onclick="detail('${chief.no}')">查看详情</a>
                   <c:if test="${!empty chief.cName}">
                     <a class="btn-opr" href="#" onclick="removeChief('${chief.no}');">撤销总监</a>
                   </c:if>
@@ -142,6 +142,10 @@
 
   function removeRecommendMan(no){
     app.del("您确定要撤销该推荐人", "${pageContext.request.contextPath}/delRecommendMan/del.json", {"no":no}, function(){$("#searchBtn").click();});
+  }
+
+  function detail(no){
+    app.clickResources("${pageContext.request.contextPath}/findChief/info.html", {"no":no});
   }
 
 </script>
