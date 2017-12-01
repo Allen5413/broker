@@ -9,4 +9,6 @@ import java.util.Map;
  */
 public interface PageBrokerProjectService {
     public PageInfo find(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap)throws Exception;
+
+    public PageInfo findForSchool(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap)throws Exception;
 }

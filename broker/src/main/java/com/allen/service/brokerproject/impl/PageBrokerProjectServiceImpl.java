@@ -49,4 +49,9 @@ public class PageBrokerProjectServiceImpl implements PageBrokerProjectService {
         }
         return pageInfo;
     }
+
+    @Override
+    public PageInfo findForSchool(PageInfo pageInfo, Map<String, Object> paramsMap, Map<String, Boolean> sortMap) throws Exception {
+        return findBrokerProjectDao.findPageForSchool(pageInfo, paramsMap, sortMap);
+    }
 }

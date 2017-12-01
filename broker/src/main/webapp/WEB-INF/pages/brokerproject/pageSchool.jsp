@@ -3,8 +3,10 @@
 <div id="tit-top-fixed" class="pos-rev-cell">
   <div class="title">经纪人查询</div>
   <ul class="search-view">
-    <form id="pageForm" name="pageForm" action="${pageContext.request.contextPath}/findBrokerProjectForSchool/find.html">
+    <form id="pageForm" name="pageForm" action="${pageContext.request.contextPath}/pageBrokerProjectForSchool/page.html">
       <input type="hidden" name="method" value="search"/>
+      <input type="hidden" id="rows" name="rows" />
+      <input type="hidden" id="currentPage" name="page" value="${pageInfo.currentPage}"/>
       <li>
         <span class="itg">项目：</span>
         <span class="inline-select">
@@ -40,24 +42,25 @@
               <th>实际人数</th>
               <th>操作</th>
             </tr>
-            <c:if test="${empty map}">
+            <c:if test="${empty pageInfo.pageResults}">
               <tr>
                 <td colspan="999" style="text-align: center; color: red">没有找到相关数据</td>
               </tr>
             </c:if>
-            <c:if test="${!empty map}">
-              <c:forEach var="school" items="${map}" varStatus="status">
+            <c:if test="${!empty pageInfo.pageResults}">
+              <c:forEach var="school" items="${pageInfo.pageResults}" varStatus="status">
                 <tr>
                   <td>${status.index+1}</td>
-                  <td>${school.value.name}</td>
-                  <td>${school.value.num}</td>
-                  <td>${school.value.maxNum}</td>
-                  <td>${school.value.manNum}</td>
+                  <td>${school.name}</td>
+                  <td>${school.num}</td>
+                  <td>${school.zdNum}</td>
+                  <td>${school.sjNum}</td>
                   <td>
-                    <a class="btn-opr" href="#" onclick="detail('${school.value.code}', '${school.value.name}');">查看</a>
+                    <a class="btn-opr" href="#" onclick="detail('${school.no}', '${school.name}');">查看</a>
                   </td>
                 </tr>
               </c:forEach>
+              <%@ include file="../common/page.jsp"%>
             </c:if>
           </table>
         </div>

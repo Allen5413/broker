@@ -28,7 +28,7 @@ public class FindChiefBySchoolNoForAppServiceImpl implements FindChiefBySchoolNo
             throw new BusinessException("没有传入学校No");
         }
         Chief chief = chiefDao.findBySchoolNo(no);
-        jsonObject.put("zz", null != chief ? chief.getZz() : "");
+        jsonObject.put("zz", null != chief ? chief.getZz() : "0");
         jsonObject.put("status", 1);
         return jsonObject;
     }
